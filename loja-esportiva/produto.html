@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Produto</title>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="topo">
+
+    <!-- LOGO -->
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
+        <img src="./img/logo.png" class="logo-img">
+        <span class="logo-text">Elite <strong>Sports</strong></span>
+    </div>
+
+    <!-- BUSCA -->
+    <div class="busca">
+        <i class="ri-search-line"></i>
+        <input type="text" placeholder="Buscar produtos...">
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="acoes">
+
+        <span onclick="window.location.href='index.html'">
+            Home
+        </span>
+
+        <div class="carrinho" onclick="window.location.href='carrinhos.html'">
+            <i class="ri-shopping-cart-line"></i>
+            <span id="contador">0</span>
+        </div>
+
+    </div>
+
+</header>
+
+<div class="produto-container">
+
+    <!-- GALERIA -->
+    <div class="galeria">
+        <img id="imagem-principal">
+
+        <div class="miniaturas">
+            <img id="img1" onclick="trocarImagem(this)">
+            <img id="img2" onclick="trocarImagem(this)">
+            <img id="img3" onclick="trocarImagem(this)">
+        </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="info">
+
+        <h2 id="nome"></h2>
+
+        <p class="preco" id="preco"></p>
+
+        <!-- CORES -->
+        <div>
+            <h4>Cor:</h4>
+<div class="cores">
+    <div class="cor azul" onclick="selecionarCor(this, 'azul')"></div>
+    <div class="cor branca" onclick="selecionarCor(this, 'branco')"></div>
+    <div class="cor preta" onclick="selecionarCor(this, 'preto')"></div>
+</div>
+        </div>
+
+        <!-- TAMANHOS -->
+        <div>
+            <h4>Tamanho:</h4>
+            <div class="tamanhos">
+                <button onclick="selecionarTamanho(this)">P</button>
+                <button onclick="selecionarTamanho(this)">M</button>
+                <button onclick="selecionarTamanho(this)">G</button>
+                <button onclick="selecionarTamanho(this)">GG</button>
+            </div>
+        </div>
+
+        <!-- BOTÕES -->
+       <div class="botoes-produto">
+    <button class="btn-secundario" onclick="adicionarCarrinho()">
+        Adicionar ao Carrinho
+    </button>
+
+    <button class="btn-principal" onclick="comprarAgora()">
+        Comprar
+    </button>
+</div>
+
+    </div>
+
+</div>
+
+<script>
+
+// VOLTAR
+function voltar() {
+    window.location.href = "index.html";
+}
+
+// PRODUTOS
+const produtos = {
+1: {
+    nome: "Camiseta Dry Fit",
+    preco: "R$ 99,90",
+    imagens: {
+        azul: [
+    "./img/camiseta-dryfit/azul-1.png",
+    "./img/camiseta-dryfit/azul-2.png",
+    "./img/camiseta-dryfit/azul-3.png"
+],
+branco: [
+    "./img/camiseta-dryfit/branca-1.png",
+    "./img/camiseta-dryfit/branca-2.png",
+    "./img/camiseta-dryfit/branca-3.png"
+],
+preto: [
+    "./img/camiseta-dryfit/preta-1.png",
+    "./img/camiseta-dryfit/preta-2.png",
+    "./img/camiseta-dryfit/preta-3.png"
+]
+    }
+},
+    2: {
+        nome: "Short Esportivo",
+        preco: "R$ 79,90",
+        imagens: [
+            "https://images.unsplash.com/photo-1593032465171-8f0c5b4e3f3d",
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6"
+        ]
+    },
+    3: {
+        nome: "Camiseta Treino",
+        preco: "R$ 89,90",
+        imagens: [
+            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+            "https://images.unsplash.com/photo-1593032465171-8f0c5b4e3f3d"
+        ]
+    },
+    4: {
+        nome: "Regata Fitness",
+        preco: "R$ 69,90",
+        imagens: [
+            "https://images.unsplash.com/photo-1584865288642-42078afe6942",
+            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6"
+        ]
+    }
+};
+
+// PEGAR ID
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+// FALLBACK
+const produto = produtos[id] || produtos[1];
+
+let corSelecionada = "azul";
+
+// PREENCHER
+document.getElementById("nome").innerText = produto.nome;
+document.getElementById("preco").innerText = produto.preco;
+
+carregarImagens("azul");
+
+function carregarImagens(cor) {
+    const lista = produto.imagens[cor];
+
+    document.getElementById("imagem-principal").src = lista[0];
+
+    document.getElementById("img1").src = lista[0];
+    document.getElementById("img2").src = lista[1];
+    document.getElementById("img3").src = lista[2];
+}
+
+// TROCAR IMAGEM
+function trocarImagem(img) {
+    document.getElementById("imagem-principal").src = img.src;
+}
+
+// TAMANHO
+function selecionarTamanho(botao) {
+    let botoes = document.querySelectorAll(".tamanhos button");
+
+    botoes.forEach(b => {
+        b.style.background = "white";
+        b.style.color = "black";
+    });
+
+    botao.style.background = "#6a00ff";
+    botao.style.color = "white";
+}
+
+// COR
+function selecionarCor(elemento, cor) {
+    let cores = document.querySelectorAll(".cor");
+
+    cores.forEach(c => c.style.border = "2px solid #ddd");
+
+    elemento.style.border = "2px solid #6a00ff";
+
+    corSelecionada = cor;
+
+    carregarImagens(cor);
+}
+
+// 🛒 ADICIONAR AO CARRINHO
+function adicionarCarrinho() {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    let existente = carrinho.find(p => p.nome === produto.nome);
+
+    if (existente) {
+        existente.qtd = (existente.qtd || 1) + 1;
+    } else {
+        carrinho.push({
+            nome: produto.nome,
+            preco: produto.preco,
+            imagem: produto.imagens[0],
+            qtd: 1
+        });
+    }
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    alert("Produto adicionado ao carrinho!");
+}
+
+// 💳 COMPRAR
+function comprarAgora() {
+    adicionarCarrinho();
+    window.location.href = "carrinho.html";
+}
+
+</script>
+
+</body>
+</html>

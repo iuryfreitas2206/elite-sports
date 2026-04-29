@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Carrinho</title>
+<link rel="stylesheet" href="style.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="topo">
+
+    <!-- LOGO -->
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
+        <img src="./img/logo.png" class="logo-img">
+        <span class="logo-text">Elite <strong>Sports</strong></span>
+    </div>
+
+    <!-- BUSCA -->
+    <div class="busca">
+        <i class="ri-search-line"></i>
+        <input type="text" placeholder="Buscar produtos...">
+    </div>
+
+    <!-- AÇÕES -->
+    <div class="acoes">
+
+        <span onclick="window.location.href='index.html'">
+            Home
+        </span>
+
+        <div class="carrinho" onclick="window.location.href='carrinhos.html'">
+            <i class="ri-shopping-cart-line"></i>
+            <span id="contador">0</span>
+        </div>
+
+    </div>
+
+</header>
+
+<div class="produtos">
+
+    <h2>🛒 Meu Carrinho</h2>
+
+    <div id="lista"></div>
+
+    <h3 class="total" id="total"></h3>
+
+    <div style="margin-top:15px; display:flex; gap:10px;">
+        <button class="btn-limpar" onclick="limparCarrinho()">
+            Limpar Carrinho
+        </button>
+
+        <button class="btn-principal" onclick="finalizarCompra()">
+            Finalizar Compra
+        </button>
+    </div>
+
+</div>
+
+<script>
+
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+let lista = document.getElementById("lista");
+let totalEl = document.getElementById("total");
+let contadorEl = document.getElementById("contador");
+
+function parsePreco(preco) {
+    return Number(preco.replace("R$", "").replace(",", "."));
+}
+
+function atualizarCarrinho() {
+
+    lista.innerHTML = "";
+    let total = 0;
+    let totalItens = 0;
+
+    if (carrinho.length === 0) {
+        lista.innerHTML = "<p>🛒 Seu carrinho está vazio</p>";
+        totalEl.innerText = "";
+        contadorEl.innerText = 0;
+        return;
+    }
+
+    carrinho.forEach((p, index) => {
+
+        let qtd = p.qtd || 1;
+
+        totalItens += qtd;
+        total += parsePreco(p.preco) * qtd;
+
+        lista.innerHTML += `
+            <div class="item-carrinho">
+
+                <img src="${p.imagem}">
+
+                <div class="item-info">
+                    <h3>${p.nome}</h3>
+                    <p>${p.preco}</p>
+                </div>
+
+                <div class="item-acoes">
+                    <button class="btn-qtd" onclick="diminuir(${index})">−</button>
+                    <span class="qtd">${qtd}</span>
+                    <button class="btn-qtd" onclick="aumentar(${index})">+</button>
+                </div>
+
+                <button class="btn-remover" onclick="remover(${index})">🗑️</button>
+
+            </div>
+        `;
+    });
+
+    totalEl.innerText = "Total: R$ " + total.toFixed(2).replace(".", ",");
+    contadorEl.innerText = totalItens;
+
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+}
+
+function aumentar(index) {
+    carrinho[index].qtd = (carrinho[index].qtd || 1) + 1;
+    atualizarCarrinho();
+}
+
+function diminuir(index) {
+    if ((carrinho[index].qtd || 1) > 1) {
+        carrinho[index].qtd--;
+    }
+    atualizarCarrinho();
+}
+
+function remover(index) {
+    carrinho.splice(index, 1);
+    atualizarCarrinho();
+}
+
+function limparCarrinho() {
+    carrinho = [];
+    atualizarCarrinho();
+}
+
+function finalizarCompra() {
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+    }
+
+    alert("Compra finalizada com sucesso!");
+    carrinho = [];
+    atualizarCarrinho();
+}
+
+atualizarCarrinho();
+function atualizarContador() {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    let total = 0;
+
+    carrinho.forEach(p => {
+        total += p.qtd || 1;
+    });
+
+    const contador = document.getElementById("contador");
+
+    if (total > 9) {
+        contador.innerText = "9+";
+    } else {
+        contador.innerText = total;
+    }
+}
+
+atualizarContador();
+
+</script>
+
+</body>
+</html>

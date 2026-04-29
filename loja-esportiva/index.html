@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Elite Sports</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Ícones (opcional, melhora muito o visual) -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="topo">
+
+    <!-- LOGO -->
+    <div class="logo">
+    <img src="./img/logo.png" class="logo-img">
+    <span class="logo-text">Elite <strong>Sports</strong></span>
+</div>
+
+    <!-- BUSCA -->
+    <div class="busca">
+        <i class="ri-search-line"></i>
+        <input type="text" placeholder="Buscar produtos...">
+    </div>
+
+    <!-- AÇÕES -->
+<div class="acoes">
+    <span><i class="ri-user-line"></i> Entrar</span>
+
+    <div class="carrinho" onclick="abrirCarrinho()">
+        <i class="ri-shopping-cart-line"></i>
+        <span id="contador">0</span>
+    </div>
+</div>
+
+</header>
+
+<!-- MENU -->
+<nav class="menu">
+    <a href="#" class="ativo">Camisetas</a>
+    <a href="#">Shorts</a>
+    <a href="#">Treino</a>
+    <a href="#">Ofertas</a>
+</nav>
+
+<!-- BANNER -->
+<section class="banner">
+    <span class="tag">NOVA COLEÇÃO</span>
+    <h2><span>ESPORTIVA</span></h2>
+    <p>Performance e estilo para o seu jogo</p>
+    <button class="btn-banner">Ver coleção →</button>
+</section>
+
+<!-- PRODUTOS -->
+<section class="produtos">
+
+    <h2>Destaques</h2>
+
+    <div class="grid">
+
+<!-- PRODUTO 1 -->
+<div class="card" onclick="abrirProduto(1)">
+    <img src="./img/camiseta-dryfit/azul-1.png">
+    <h3>Camiseta Dry Fit</h3>
+    <p>R$ 99,90</p>
+   <button onclick="abrirProduto(1)">Comprar</button>
+</div>
+
+<!-- PRODUTO 2 -->
+<div class="card" onclick="abrirProduto(2)">
+    <img src="./img/short-esportivo/short.jpg">
+    <h3>Short Esportivo</h3>
+    <p>R$ 79,90</p>
+    <button onclick="abrirProduto(2)">Comprar</button>
+</div>
+
+<!-- PRODUTO 3 -->
+<div class="card" onclick="abrirProduto(3)">
+    <img src="./img/camiseta-treino/treino.jpg">
+    <h3>Camiseta Treino</h3>
+    <p>R$ 89,90</p>
+    <button onclick="abrirProduto(3)">Comprar</button>
+</div>
+
+<!-- PRODUTO 4 -->
+<div class="card" onclick="abrirProduto(4)">
+    <img src="./img/regata/regata.jpg">
+    <h3>Regata Fitness</h3>
+    <p>R$ 69,90</p>
+    <button onclick="abrirProduto(4)">Comprar</button>
+</div>
+
+    </div>
+
+</section>
+
+<script>
+function abrirProduto(id) {
+    window.location.href = "produto.html?id=" + id;
+}
+
+function abrirCarrinho() {
+    window.location.href = "carrinhos.html";
+}
+</script>
+<script>
+function atualizarContador() {
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    let total = 0;
+
+    carrinho.forEach(p => {
+        total += p.qtd || 1;
+    });
+
+    const contador = document.getElementById("contador");
+
+    if (total > 9) {
+        contador.innerText = "9+";
+    } else {
+        contador.innerText = total;
+    }
+}
+
+// CHAMA AUTOMATICAMENTE AO CARREGAR
+atualizarContador();
+
+function abrirProduto(id) {
+    window.location.href = "produto.html?id=" + id;
+}
+
+function abrirCarrinho() {
+    window.location.href = "carrinhos.html";
+}
+
+
+</script>
+</body>
+</html>

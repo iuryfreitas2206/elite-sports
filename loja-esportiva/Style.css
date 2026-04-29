@@ -1,0 +1,484 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f7;
+}
+
+/* 🔥 HEADER NOVO */
+.topo {
+    background: #0b0b0e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+}
+
+/* LOGO */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo-icon {
+    color: #7b2cff;
+    font-weight: bold;
+}
+
+.logo-text strong {
+    color: #7b2cff;
+}
+
+.logo-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+/* BUSCA */
+.busca {
+    background: #1c1c22;
+    border-radius: 25px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.busca input {
+    border: none;
+    background: transparent;
+    color: white;
+    outline: none;
+    width: 100%;
+}
+
+.busca i {
+    margin-right: 8px;
+    color: #aaa;
+}
+
+/* AÇÕES */
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.acoes span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+/* MENU */
+.menu {
+    background: #111114;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    border-bottom: 1px solid #222;
+}
+
+.menu a {
+    color: #aaa;
+    padding: 15px 0;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+}
+
+.menu a:hover {
+    color: white;
+}
+
+.menu .ativo {
+    color: white;
+}
+
+.menu .ativo::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #7b2cff;
+}
+
+/* 🔥 BANNER TOP */
+.banner {
+    background: url('./img/banner.jpg') no-repeat;
+    background-size: cover;
+    background-position: right center;
+
+    height: 450px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    
+    padding-left: 60px;
+    padding-bottom: 60px;
+
+    color: white;
+}
+
+/* TEXTO BANNER */
+.tag {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #aaa;
+}
+
+.banner h2 {
+    font-size: 60px;
+    margin: 10px 0;
+}
+
+.banner h2 span {
+    color: #7b2cff;
+}
+
+.banner p {
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* BOTÃO ROXO */
+.btn-banner {
+    background: linear-gradient(45deg, #7b2cff, #a855f7);
+    border: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+    transition: 0.2s;
+}
+
+.btn-banner:hover {
+    transform: scale(1.05);
+}
+
+/* PRODUTOS */
+.produtos {
+    padding: 40px;
+}
+
+.produtos h2 {
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* 🔥 CARD PROFISSIONAL */
+.card {
+    background: white;
+    width: 240px;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+/* IMAGEM PADRÃO LOJA */
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: #f5f5f7;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* PREÇO */
+.card p {
+    color: #7b2cff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* BOTÃO */
+button {
+    background: #0b0b0e;
+    color: white;
+
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+
+    cursor: pointer;
+    font-weight: bold;
+    min-width: 130px;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #7b2cff;
+}
+
+.carrinho {
+    position: relative;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+}
+
+.carrinho i {
+    font-size: 20px;
+}
+
+/* BOLINHA */
+#contador {
+    position: absolute;
+    top: -6px;
+    right: -8px;
+
+    background: #7b2cff;
+    color: white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    width: 16px;
+    height: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+}
+
+/* ========================= */
+/* 🔥 PÁGINA DE PRODUTO 🔥 */
+/* ========================= */
+
+.produto-container {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 40px;
+
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ESQUERDA */
+.galeria {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.galeria img {
+    width: 100%;
+    max-width: 380px;
+    height: 380px; /* força tamanho igual */
+    object-fit: contain; /* mantém proporção */
+    border-radius: 10px;
+}
+
+/* MINIATURAS */
+.miniaturas {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.miniaturas img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* DIREITA */
+.info {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.preco {
+    font-size: 26px;
+    color: #7b2cff;
+    font-weight: bold;
+}
+
+/* TAMANHOS (BOTÕES) */
+.tamanhos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* espaço entre eles */
+}
+
+.tamanhos button {
+    background: #0b0b0e;
+    color: white;
+
+    border: none;
+    padding: 10px 14px; /* menor que antes */
+    border-radius: 8px;
+
+    font-weight: bold;
+    min-width: 60px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tamanhos button:hover {
+    background: #7b2cff;
+}
+
+
+/* CORES DO PRODUTO */
+.cores {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.cor {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ddd;
+}
+
+/* CORES */
+.azul {
+    background: blue;
+}
+
+.branca {
+    background: white;
+    border: 2px solid #ccc; /* pra não sumir no fundo branco */
+}
+
+.preta {
+    background: black;
+}
+
+/* ========================= */
+/* 🛒 CARRINHO */
+/* ========================= */
+
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* IMAGEM */
+.item-carrinho img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f5f5f5;
+    padding: 5px;
+}
+
+/* INFO */
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    margin: 0;
+}
+
+.item-info p {
+    color: #7b2cff;
+    font-weight: bold;
+}
+
+/* AÇÕES */
+.item-acoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* BOTÕES + / - */
+.btn-qtd {
+    background: #ddd; /* cinza */
+    color: black; /* símbolo preto */
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-qtd:hover {
+    background: #bbb;
+}
+
+.btn-remover:hover {
+    background: #333;
+}
+
+/* REMOVER */
+.btn-remover {
+    background: #0b0b0e; /* preto igual seus botões */
+    color: white;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold; /* deixa "negrito" */
+}
+/* TOTAL */
+.total {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* BOTÃO LIMPAR */
+.btn-limpar {
+    background: #999;
+}
+
+.btn-limpar:hover {
+    background: #666;
+}
