@@ -1,245 +1,2704 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
 <meta charset="UTF-8">
-<title>Produto</title>
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Produto - Elite Sports</title>
+
 <link rel="stylesheet" href="style.css">
 
-<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<link
+    href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+    rel="stylesheet"
+>
+
+
+<style>
+
+/* =========================================================
+   PÁGINA DE PRODUTO
+========================================================= */
+
+body.pagina-produto {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #0d0d12;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.pagina-produto .menu {
+    border-bottom: 1px solid #24242d;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
+
+.pagina-produto .produto-page {
+    width: min(1280px, calc(100% - 50px));
+
+    margin: 55px auto 35px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(380px, 0.95fr);
+
+    gap: 50px;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   GALERIA
+========================================================= */
+
+.pagina-produto .galeria-produto {
+    min-width: 0;
+}
+
+
+.pagina-produto .imagem-principal-box {
+    height: 610px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #242430 0%,
+            #17171e 65%,
+            #131319 100%
+        );
+
+    border: 1px solid #30303b;
+
+    border-radius: 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 35px;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+
+.pagina-produto .imagem-principal-box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: rgba(124, 44, 255, 0.12);
+
+    filter: blur(90px);
+
+    bottom: -110px;
+    right: -80px;
+
+    pointer-events: none;
+}
+
+
+.pagina-produto #imagem-principal {
+    width: 100%;
+    height: 100%;
+
+    max-width: 560px;
+    max-height: 550px;
+
+    object-fit: contain;
+
+    position: relative;
+
+    z-index: 1;
+
+    transition: transform 0.25s ease;
+}
+
+
+.pagina-produto #imagem-principal:hover {
+    transform: scale(1.025);
+}
+
+
+/* =========================================================
+   MINIATURAS
+========================================================= */
+
+.pagina-produto .miniaturas-produto {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 18px;
+}
+
+
+.pagina-produto .miniaturas-produto img {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    background: #18181f;
+
+    border: 2px solid #2c2c36;
+
+    border-radius: 14px;
+
+    padding: 8px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.pagina-produto .miniaturas-produto img:hover {
+    transform: translateY(-3px);
+
+    border-color: #7130d9;
+}
+
+
+.pagina-produto .miniaturas-produto img.ativa {
+    border-color: #8b2cff;
+
+    box-shadow:
+        0 0 0 1px #8b2cff,
+        0 0 20px rgba(139, 44, 255, 0.18);
+}
+
+
+/* =========================================================
+   CARD DE INFORMAÇÕES
+========================================================= */
+
+.pagina-produto .produto-info-card {
+    background:
+        linear-gradient(
+            145deg,
+            #191920,
+            #141419
+        );
+
+    border: 1px solid #30303a;
+
+    border-radius: 24px;
+
+    padding: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.22);
+}
+
+
+/* CATEGORIA */
+
+.pagina-produto .produto-categoria {
+    color: #9c42ff;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 12px;
+}
+
+
+/* NOME */
+
+.pagina-produto #nome {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(32px, 4vw, 48px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.5px;
+}
+
+
+/* PREÇO */
+
+.pagina-produto #preco {
+    margin: 18px 0 8px;
+
+    color: #9b32ff;
+
+    font-size: 34px;
+    font-weight: 900;
+}
+
+
+/* TEXTO AUXILIAR */
+
+.pagina-produto .produto-pagamento {
+    color: #a7a7b2;
+
+    font-size: 13px;
+
+    margin-bottom: 30px;
+}
+
+
+/* DIVISOR */
+
+.pagina-produto .produto-divisor {
+    width: 100%;
+    height: 1px;
+
+    background: #2b2b34;
+
+    margin: 5px 0 28px;
+}
+
+
+/* =========================================================
+   OPÇÕES
+========================================================= */
+
+.pagina-produto .area-opcao {
+    margin-bottom: 26px;
+}
+
+
+.pagina-produto .area-opcao h4 {
+    margin: 0 0 12px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   CORES
+========================================================= */
+
+.pagina-produto .cores {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.pagina-produto .cor {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    border: 3px solid #393943;
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.pagina-produto .cor:hover {
+    transform: scale(1.1);
+}
+
+
+.pagina-produto .cor.selecionada {
+    border-color: #9237ff;
+
+    box-shadow:
+        0 0 0 3px rgba(146, 55, 255, 0.14);
+}
+
+
+.pagina-produto .cor-preto {
+    background: #090909;
+}
+
+
+.pagina-produto .cor-branco {
+    background: #ffffff;
+}
+
+
+.pagina-produto .cor-azul {
+    background: #174cbf;
+}
+
+
+/* =========================================================
+   TAMANHOS
+========================================================= */
+
+.pagina-produto .tamanhos {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+
+.pagina-produto .tamanhos button {
+    min-width: 62px;
+    height: 45px;
+
+    border-radius: 10px;
+
+    border: 1px solid #353540;
+
+    background: #0b0b0f;
+
+    color: white;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.pagina-produto .tamanhos button:hover {
+    border-color: #8734f5;
+
+    transform: translateY(-2px);
+}
+
+
+.pagina-produto .tamanhos button.selecionado {
+    background: #832cff;
+
+    border-color: #832cff;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.pagina-produto .botoes-produto {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 12px;
+
+    margin-top: 8px;
+}
+
+
+.pagina-produto .btn-add-carrinho,
+.pagina-produto .btn-comprar-agora {
+    min-height: 55px;
+
+    border-radius: 11px;
+
+    font-weight: 800;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.pagina-produto .btn-add-carrinho {
+    background: #09090d;
+
+    color: #ffffff;
+
+    border: 1px solid #373741;
+}
+
+
+.pagina-produto .btn-add-carrinho:hover {
+    border-color: #8b32ff;
+
+    transform: translateY(-2px);
+}
+
+
+.pagina-produto .btn-comprar-agora {
+    border: none;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6f20ff,
+            #a642ff
+        );
+
+    box-shadow:
+        0 10px 30px rgba(127, 37, 255, 0.24);
+}
+
+
+.pagina-produto .btn-comprar-agora:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 35px rgba(127, 37, 255, 0.35);
+}
+
+
+/* =========================================================
+   BENEFÍCIOS INTERNOS
+========================================================= */
+
+.pagina-produto .produto-vantagens {
+    margin-top: 32px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #2d2d35;
+
+    display: grid;
+
+    gap: 16px;
+}
+
+
+.pagina-produto .produto-vantagem {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.pagina-produto .produto-vantagem i {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(132, 45, 255, 0.12);
+
+    color: #963dff;
+
+    font-size: 19px;
+}
+
+
+.pagina-produto .produto-vantagem strong {
+    display: block;
+
+    font-size: 13px;
+}
+
+
+.pagina-produto .produto-vantagem span {
+    display: block;
+
+    color: #92929e;
+
+    font-size: 11px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   FAIXA INFERIOR
+========================================================= */
+
+.pagina-produto .beneficios-produto-page {
+    width: 100%;
+
+    margin-top: auto;
+
+    border-top: 1px solid #25252d;
+
+    border-bottom: 1px solid #25252d;
+
+    background: #111116;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+.pagina-produto .beneficio-produto-page {
+    min-height: 105px;
+
+    padding: 20px 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 13px;
+
+    border-right: 1px solid #292931;
+}
+
+
+.pagina-produto .beneficio-produto-page:last-child {
+    border-right: none;
+}
+
+
+.pagina-produto .beneficio-produto-page i {
+    color: #9238ff;
+
+    font-size: 25px;
+}
+
+
+.pagina-produto .beneficio-produto-page strong {
+    display: block;
+
+    color: white;
+
+    font-size: 13px;
+}
+
+
+.pagina-produto .beneficio-produto-page span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8f8f9b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .pagina-produto .produto-page {
+        grid-template-columns: 1fr;
+
+        width: min(760px, calc(100% - 30px));
+
+        gap: 25px;
+
+        margin-top: 30px;
+    }
+
+
+    .pagina-produto .imagem-principal-box {
+        height: 530px;
+    }
+
+
+    .pagina-produto .produto-info-card {
+        padding: 35px;
+    }
+
+
+    .pagina-produto .beneficios-produto-page {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .pagina-produto .beneficio-produto-page {
+        border-bottom: 1px solid #292931;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .pagina-produto .produto-page {
+        width: calc(100% - 22px);
+
+        margin-top: 20px;
+    }
+
+
+    .pagina-produto .imagem-principal-box {
+        height: 390px;
+
+        padding: 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .pagina-produto .miniaturas-produto img {
+        width: 75px;
+        height: 75px;
+    }
+
+
+    .pagina-produto .produto-info-card {
+        padding: 25px 20px;
+
+        border-radius: 18px;
+    }
+
+
+    .pagina-produto #nome {
+        font-size: 32px;
+    }
+
+
+    .pagina-produto #preco {
+        font-size: 28px;
+    }
+
+
+    .pagina-produto .botoes-produto {
+        grid-template-columns: 1fr;
+    }
+
+
+    .pagina-produto .beneficios-produto-page {
+        grid-template-columns: 1fr;
+    }
+
+
+    .pagina-produto .beneficio-produto-page {
+        justify-content: flex-start;
+
+        padding-left: 35px;
+
+        border-right: none;
+    }
+
+}
+
+</style>
+
 </head>
 
-<body>
+
+<body class="pagina-produto">
+
+
+<!-- ===================================================== -->
+<!-- HEADER                                                -->
+<!-- ===================================================== -->
 
 <header class="topo">
 
-    <!-- LOGO -->
-    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
-        <img src="./img/logo.png" class="logo-img">
-        <span class="logo-text">Elite <strong>Sports</strong></span>
-    </div>
+    <div
+        class="logo"
+        onclick="window.location.href='index.html'"
+        style="cursor:pointer;"
+    >
 
-    <!-- BUSCA -->
-    <div class="busca">
-        <i class="ri-search-line"></i>
-        <input type="text" placeholder="Buscar produtos...">
-    </div>
+        <img
+            src="./img/logo.png"
+            class="logo-img"
+            alt="Elite Sports"
+        >
 
-    <!-- AÇÕES -->
-    <div class="acoes">
-
-        <span onclick="window.location.href='index.html'">
-            Home
+        <span class="logo-text">
+            Elite <strong>Sports</strong>
         </span>
 
-        <div class="carrinho" onclick="window.location.href='carrinhos.html'">
+    </div>
+
+
+    <div class="acoes">
+
+        <span onclick="history.back()">
+            <i class="ri-arrow-left-line"></i>
+            Voltar
+        </span>
+
+
+        <span onclick="window.location.href='index.html'">
+            <i class="ri-home-line"></i>
+            Início
+        </span>
+
+
+        <div class="conta-dropdown">
+
+            <span
+                id="usuarioLogadoNome"
+                onclick="handleUsuarioClick()"
+            >
+
+                <i class="ri-user-line"></i>
+
+                <span id="nomeUsuario">
+                    Login
+                </span>
+
+                <i
+                    class="ri-arrow-down-s-line"
+                    id="setaDropdown"
+                    style="display:none"
+                ></i>
+
+            </span>
+
+
+            <div
+                id="dropdownMenu"
+                class="dropdown-content"
+            >
+
+                <button onclick="window.location.href='minha-conta.html'">
+                    Minha Conta
+                </button>
+
+                <button onclick="window.location.href='meus-pedidos.html'">
+                    Meus Pedidos
+                </button>
+
+                <button onclick="sair()">
+                    Sair da conta
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="carrinho"
+            onclick="window.location.href='carrinhos.html'"
+        >
+
             <i class="ri-shopping-cart-line"></i>
-            <span id="contador">0</span>
+
+            <span id="contador">
+                0
+            </span>
+
         </div>
 
     </div>
 
 </header>
 
-<div class="produto-container">
 
-    <!-- GALERIA -->
-    <div class="galeria">
-        <img id="imagem-principal">
 
-        <div class="miniaturas">
-            <img id="img1" onclick="trocarImagem(this)">
-            <img id="img2" onclick="trocarImagem(this)">
-            <img id="img3" onclick="trocarImagem(this)">
+<!-- ===================================================== -->
+<!-- MENU                                                  -->
+<!-- ===================================================== -->
+
+<nav class="menu">
+
+    <a href="index.html">
+        Início
+    </a>
+
+    <a href="camisetas.html">
+        Camisetas
+    </a>
+
+    <a href="shorts.html">
+        Shorts
+    </a>
+
+    <a href="acessorios.html">
+        Acessórios
+    </a>
+
+    <a href="selecoes.html">
+        Copa do Mundo
+    </a>
+
+</nav>
+
+
+
+<!-- ===================================================== -->
+<!-- PRODUTO                                               -->
+<!-- ===================================================== -->
+
+<main class="produto-page">
+
+
+    <!-- ================================================= -->
+    <!-- GALERIA                                          -->
+    <!-- ================================================= -->
+
+    <section class="galeria-produto">
+
+
+        <div class="imagem-principal-box">
+
+            <img
+                id="imagem-principal"
+                src=""
+                alt="Produto Elite Sports"
+            >
+
         </div>
-    </div>
 
-    <!-- INFO -->
-    <div class="info">
 
-        <h2 id="nome"></h2>
+        <div class="miniaturas-produto">
 
-        <p class="preco" id="preco"></p>
+            <img
+                id="img1"
+                onclick="trocarImagem(this)"
+                alt="Imagem 1"
+            >
 
-        <!-- CORES -->
-        <div>
-            <h4>Cor:</h4>
-<div class="cores">
-    <div class="cor azul" onclick="selecionarCor(this, 'azul')"></div>
-    <div class="cor branca" onclick="selecionarCor(this, 'branco')"></div>
-    <div class="cor preta" onclick="selecionarCor(this, 'preto')"></div>
-</div>
+            <img
+                id="img2"
+                onclick="trocarImagem(this)"
+                alt="Imagem 2"
+            >
+
+            <img
+                id="img3"
+                onclick="trocarImagem(this)"
+                alt="Imagem 3"
+            >
+
         </div>
 
-        <!-- TAMANHOS -->
-        <div>
-            <h4>Tamanho:</h4>
-            <div class="tamanhos">
-                <button onclick="selecionarTamanho(this)">P</button>
-                <button onclick="selecionarTamanho(this)">M</button>
-                <button onclick="selecionarTamanho(this)">G</button>
-                <button onclick="selecionarTamanho(this)">GG</button>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- INFORMAÇÕES                                      -->
+    <!-- ================================================= -->
+
+    <section class="produto-info-card">
+
+
+        <span
+            class="produto-categoria"
+            id="categoriaProduto"
+        >
+            ELITE SPORTS
+        </span>
+
+
+        <h1 id="nome"></h1>
+
+
+        <p
+            class="preco"
+            id="preco"
+        ></p>
+
+
+        <div class="produto-pagamento">
+            Produto selecionado • Compra segura
+        </div>
+
+
+        <div class="produto-divisor"></div>
+
+
+
+        <!-- ============================================= -->
+        <!-- CORES                                         -->
+        <!-- ============================================= -->
+
+        <div
+            id="area-cores"
+            class="area-opcao"
+        >
+
+            <h4>
+                Cor:
+            </h4>
+
+            <div
+                class="cores"
+                id="listaCores"
+            ></div>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- TAMANHO                                       -->
+        <!-- ============================================= -->
+
+        <div
+            id="area-tamanhos"
+            class="area-opcao"
+        >
+
+            <h4>
+                Tamanho:
+            </h4>
+
+
+            <div
+                class="tamanhos"
+                id="listaTamanhos"
+            ></div>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- BOTÕES                                        -->
+        <!-- ============================================= -->
+
+        <div class="botoes-produto">
+
+            <button
+                class="btn-add-carrinho"
+                onclick="adicionarCarrinho()"
+            >
+
+                <i class="ri-shopping-cart-line"></i>
+
+                Adicionar ao carrinho
+
+            </button>
+
+
+            <button
+                class="btn-comprar-agora"
+                onclick="comprarAgora()"
+            >
+
+                Comprar agora
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ============================================= -->
+        <!-- VANTAGENS                                     -->
+        <!-- ============================================= -->
+
+        <div class="produto-vantagens">
+
+
+            <div class="produto-vantagem">
+
+                <i class="ri-truck-line"></i>
+
+                <div>
+
+                    <strong>
+                        Entrega para todo o Brasil
+                    </strong>
+
+                    <span>
+                        Envio seguro para sua região.
+                    </span>
+
+                </div>
+
             </div>
+
+
+            <div class="produto-vantagem">
+
+                <i class="ri-shield-check-line"></i>
+
+                <div>
+
+                    <strong>
+                        Compra segura
+                    </strong>
+
+                    <span>
+                        Seus dados protegidos.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="produto-vantagem">
+
+                <i class="ri-bank-card-line"></i>
+
+                <div>
+
+                    <strong>
+                        Pagamento facilitado
+                    </strong>
+
+                    <span>
+                        Mais comodidade na sua compra.
+                    </span>
+
+                </div>
+
+            </div>
+
+
         </div>
 
-        <!-- BOTÕES -->
-       <div class="botoes-produto">
-    <button class="btn-secundario" onclick="adicionarCarrinho()">
-        Adicionar ao Carrinho
-    </button>
 
-    <button class="btn-principal" onclick="comprarAgora()">
-        Comprar
-    </button>
-</div>
+    </section>
+
+
+</main>
+
+
+
+<!-- ===================================================== -->
+<!-- BENEFÍCIOS                                            -->
+<!-- ===================================================== -->
+
+<section class="beneficios-produto-page">
+
+
+    <div class="beneficio-produto-page">
+
+        <i class="ri-truck-line"></i>
+
+        <div>
+            <strong>Entrega para todo o Brasil</strong>
+            <span>Receba com segurança.</span>
+        </div>
 
     </div>
 
-</div>
+
+    <div class="beneficio-produto-page">
+
+        <i class="ri-shield-check-line"></i>
+
+        <div>
+            <strong>Compra segura</strong>
+            <span>Seus dados protegidos.</span>
+        </div>
+
+    </div>
+
+
+    <div class="beneficio-produto-page">
+
+        <i class="ri-bank-card-line"></i>
+
+        <div>
+            <strong>Pagamento facilitado</strong>
+            <span>Mais comodidade para comprar.</span>
+        </div>
+
+    </div>
+
+
+    <div class="beneficio-produto-page">
+
+        <i class="ri-customer-service-2-line"></i>
+
+        <div>
+            <strong>Atendimento</strong>
+            <span>Conte com a Elite Sports.</span>
+        </div>
+
+    </div>
+
+
+</section>
+
+
 
 <script>
 
-// VOLTAR
-function voltar() {
-    window.location.href = "index.html";
+
+/* =========================================================
+   PRODUTOS
+========================================================= */
+
+const produtos = {
+
+
+/* =========================================================
+   CAMISETA DRY FIT
+========================================================= */
+
+1: {
+
+    categoria: "CAMISETAS",
+
+    nome: "Camiseta Dry Fit",
+
+    preco: "R$ 99,90",
+
+    temCor: true,
+
+    temTamanho: true,
+
+    cores: [
+        "azul",
+        "branco",
+        "preto"
+    ],
+
+    tamanhos: [
+        "P",
+        "M",
+        "G",
+        "GG"
+    ],
+
+    imagens: {
+
+        azul: [
+            "./img/camiseta-dryfit/DryFit-azul-1.png",
+            "./img/camiseta-dryfit/DryFit-azul-2.png",
+            "./img/camiseta-dryfit/DryFit-azul-3.png"
+        ],
+
+        branco: [
+            "./img/camiseta-dryfit/DryFit-branca-1.png",
+            "./img/camiseta-dryfit/DryFit-branca-2.png",
+            "./img/camiseta-dryfit/DryFit-branca-3.png"
+        ],
+
+        preto: [
+            "./img/camiseta-dryfit/DryFit-preta-1.png",
+            "./img/camiseta-dryfit/DryFit-preta-2.png",
+            "./img/camiseta-dryfit/DryFit-preta-3.png"
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   SHORT ESPORTIVO
+========================================================= */
+
+2: {
+
+    categoria: "SHORTS",
+
+    nome: "Short Esportivo",
+
+    preco: "R$ 79,90",
+
+    temCor: true,
+
+    temTamanho: true,
+
+    cores: [
+        "preto",
+        "azul",
+        "branco"
+    ],
+
+    tamanhos: [
+        "P",
+        "M",
+        "G",
+        "GG"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/short-esportivo/Short-Preto-1.png",
+            "./img/short-esportivo/Short-Preto-2.png",
+            "./img/short-esportivo/Short-Preto-3.png"
+        ],
+
+        azul: [
+            "./img/short-esportivo/Short-Azul-1.png",
+            "./img/short-esportivo/Short-Azul-2.png",
+            "./img/short-esportivo/Short-Azul-3.png"
+        ],
+
+        branco: [
+            "./img/short-esportivo/Short-Branco-1.png",
+            "./img/short-esportivo/Short-Branco-2.png",
+            "./img/short-esportivo/Short-Branco-3.png"
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   CAMISETA TREINO
+========================================================= */
+
+3: {
+
+    categoria: "CAMISETAS",
+
+    nome: "Camiseta Treino",
+
+    preco: "R$ 89,90",
+
+    temCor: true,
+
+    temTamanho: true,
+
+    cores: [
+        "preto",
+        "azul",
+        "branco"
+    ],
+
+    tamanhos: [
+        "P",
+        "M",
+        "G",
+        "GG"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/camiseta-treino/Camiseta treino-preta-1.png",
+            "./img/camiseta-treino/Camiseta treino-preta-2.png",
+            "./img/camiseta-treino/Camiseta treino-preta-3.png"
+        ],
+
+        azul: [
+            "./img/camiseta-treino/Camiseta treino-azul-3.png",
+            "./img/camiseta-treino/Camiseta treino-azul-2.png",
+            "./img/camiseta-treino/Camiseta treino-azul-1.png"
+        ],
+
+        branco: [
+            "./img/camiseta-treino/Camiseta treino-branca-1.png",
+            "./img/camiseta-treino/Camiseta treino-branca-2.png",
+            "./img/camiseta-treino/Camiseta treino-branca-3.png"
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   REGATA
+========================================================= */
+
+4: {
+
+    categoria: "CAMISETAS",
+
+    nome: "Regata Fitness",
+
+    preco: "R$ 69,90",
+
+    temCor: true,
+
+    temTamanho: true,
+
+    cores: [
+        "preto",
+        "azul",
+        "branco"
+    ],
+
+    tamanhos: [
+        "P",
+        "M",
+        "G",
+        "GG"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/regata/Regata-Preta-1.png",
+            "./img/regata/Regata-Preta-2.png",
+            "./img/regata/Regata-Preta-3.png"
+        ],
+
+        azul: [
+            "./img/regata/Regata-Azul-1.png",
+            "./img/regata/Regata-Azul-2.png",
+            "./img/regata/Regata-Azul-3.png"
+        ],
+
+        branco: [
+            "./img/regata/Regata-Branca-1.png",
+            "./img/regata/Regata-Branca-2.png",
+            "./img/regata/Regata-Branca-3.png"
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   BOLAS
+========================================================= */
+
+301: {
+
+    categoria: "BOLAS",
+
+    nome: "Bola Elite Nations",
+
+    preco: "R$ 159,90",
+
+    temCor: false,
+
+    temTamanho: false,
+
+    imagens: {
+
+        principal: [
+            "./img/acessorios/Bola_futebol_1.png",
+        ]
+
+    }
+
+},
+
+
+302: {
+
+    categoria: "BOLAS",
+
+    nome: "Bola Elite Stars",
+
+    preco: "R$ 179,90",
+
+    temCor: false,
+
+    temTamanho: false,
+
+    imagens: {
+
+        principal: [
+            "./img/acessorios/Bola_futebol_2.png",
+        ]
+
+    }
+
+},
+
+
+303: {
+
+    categoria: "BOLAS",
+
+    nome: "Bola Elite Pro",
+
+    preco: "R$ 129,90",
+
+    temCor: false,
+
+    temTamanho: false,
+
+    imagens: {
+
+        principal: [
+            "./img/acessorios/Bola_futebol_3.png",
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   GARRAFA
+========================================================= */
+
+304: {
+
+    categoria: "GARRAFAS",
+
+    nome: "Garrafa Esportiva Elite 750ml",
+
+    preco: "R$ 79,90",
+
+    temCor: true,
+
+    temTamanho: false,
+
+    cores: [
+        "preto",
+        "azul",
+        "branco"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/acessorios/Garrafa_preta_1.png",
+        ],
+
+        azul: [
+            "./img/acessorios/Garrafa_azul_1.png",
+        ],
+
+        branco: [
+            "./img/acessorios/Garrafa_branca_1.png",
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   BOLSA
+========================================================= */
+
+305: {
+
+    categoria: "BOLSAS",
+
+    nome: "Bolsa Esportiva Elite",
+
+    preco: "R$ 149,90",
+
+    temCor: true,
+
+    temTamanho: false,
+
+    cores: [
+        "preto",
+        "azul",
+        "branco"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/acessorios/Bolsa_preta_1.png",
+            "./img/acessorios/Bolsa_preta_2.png",
+            "./img/acessorios/Bolsa_preta_3.png"
+        ],
+
+        azul: [
+            "./img/acessorios/Bolsa_azul_1.png",
+            "./img/acessorios/Bolsa_azul_2.png",
+            "./img/acessorios/Bolsa_azul_3.png"
+        ],
+
+        branco: [
+            "./img/acessorios/Bolsa_branca_1.png",
+            "./img/acessorios/Bolsa_branca_2.png",
+            "./img/acessorios/Bolsa_branca_3.png"
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   MOCHILA
+========================================================= */
+
+306: {
+
+    categoria: "MOCHILAS",
+
+    nome: "Mochila Esportiva Elite",
+
+    preco: "R$ 189,90",
+
+    temCor: true,
+
+    temTamanho: false,
+
+    cores: [
+        "preto",
+        "azul",
+        "branco"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/acessorios/Mochila_preta_1.png",
+            "./img/acessorios/Mochila_preta_2.png",
+            "./img/acessorios/Mochila_preta_3.png"
+        ],
+
+        azul: [
+            "./img/acessorios/Mochila_azul_1.png",
+            "./img/acessorios/Mochila_azul_2.png",
+            "./img/acessorios/Mochila_azul_3.png"
+        ],
+
+        branco: [
+            "./img/acessorios/Mochila_branca_1.png",
+            "./img/acessorios/Mochila_branca_2.png",
+            "./img/acessorios/Mochila_branca_3.png"
+        ]
+
+    }
+
+},
+
+
+
+/* =========================================================
+   MEIA
+========================================================= */
+
+307: {
+
+    categoria: "MEIAS",
+
+    nome: "Meia Esportiva Elite",
+
+    preco: "R$ 39,90",
+
+    temCor: true,
+
+    temTamanho: false,
+
+    cores: [
+        "preto",
+        "branco"
+    ],
+
+    imagens: {
+
+        preto: [
+            "./img/acessorios/Meia_preta_1.png",
+            "./img/acessorios/Meia_preta_2.png",
+            "./img/acessorios/Meia_preta_3.png"
+        ],
+
+        branco: [
+            "./img/acessorios/Meia_branca_1.png",
+            "./img/acessorios/Meia_branca_2.png",
+            "./img/acessorios/Meia_branca_3.png"
+        ]
+
+    }
+
 }
 
-// PRODUTOS
-const produtos = {
-1: {
-    nome: "Camiseta Dry Fit",
-    preco: "R$ 99,90",
-    imagens: {
-        azul: [
-    "./img/camiseta-dryfit/azul-1.png",
-    "./img/camiseta-dryfit/azul-2.png",
-    "./img/camiseta-dryfit/azul-3.png"
-],
-branco: [
-    "./img/camiseta-dryfit/branca-1.png",
-    "./img/camiseta-dryfit/branca-2.png",
-    "./img/camiseta-dryfit/branca-3.png"
-],
-preto: [
-    "./img/camiseta-dryfit/preta-1.png",
-    "./img/camiseta-dryfit/preta-2.png",
-    "./img/camiseta-dryfit/preta-3.png"
-]
-    }
-},
-    2: {
-        nome: "Short Esportivo",
-        preco: "R$ 79,90",
-        imagens: [
-            "https://images.unsplash.com/photo-1593032465171-8f0c5b4e3f3d",
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6"
-        ]
-    },
-    3: {
-        nome: "Camiseta Treino",
-        preco: "R$ 89,90",
-        imagens: [
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6",
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-            "https://images.unsplash.com/photo-1593032465171-8f0c5b4e3f3d"
-        ]
-    },
-    4: {
-        nome: "Regata Fitness",
-        preco: "R$ 69,90",
-        imagens: [
-            "https://images.unsplash.com/photo-1584865288642-42078afe6942",
-            "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
-            "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6"
-        ]
-    }
 };
 
-// PEGAR ID
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
 
-// FALLBACK
-const produto = produtos[id] || produtos[1];
 
-let corSelecionada = "azul";
+/* =========================================================
+   PRODUTOS COPA DO MUNDO
+========================================================= */
 
-// PREENCHER
-document.getElementById("nome").innerText = produto.nome;
-document.getElementById("preco").innerText = produto.preco;
+const produtosCopa = {
 
-carregarImagens("azul");
 
-function carregarImagens(cor) {
-    const lista = produto.imagens[cor];
+101: [
+    "Camisa Brasil",
+    "R$ 129,90",
+    "./img/brasil"
+],
 
-    document.getElementById("imagem-principal").src = lista[0];
 
-    document.getElementById("img1").src = lista[0];
-    document.getElementById("img2").src = lista[1];
-    document.getElementById("img3").src = lista[2];
+102: [
+    "Camisa França",
+    "R$ 129,90",
+    "./img/franca"
+],
+
+
+103: [
+    "Camisa Argentina",
+    "R$ 129,90",
+    "./img/argentina"
+],
+
+
+104: [
+    "Camisa Portugal",
+    "R$ 129,90",
+    "./img/portugal"
+],
+
+
+105: [
+    "Camisa Alemanha",
+    "R$ 129,90",
+    "./img/alemanha"
+],
+
+
+106: [
+    "Camisa Espanha",
+    "R$ 129,90",
+    "./img/espanha"
+],
+
+
+107: [
+    "Camisa Inglaterra",
+    "R$ 129,90",
+    "./img/inglaterra"
+],
+
+
+108: [
+    "Camisa Bélgica",
+    "R$ 129,90",
+    "./img/belgica"
+],
+
+
+201: [
+    "Short Brasil",
+    "R$ 89,90",
+    "./img/short-brasil"
+],
+
+
+202: [
+    "Short França",
+    "R$ 89,90",
+    "./img/short-franca"
+],
+
+
+203: [
+    "Short Argentina",
+    "R$ 89,90",
+    "./img/short-argentina"
+],
+
+
+204: [
+    "Short Portugal",
+    "R$ 89,90",
+    "./img/short-portugal"
+],
+
+
+205: [
+    "Short Alemanha",
+    "R$ 89,90",
+    "./img/short-alemanha"
+],
+
+
+206: [
+    "Short Espanha",
+    "R$ 89,90",
+    "./img/short-espanha"
+],
+
+
+207: [
+    "Short Inglaterra",
+    "R$ 89,90",
+    "./img/short-inglaterra"
+],
+
+
+208: [
+    "Short Bélgica",
+    "R$ 89,90",
+    "./img/short-belgica"
+]
+
+};
+
+
+
+/* ADICIONA COPA AO OBJETO PRINCIPAL */
+
+Object.entries(produtosCopa).forEach(
+    ([codigo, dados]) => {
+
+        produtos[codigo] = {
+
+            categoria: "COPA DO MUNDO",
+
+            nome: dados[0],
+
+            preco: dados[1],
+
+            temCor: false,
+
+            temTamanho: true,
+
+            tamanhos: [
+                "P",
+                "M",
+                "G",
+                "GG"
+            ],
+
+            imagens: {
+
+                principal: [
+                    dados[2] + "-1.png",
+                    dados[2] + "-2.png",
+                    dados[2] + "-3.png"
+                ]
+
+            }
+
+        };
+
+    }
+);
+
+
+
+/* =========================================================
+   LÊ O PRODUTO DA URL
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const id =
+    params.get("id");
+
+
+if (!id || !produtos[id]) {
+
+    alert(
+        "Produto não encontrado!"
+    );
+
+    window.location.href =
+        "index.html";
+
 }
 
-// TROCAR IMAGEM
-function trocarImagem(img) {
-    document.getElementById("imagem-principal").src = img.src;
-}
 
-// TAMANHO
-function selecionarTamanho(botao) {
-    let botoes = document.querySelectorAll(".tamanhos button");
+const produto =
+    produtos[id];
 
-    botoes.forEach(b => {
-        b.style.background = "white";
-        b.style.color = "black";
-    });
 
-    botao.style.background = "#6a00ff";
-    botao.style.color = "white";
-}
+let corSelecionada = "";
 
-// COR
-function selecionarCor(elemento, cor) {
-    let cores = document.querySelectorAll(".cor");
+let tamanhoSelecionado = "";
 
-    cores.forEach(c => c.style.border = "2px solid #ddd");
 
-    elemento.style.border = "2px solid #6a00ff";
 
-    corSelecionada = cor;
+/* =========================================================
+   INICIALIZA PRODUTO
+========================================================= */
 
-    carregarImagens(cor);
-}
+function iniciarProduto() {
 
-// 🛒 ADICIONAR AO CARRINHO
-function adicionarCarrinho() {
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    document.getElementById(
+        "nome"
+    ).innerText =
+        produto.nome;
 
-    let existente = carrinho.find(p => p.nome === produto.nome);
 
-    if (existente) {
-        existente.qtd = (existente.qtd || 1) + 1;
+    document.getElementById(
+        "preco"
+    ).innerText =
+        produto.preco;
+
+
+    document.getElementById(
+        "categoriaProduto"
+    ).innerText =
+        produto.categoria ||
+        "ELITE SPORTS";
+
+
+    criarCores();
+
+    criarTamanhos();
+
+
+    if (produto.temCor) {
+
+        const corURL =
+            params.get("cor");
+
+
+        if (
+            corURL &&
+            produto.cores.includes(
+                corURL
+            )
+        ) {
+
+            corSelecionada =
+                corURL;
+
+        } else {
+
+            corSelecionada =
+                produto.cores[0];
+
+        }
+
+
     } else {
-        carrinho.push({
-            nome: produto.nome,
-            preco: produto.preco,
-            imagem: produto.imagens[0],
-            qtd: 1
-        });
+
+        corSelecionada =
+            "principal";
+
     }
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    alert("Produto adicionado ao carrinho!");
+    carregarImagens(
+        corSelecionada
+    );
+
+
+    marcarCorSelecionada();
+
 }
 
-// 💳 COMPRAR
+
+
+/* =========================================================
+   CRIA CORES
+========================================================= */
+
+function criarCores() {
+
+    const area =
+        document.getElementById(
+            "area-cores"
+        );
+
+
+    const lista =
+        document.getElementById(
+            "listaCores"
+        );
+
+
+    lista.innerHTML = "";
+
+
+    if (
+        !produto.temCor ||
+        !produto.cores ||
+        produto.cores.length === 0
+    ) {
+
+        area.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    area.style.display =
+        "block";
+
+
+    produto.cores.forEach(
+        cor => {
+
+            const bolinha =
+                document.createElement(
+                    "button"
+                );
+
+
+            bolinha.type =
+                "button";
+
+
+            bolinha.className =
+                "cor cor-" + cor;
+
+
+            bolinha.title =
+                primeiraMaiuscula(
+                    cor
+                );
+
+
+            bolinha.setAttribute(
+                "aria-label",
+                "Selecionar cor " +
+                cor
+            );
+
+
+            bolinha.onclick =
+                function() {
+
+                    selecionarCor(
+                        cor
+                    );
+
+                };
+
+
+            lista.appendChild(
+                bolinha
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   TAMANHOS
+========================================================= */
+
+function criarTamanhos() {
+
+    const area =
+        document.getElementById(
+            "area-tamanhos"
+        );
+
+
+    const lista =
+        document.getElementById(
+            "listaTamanhos"
+        );
+
+
+    lista.innerHTML = "";
+
+
+    if (
+        !produto.temTamanho ||
+        !produto.tamanhos
+    ) {
+
+        area.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    area.style.display =
+        "block";
+
+
+    produto.tamanhos.forEach(
+        tamanho => {
+
+            const botao =
+                document.createElement(
+                    "button"
+                );
+
+
+            botao.innerText =
+                tamanho;
+
+
+            botao.onclick =
+                function() {
+
+                    selecionarTamanho(
+                        this,
+                        tamanho
+                    );
+
+                };
+
+
+            lista.appendChild(
+                botao
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   IMAGENS
+========================================================= */
+
+function obterImagens() {
+
+    if (
+        produto.temCor
+    ) {
+
+        return (
+            produto.imagens[
+                corSelecionada
+            ] ||
+            Object.values(
+                produto.imagens
+            )[0]
+        );
+
+    }
+
+
+    return (
+        produto.imagens.principal ||
+        Object.values(
+            produto.imagens
+        )[0]
+    );
+
+}
+
+
+
+function carregarImagens(cor) {
+
+    const lista =
+        produto.imagens[cor] ||
+        produto.imagens.principal ||
+        Object.values(produto.imagens)[0];
+
+
+    const principal =
+        document.getElementById("imagem-principal");
+
+
+    principal.src = lista[0];
+
+
+    const areaMiniaturas =
+        document.querySelector(".miniaturas-produto");
+
+
+    /*
+       Se o produto possui apenas uma foto,
+       não mostra miniaturas.
+    */
+
+    if (lista.length <= 1) {
+
+        areaMiniaturas.style.display = "none";
+
+    } else {
+
+        areaMiniaturas.style.display = "flex";
+
+    }
+
+
+    const miniaturas = [
+        document.getElementById("img1"),
+        document.getElementById("img2"),
+        document.getElementById("img3")
+    ];
+
+
+    miniaturas.forEach((miniatura, index) => {
+
+        miniatura.classList.remove("ativa");
+
+
+        if (lista[index]) {
+
+            miniatura.src = lista[index];
+
+            miniatura.style.display = "block";
+
+        } else {
+
+            miniatura.style.display = "none";
+
+        }
+
+    });
+
+
+    if (lista.length > 1) {
+
+        miniaturas[0].classList.add("ativa");
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TROCA FOTO
+========================================================= */
+
+function trocarImagem(
+    img
+) {
+
+    document.getElementById(
+        "imagem-principal"
+    ).src =
+        img.src;
+
+
+    document
+        .querySelectorAll(
+            ".miniaturas-produto img"
+        )
+        .forEach(
+            miniatura => {
+
+                miniatura.classList.remove(
+                    "ativa"
+                );
+
+            }
+        );
+
+
+    img.classList.add(
+        "ativa"
+    );
+
+}
+
+
+
+/* =========================================================
+   SELEÇÃO DE COR
+========================================================= */
+
+function selecionarCor(
+    cor
+) {
+
+    corSelecionada =
+        cor;
+
+
+    carregarImagens(
+        cor
+    );
+
+
+    marcarCorSelecionada();
+
+}
+
+
+
+function marcarCorSelecionada() {
+
+    document
+        .querySelectorAll(
+            "#listaCores .cor"
+        )
+        .forEach(
+            cor => {
+
+                cor.classList.remove(
+                    "selecionada"
+                );
+
+            }
+        );
+
+
+    if (
+        !produto.temCor
+    ) {
+
+        return;
+
+    }
+
+
+    const selecionada =
+        document.querySelector(
+            ".cor-" +
+            corSelecionada
+        );
+
+
+    if (
+        selecionada
+    ) {
+
+        selecionada.classList.add(
+            "selecionada"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   TAMANHO
+========================================================= */
+
+function selecionarTamanho(
+    botao,
+    tamanho
+) {
+
+    tamanhoSelecionado =
+        tamanho;
+
+
+    document
+        .querySelectorAll(
+            "#listaTamanhos button"
+        )
+        .forEach(
+            btn => {
+
+                btn.classList.remove(
+                    "selecionado"
+                );
+
+            }
+        );
+
+
+    botao.classList.add(
+        "selecionado"
+    );
+
+}
+
+
+
+/* =========================================================
+   CARRINHO
+========================================================= */
+
+function adicionarCarrinho() {
+
+
+    if (
+        produto.temTamanho &&
+        tamanhoSelecionado === ""
+    ) {
+
+        alert(
+            "Selecione um tamanho antes de adicionar ao carrinho!"
+        );
+
+        return false;
+
+    }
+
+
+    const carrinho =
+        JSON.parse(
+            localStorage.getItem(
+                "carrinho"
+            )
+        ) || [];
+
+
+    const corCarrinho =
+        produto.temCor
+            ? corSelecionada
+            : "Única";
+
+
+    const tamanhoCarrinho =
+        produto.temTamanho
+            ? tamanhoSelecionado
+            : "Único";
+
+
+    const imagens =
+        obterImagens();
+
+
+    const existente =
+        carrinho.find(
+            item =>
+
+                String(item.id) ===
+                String(id)
+
+                &&
+
+                item.cor ===
+                corCarrinho
+
+                &&
+
+                item.tamanho ===
+                tamanhoCarrinho
+        );
+
+
+    if (
+        existente
+    ) {
+
+        existente.qtd =
+            (existente.qtd || 1) + 1;
+
+    } else {
+
+        carrinho.push({
+
+            id: id,
+
+            nome:
+                produto.nome,
+
+            preco:
+                produto.preco,
+
+            cor:
+                corCarrinho,
+
+            tamanho:
+                tamanhoCarrinho,
+
+            imagem:
+                imagens[0],
+
+            qtd: 1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(
+            carrinho
+        )
+    );
+
+
+    atualizarContador();
+
+
+    alert(
+        "Produto adicionado ao carrinho!"
+    );
+
+
+    return true;
+
+}
+
+
+
+/* =========================================================
+   COMPRAR AGORA
+========================================================= */
+
 function comprarAgora() {
-    adicionarCarrinho();
-    window.location.href = "carrinho.html";
+
+    const adicionado =
+        adicionarCarrinho();
+
+
+    if (
+        adicionado
+    ) {
+
+        window.location.href =
+            "carrinhos.html";
+
+    }
+
 }
+
+
+
+/* =========================================================
+   CONTADOR CARRINHO
+========================================================= */
+
+function atualizarContador() {
+
+    const carrinho =
+        JSON.parse(
+            localStorage.getItem(
+                "carrinho"
+            )
+        ) || [];
+
+
+    let total = 0;
+
+
+    carrinho.forEach(
+        produto => {
+
+            total +=
+                produto.qtd || 1;
+
+        }
+    );
+
+
+    const contador =
+        document.getElementById(
+            "contador"
+        );
+
+
+    contador.innerText =
+        total > 9
+            ? "9+"
+            : total;
+
+}
+
+
+
+/* =========================================================
+   LOGIN / HEADER
+========================================================= */
+
+function atualizarNomeUsuarioHeader() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem(
+                "usuarioLogado"
+            )
+        );
+
+
+    const nome =
+        document.getElementById(
+            "nomeUsuario"
+        );
+
+
+    const seta =
+        document.getElementById(
+            "setaDropdown"
+        );
+
+
+    if (
+        usuario
+    ) {
+
+        nome.innerText =
+            usuario.nome ||
+            "Usuário";
+
+
+        seta.style.display =
+            "inline";
+
+    } else {
+
+        nome.innerText =
+            "Login";
+
+
+        seta.style.display =
+            "none";
+
+    }
+
+}
+
+
+
+function handleUsuarioClick() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem(
+                "usuarioLogado"
+            )
+        );
+
+
+    if (
+        usuario
+    ) {
+
+        document
+            .getElementById(
+                "dropdownMenu"
+            )
+            .classList
+            .toggle("show");
+
+    } else {
+
+        window.location.href =
+            "Entrar.html";
+
+    }
+
+}
+
+
+
+function sair() {
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+
+    atualizarNomeUsuarioHeader();
+
+
+    document
+        .getElementById(
+            "dropdownMenu"
+        )
+        .classList
+        .remove("show");
+
+}
+
+
+
+/* =========================================================
+   FECHAR DROPDOWN
+========================================================= */
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const areaUsuario =
+            document.getElementById(
+                "usuarioLogadoNome"
+            );
+
+
+        const menu =
+            document.getElementById(
+                "dropdownMenu"
+            );
+
+
+        if (
+            areaUsuario &&
+            !areaUsuario.contains(
+                event.target
+            )
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   AUXILIAR
+========================================================= */
+
+function primeiraMaiuscula(
+    texto
+) {
+
+    return (
+        texto.charAt(0)
+            .toUpperCase()
+        +
+        texto.slice(1)
+    );
+
+}
+
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        iniciarProduto();
+
+        atualizarNomeUsuarioHeader();
+
+        atualizarContador();
+
+    }
+);
+
 
 </script>
+
 
 </body>
 </html>

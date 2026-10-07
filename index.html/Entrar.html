@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Entrar - Elite Sports</title>
+
+<!-- Link para o CSS da página -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Link para os ícones RemixIcon -->
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Cabeçalho da página -->
+<header class="topo">
+
+    <!-- Logo da loja, clicável para ir para a página inicial -->
+    <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
+        <img src="./img/logo.png" class="logo-img">
+        <span class="logo-text">Elite <strong>Sports</strong></span>
+    </div>
+
+    <!-- Área de ações do usuário -->
+    <div class="acoes">
+
+        <!-- Botão de voltar para a página anterior -->
+        <span onclick="history.back()">
+            <i class="ri-arrow-left-line"></i> Voltar
+        </span>
+
+        <!-- Botão para ir para a página inicial -->
+        <span onclick="window.location.href='index.html'">
+            <i class="ri-home-line"></i> Início
+        </span>
+
+        <!-- Área do usuário: mostra "Login" se não estiver logado ou nome do usuário quando logado -->
+        <div class="conta-dropdown">
+            <span id="usuarioLogadoNome" onclick="handleUsuarioClick()">
+                <i class="ri-user-line"></i> <span id="nomeUsuario">Login</span>
+                <i class="ri-arrow-down-s-line" id="setaDropdown" style="display:none"></i> <!-- seta para abrir o menu -->
+            </span>
+
+            <!-- Menu dropdown do usuário (minha conta, meus pedidos, sair) -->
+            <div id="dropdownMenu" class="dropdown-content">
+                <button onclick="mostrarMinhaConta()">Minha Conta</button>
+                <button onclick="mostrarMeusPedidos()">Meus Pedidos</button>
+                <button onclick="sair()">Sair da conta</button>
+            </div>
+        </div>
+
+        <!-- Carrinho de compras sempre por último -->
+        <div class="carrinho" onclick="window.location.href='carrinhos.html'">
+            <i class="ri-shopping-cart-line"></i>
+            <span id="contador">0</span> <!-- quantidade de itens no carrinho -->
+        </div>
+
+    </div>
+
+</header>
+
+<!-- Menu de navegação principal -->
+<nav class="menu">
+    <a href="index.html">Início</a>
+    <a href="camisetas.html">Camisetas</a>
+    <a href="shorts.html">Shorts</a>
+    <a href="selecoes.html">Copa do Mundo</a>
+</nav>
+
+<!-- Área de login e cadastro -->
+<section class="login-container">
+
+    <div class="login-card">
+
+<div class="login-logo">
+    <img src="./img/logo.png">
+    <span style="color: #ffffff !important;">
+        Elite <strong style="color: #7c2cff !important;">Sports</strong>
+    </span>
+</div>
+
+
+        <!-- Botões para alternar entre login e cadastro -->
+        <div class="abas-login">
+            <button id="btnLogin" class="aba-ativa" onclick="mostrarLogin()">
+                Entrar
+            </button>
+
+            <button id="btnCadastro" onclick="mostrarCadastro()">
+                Cadastrar
+            </button>
+        </div>
+
+
+        <!-- LOGIN -->
+        <div id="boxLogin">
+
+            <h2>Bem-vindo de volta</h2>
+
+            <p class="login-subtitulo">
+                Entre na sua conta Elite Sports
+            </p>
+
+
+            <label>E-mail</label>
+
+            <div class="campo-input">
+                <i class="ri-mail-line"></i>
+
+                <input 
+                    type="email" 
+                    id="loginEmail" 
+                    placeholder="Digite seu e-mail">
+            </div>
+
+
+
+            <label>Senha</label>
+
+            <div class="campo-senha campo-input">
+
+                <i class="ri-lock-line"></i>
+
+                <input 
+                    type="password" 
+                    id="loginSenha" 
+                    placeholder="Digite sua senha">
+
+
+                <i class="ri-eye-line olho"
+                onclick="mostrarOcultarSenha('loginSenha', this)">
+                </i>
+
+            </div>
+
+
+            <button class="btn-principal" onclick="fazerLogin()">
+                Entrar
+            </button>
+
+
+            <button class="btn-laranja" onclick="mostrarRedefinirSenha()">
+                Esqueci minha senha
+            </button>
+
+
+        </div>
+
+
+
+        <!-- CADASTRO -->
+        <div id="boxCadastro" style="display:none;">
+
+            <h2>Criar conta</h2>
+
+            <p class="login-subtitulo">
+                Faça seu cadastro e compre seus produtos
+            </p>
+
+
+
+            <label>Nome</label>
+
+            <div class="campo-input">
+                <i class="ri-user-line"></i>
+
+                <input 
+                type="text"
+                id="cadastroNome"
+                placeholder="Digite seu nome">
+            </div>
+
+
+
+            <label>E-mail</label>
+
+            <div class="campo-input">
+                <i class="ri-mail-line"></i>
+
+                <input 
+                type="email"
+                id="cadastroEmail"
+                placeholder="Digite seu e-mail">
+            </div>
+
+
+
+            <label>CPF</label>
+
+            <div class="campo-input">
+                <i class="ri-bank-card-line"></i>
+
+                <input 
+                type="text"
+                id="cadastroCPF"
+                placeholder="Digite seu CPF"
+                maxlength="14"
+                oninput="formatarCPF(this)">
+            </div>
+
+
+
+            <label>Senha</label>
+
+            <div class="campo-senha campo-input">
+
+                <i class="ri-lock-line"></i>
+
+                <input 
+                type="password"
+                id="cadastroSenha"
+                placeholder="Crie uma senha">
+
+
+                <i class="ri-eye-line olho"
+                onclick="mostrarOcultarSenha('cadastroSenha', this)">
+                </i>
+
+            </div>
+
+
+
+            <label>Confirmar senha</label>
+
+            <div class="campo-senha campo-input">
+
+                <i class="ri-lock-line"></i>
+
+                <input 
+                type="password"
+                id="cadastroConfirmarSenha"
+                placeholder="Repita a senha">
+
+
+                <i class="ri-eye-line olho"
+                onclick="mostrarOcultarSenha('cadastroConfirmarSenha', this)">
+                </i>
+
+            </div>
+
+
+
+            <button class="btn-principal" onclick="cadastrarUsuario()">
+                Cadastrar
+            </button>
+
+
+        </div>
+
+
+
+        <!-- REDEFINIR SENHA -->
+        <div class="redefinir-senha" id="boxRedefinirSenha" style="display:none;">
+
+            <h2>Redefinir Senha</h2>
+
+            <div id="emailStep">
+
+                <label>E-mail cadastrado</label>
+
+                <input 
+                type="email"
+                id="emailRedefinir"
+                placeholder="Digite seu e-mail">
+
+
+                <button onclick="verificarEmailRedefinir()">
+                    Confirmar
+                </button>
+
+
+                <p id="mensagemRedefinir"></p>
+
+            </div>
+
+
+
+            <div id="senhaStep" style="display:none;">
+
+                <label>Nova senha</label>
+
+                <input 
+                type="password"
+                id="novaSenha"
+                placeholder="Nova senha">
+
+
+                <label>Confirmar senha</label>
+
+                <input 
+                type="password"
+                id="confirmarNovaSenha"
+                placeholder="Repita a senha">
+
+
+                <button onclick="atualizarSenha()">
+                    Redefinir Senha
+                </button>
+
+
+                <p id="mensagemNovaSenha"></p>
+
+            </div>
+
+
+            <button onclick="voltarLogin()">
+                Voltar para login
+            </button>
+
+
+        </div>
+
+
+        <p id="mensagemLogin"></p>
+    </div>
+</section>
+
+<script>
+
+/* =========================================================
+   ELITE SPORTS - LOGIN / CADASTRO
+   ========================================================= */
+
+
+/* =========================
+   MENSAGENS
+   ========================= */
+
+function mostrarMensagem(texto, cor) {
+    const mensagem = document.getElementById("mensagemLogin");
+
+    if (!mensagem) return;
+
+    mensagem.innerText = texto;
+    mensagem.style.color = cor;
+    mensagem.style.textAlign = "center";
+    mensagem.style.marginTop = "15px";
+}
+
+
+/* =========================
+   TROCAR ENTRE LOGIN/CADASTRO
+   ========================= */
+
+function mostrarLogin() {
+
+    document.getElementById("boxLogin").style.display = "block";
+    document.getElementById("boxCadastro").style.display = "none";
+    document.getElementById("boxRedefinirSenha").style.display = "none";
+
+    document.getElementById("btnLogin").classList.add("aba-ativa");
+    document.getElementById("btnCadastro").classList.remove("aba-ativa");
+
+    mostrarMensagem("", "");
+}
+
+
+function mostrarCadastro() {
+
+    document.getElementById("boxLogin").style.display = "none";
+    document.getElementById("boxCadastro").style.display = "block";
+    document.getElementById("boxRedefinirSenha").style.display = "none";
+
+    document.getElementById("btnCadastro").classList.add("aba-ativa");
+    document.getElementById("btnLogin").classList.remove("aba-ativa");
+
+    mostrarMensagem("", "");
+}
+
+
+/* =========================
+   VALIDAÇÃO DE E-MAIL
+   ========================= */
+
+function validarEmail(email) {
+
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    return regex.test(email);
+}
+
+
+/* =========================
+   VALIDAÇÃO CPF
+   ========================= */
+
+function validarCPF(cpf) {
+
+    cpf = cpf.replace(/[^\d]+/g, "");
+
+    if (cpf.length !== 11) {
+        return false;
+    }
+
+    if (/^(\d)\1+$/.test(cpf)) {
+        return false;
+    }
+
+    let soma = 0;
+
+    for (let i = 0; i < 9; i++) {
+        soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+
+    let resto = (soma * 10) % 11;
+
+    if (resto === 10) {
+        resto = 0;
+    }
+
+    if (resto !== parseInt(cpf.charAt(9))) {
+        return false;
+    }
+
+    soma = 0;
+
+    for (let i = 0; i < 10; i++) {
+        soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+
+    resto = (soma * 10) % 11;
+
+    if (resto === 10) {
+        resto = 0;
+    }
+
+    if (resto !== parseInt(cpf.charAt(10))) {
+        return false;
+    }
+
+    return true;
+}
+
+
+/* =========================
+   FORMATAÇÃO CPF
+   ========================= */
+
+function formatarCPF(campo) {
+
+    let cpf = campo.value.replace(/\D/g, "");
+
+    if (cpf.length > 11) {
+        cpf = cpf.slice(0, 11);
+    }
+
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+
+    campo.value = cpf;
+}
+
+
+function cadastrarUsuario() {
+
+    const campos = [
+        {
+            id: "cadastroNome",
+            nome: "Nome"
+        },
+        {
+            id: "cadastroEmail",
+            nome: "E-mail"
+        },
+        {
+            id: "cadastroCPF",
+            nome: "CPF"
+        },
+        {
+            id: "cadastroSenha",
+            nome: "Senha"
+        },
+        {
+            id: "cadastroConfirmarSenha",
+            nome: "Confirmar senha"
+        }
+    ];
+
+    /* REMOVE MARCAÇÕES ANTIGAS */
+    campos.forEach(item => {
+
+        const campo = document.getElementById(item.id);
+
+        const container = campo.closest(".campo-input");
+
+        const label = container.previousElementSibling;
+
+        label.innerHTML = item.nome;
+
+        container.classList.remove("campo-obrigatorio");
+    });
+
+
+    /* VERIFICA CAMPOS VAZIOS */
+
+    let temCampoVazio = false;
+
+    campos.forEach(item => {
+
+        const campo = document.getElementById(item.id);
+
+        if (campo.value.trim() === "") {
+
+            const container = campo.closest(".campo-input");
+
+            const label = container.previousElementSibling;
+
+            label.innerHTML = item.nome;
+
+            container.classList.add("campo-obrigatorio");
+
+            temCampoVazio = true;
+        }
+    });
+
+
+    if (temCampoVazio) {
+
+        mostrarMensagem(
+            "Preencha todos os campos.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* PEGA OS VALORES */
+
+    const nome =
+        document.getElementById("cadastroNome").value.trim();
+
+    const email =
+        document.getElementById("cadastroEmail").value
+        .trim()
+        .toLowerCase();
+
+    const cpf =
+        document.getElementById("cadastroCPF").value.trim();
+
+    const senha =
+        document.getElementById("cadastroSenha").value;
+
+    const confirmarSenha =
+        document.getElementById("cadastroConfirmarSenha").value;
+
+
+    /* NOME */
+
+    if (nome.length < 3) {
+
+        mostrarMensagem(
+            "O nome precisa ter pelo menos 3 caracteres.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* EMAIL */
+
+    if (!validarEmail(email)) {
+
+        mostrarMensagem(
+            "Digite um e-mail válido.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* CPF */
+
+    if (!validarCPF(cpf)) {
+
+        mostrarMensagem(
+            "CPF inválido.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* SENHA */
+
+    if (senha.length < 6) {
+
+        mostrarMensagem(
+            "A senha precisa ter pelo menos 6 caracteres.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* CONFIRMAÇÃO DA SENHA */
+
+    if (senha !== confirmarSenha) {
+
+        mostrarMensagem(
+            "As senhas não conferem.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* BUSCA USUÁRIOS CADASTRADOS */
+
+    let usuarios;
+
+    try {
+
+        usuarios =
+            JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    } catch {
+
+        usuarios = [];
+    }
+
+
+    /* VERIFICA E-MAIL DUPLICADO */
+
+    const emailJaExiste =
+        usuarios.some(usuario =>
+            usuario.email &&
+            usuario.email.toLowerCase() === email
+        );
+
+
+    if (emailJaExiste) {
+
+        mostrarMensagem(
+            "Este e-mail já está cadastrado.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* VERIFICA CPF DUPLICADO */
+
+    const cpfNumeros =
+        cpf.replace(/\D/g, "");
+
+
+    const cpfJaExiste =
+        usuarios.some(usuario =>
+            usuario.cpf &&
+            usuario.cpf.replace(/\D/g, "") === cpfNumeros
+        );
+
+
+    if (cpfJaExiste) {
+
+        mostrarMensagem(
+            "Este CPF já está cadastrado.",
+            "#ff4d5a"
+        );
+
+        return;
+    }
+
+
+    /* CRIA O USUÁRIO */
+
+    const novoUsuario = {
+
+        nome: nome,
+        email: email,
+        cpf: cpf,
+        senha: senha,
+        telefone: ""
+
+    };
+
+
+    usuarios.push(novoUsuario);
+
+
+    localStorage.setItem(
+        "usuarios",
+        JSON.stringify(usuarios)
+    );
+
+
+    /* LOGA AUTOMATICAMENTE */
+
+    const usuarioLogado = {
+
+        nome: novoUsuario.nome,
+        email: novoUsuario.email,
+        cpf: novoUsuario.cpf,
+        telefone: novoUsuario.telefone
+
+    };
+
+
+    localStorage.setItem(
+        "usuarioLogado",
+        JSON.stringify(usuarioLogado)
+    );
+
+
+    mostrarMensagem(
+        "Cadastro realizado com sucesso!",
+        "#4ade80"
+    );
+
+
+    /* REDIRECIONA */
+
+    setTimeout(() => {
+
+        const voltarDepoisLogin =
+            localStorage.getItem("voltarDepoisLogin");
+
+
+        if (voltarDepoisLogin) {
+
+            localStorage.removeItem("voltarDepoisLogin");
+
+            window.location.href =
+                voltarDepoisLogin;
+
+        } else {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }, 800);
+}
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+function fazerLogin() {
+
+    const email =
+        document.getElementById("loginEmail").value
+        .trim()
+        .toLowerCase();
+
+    const senha =
+        document.getElementById("loginSenha").value;
+
+
+    if (email === "" || senha === "") {
+
+        mostrarMensagem(
+            "Digite e-mail e senha.",
+            "#ff5c5c"
+        );
+
+        return;
+    }
+
+
+    let usuarios;
+
+    try {
+
+        usuarios =
+            JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    } catch {
+
+        usuarios = [];
+    }
+
+
+    const usuarioEncontrado =
+        usuarios.find(usuario =>
+            usuario.email &&
+            usuario.email.toLowerCase() === email &&
+            usuario.senha === senha
+        );
+
+
+    if (!usuarioEncontrado) {
+
+        mostrarMensagem(
+            "E-mail ou senha incorretos.",
+            "#ff5c5c"
+        );
+
+        return;
+    }
+
+
+    const usuarioLogado = {
+
+        nome: usuarioEncontrado.nome,
+        email: usuarioEncontrado.email,
+        cpf: usuarioEncontrado.cpf || "",
+        telefone: usuarioEncontrado.telefone || ""
+
+    };
+
+
+    localStorage.setItem(
+        "usuarioLogado",
+        JSON.stringify(usuarioLogado)
+    );
+
+
+    atualizarNomeUsuarioHeader();
+
+
+    mostrarMensagem(
+        "Login realizado com sucesso!",
+        "#4ade80"
+    );
+
+
+    setTimeout(() => {
+
+        const voltarDepoisLogin =
+            localStorage.getItem("voltarDepoisLogin");
+
+
+        if (voltarDepoisLogin) {
+
+            localStorage.removeItem(
+                "voltarDepoisLogin"
+            );
+
+            window.location.href =
+                voltarDepoisLogin;
+
+        } else {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }, 800);
+}
+
+
+/* =========================================================
+   MOSTRAR / OCULTAR SENHA
+   ========================================================= */
+
+function mostrarOcultarSenha(idCampo, icone) {
+
+    const campo =
+        document.getElementById(idCampo);
+
+
+    if (!campo) return;
+
+
+    if (campo.type === "password") {
+
+        campo.type = "text";
+
+        icone.classList.remove(
+            "ri-eye-line"
+        );
+
+        icone.classList.add(
+            "ri-eye-off-line"
+        );
+
+    } else {
+
+        campo.type = "password";
+
+        icone.classList.remove(
+            "ri-eye-off-line"
+        );
+
+        icone.classList.add(
+            "ri-eye-line"
+        );
+
+    }
+}
+
+
+/* =========================================================
+   REDEFINIR SENHA
+   ========================================================= */
+
+function mostrarRedefinirSenha() {
+
+    document.getElementById("boxLogin").style.display = "none";
+    document.getElementById("boxCadastro").style.display = "none";
+    document.getElementById("boxRedefinirSenha").style.display = "block";
+
+    document.getElementById("emailStep").style.display = "block";
+    document.getElementById("senhaStep").style.display = "none";
+
+    document.getElementById("emailRedefinir").value = "";
+
+    document.getElementById("mensagemRedefinir").innerText = "";
+
+    const mensagemNova =
+        document.getElementById("mensagemNovaSenha");
+
+    if (mensagemNova) {
+        mensagemNova.innerText = "";
+    }
+}
+
+
+function verificarEmailRedefinir() {
+
+    const email =
+        document.getElementById("emailRedefinir").value
+        .trim()
+        .toLowerCase();
+
+
+    if (email === "") {
+
+        document.getElementById(
+            "mensagemRedefinir"
+        ).style.color = "#ff5c5c";
+
+        document.getElementById(
+            "mensagemRedefinir"
+        ).innerText =
+            "Digite seu e-mail.";
+
+        return;
+    }
+
+
+    let usuarios =
+        JSON.parse(
+            localStorage.getItem("usuarios")
+        ) || [];
+
+
+    const usuario =
+        usuarios.find(u =>
+            u.email &&
+            u.email.toLowerCase() === email
+        );
+
+
+    if (!usuario) {
+
+        document.getElementById(
+            "mensagemRedefinir"
+        ).style.color = "#ff5c5c";
+
+        document.getElementById(
+            "mensagemRedefinir"
+        ).innerText =
+            "E-mail não cadastrado.";
+
+        return;
+    }
+
+
+    window.usuarioRedefinir = usuario;
+
+
+    document.getElementById(
+        "emailStep"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "senhaStep"
+    ).style.display = "block";
+}
+
+
+function atualizarSenha() {
+
+    const nova =
+        document.getElementById(
+            "novaSenha"
+        ).value;
+
+    const repetir =
+        document.getElementById(
+            "confirmarNovaSenha"
+        ).value;
+
+
+    const mensagem =
+        document.getElementById(
+            "mensagemNovaSenha"
+        );
+
+
+    if (nova.length < 6) {
+
+        mensagem.style.color = "#ff5c5c";
+
+        mensagem.innerText =
+            "A senha precisa ter pelo menos 6 caracteres.";
+
+        return;
+    }
+
+
+    if (nova !== repetir) {
+
+        mensagem.style.color = "#ff5c5c";
+
+        mensagem.innerText =
+            "As senhas não conferem.";
+
+        return;
+    }
+
+
+    if (!window.usuarioRedefinir) {
+
+        mensagem.style.color = "#ff5c5c";
+
+        mensagem.innerText =
+            "Não foi possível identificar o usuário.";
+
+        return;
+    }
+
+
+    let usuarios =
+        JSON.parse(
+            localStorage.getItem("usuarios")
+        ) || [];
+
+
+    const indice =
+        usuarios.findIndex(
+            usuario =>
+                usuario.email ===
+                window.usuarioRedefinir.email
+        );
+
+
+    if (indice === -1) {
+
+        mensagem.style.color = "#ff5c5c";
+
+        mensagem.innerText =
+            "Usuário não encontrado.";
+
+        return;
+    }
+
+
+    usuarios[indice].senha = nova;
+
+
+    localStorage.setItem(
+        "usuarios",
+        JSON.stringify(usuarios)
+    );
+
+
+    mensagem.style.color = "#4ade80";
+
+    mensagem.innerText =
+        "Senha redefinida com sucesso!";
+
+
+    setTimeout(() => {
+
+        voltarLogin();
+
+    }, 1500);
+}
+
+
+function voltarLogin() {
+
+    document.getElementById(
+        "boxRedefinirSenha"
+    ).style.display = "none";
+
+    document.getElementById(
+        "boxCadastro"
+    ).style.display = "none";
+
+    document.getElementById(
+        "boxLogin"
+    ).style.display = "block";
+
+
+    document.getElementById(
+        "btnLogin"
+    ).classList.add("aba-ativa");
+
+
+    document.getElementById(
+        "btnCadastro"
+    ).classList.remove("aba-ativa");
+}
+
+
+/* =========================================================
+   CARRINHO
+   ========================================================= */
+
+function atualizarContador() {
+
+    let carrinho =
+        JSON.parse(
+            localStorage.getItem("carrinho")
+        ) || [];
+
+
+    let total = 0;
+
+
+    carrinho.forEach(produto => {
+
+        total += produto.qtd || 1;
+
+    });
+
+
+    const contador =
+        document.getElementById("contador");
+
+
+    if (!contador) return;
+
+
+    contador.innerText =
+        total > 9 ? "9+" : total;
+}
+
+
+/* =========================================================
+   HEADER / USUÁRIO
+   ========================================================= */
+
+function atualizarNomeUsuarioHeader() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        ) || null;
+
+
+    const nomeEl =
+        document.getElementById("nomeUsuario");
+
+
+    const seta =
+        document.getElementById("setaDropdown");
+
+
+    if (!nomeEl) return;
+
+
+    if (usuario) {
+
+        nomeEl.innerText =
+            usuario.nome || "Minha Conta";
+
+        if (seta) {
+            seta.style.display = "inline";
+        }
+
+    } else {
+
+        nomeEl.innerText = "Login";
+
+        if (seta) {
+            seta.style.display = "none";
+        }
+
+    }
+}
+
+
+function handleUsuarioClick() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+
+    if (!usuario) {
+
+        window.location.href =
+            "Entrar.html";
+
+        return;
+    }
+
+
+    toggleDropdown();
+}
+
+
+function toggleDropdown() {
+
+    const menu =
+        document.getElementById(
+            "dropdownMenu"
+        );
+
+
+    const seta =
+        document.getElementById(
+            "setaDropdown"
+        );
+
+
+    if (!menu) return;
+
+
+    menu.classList.toggle("show");
+
+
+    if (seta) {
+
+        seta.classList.toggle(
+            "girar",
+            menu.classList.contains("show")
+        );
+
+    }
+}
+
+
+/* =========================================================
+   MINHA CONTA / MEUS PEDIDOS
+   ========================================================= */
+
+function mostrarMinhaConta() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+
+    if (!usuario) {
+
+        window.location.href =
+            "Entrar.html";
+
+        return;
+    }
+
+
+    window.location.href =
+        "minha-conta.html";
+}
+
+
+function mostrarMeusPedidos() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+
+    if (!usuario) {
+
+        window.location.href =
+            "Entrar.html";
+
+        return;
+    }
+
+
+    window.location.href =
+        "meus-pedidos.html";
+}
+
+
+/* =========================================================
+   SAIR
+   ========================================================= */
+
+function sair() {
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+
+    atualizarNomeUsuarioHeader();
+
+
+    const menu =
+        document.getElementById(
+            "dropdownMenu"
+        );
+
+
+    if (menu) {
+
+        menu.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    window.location.href =
+        "index.html";
+}
+
+
+/* =========================================================
+   FECHAR DROPDOWN AO CLICAR FORA
+   ========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const areaUsuario =
+            document.getElementById(
+                "usuarioLogadoNome"
+            );
+
+
+        const menu =
+            document.getElementById(
+                "dropdownMenu"
+            );
+
+
+        const seta =
+            document.getElementById(
+                "setaDropdown"
+            );
+
+
+        if (
+            !areaUsuario ||
+            !menu
+        ) {
+            return;
+        }
+
+
+        if (
+            !areaUsuario.contains(event.target) &&
+            !menu.contains(event.target)
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+
+            if (seta) {
+
+                seta.classList.remove(
+                    "girar"
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        atualizarNomeUsuarioHeader();
+        atualizarContador();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

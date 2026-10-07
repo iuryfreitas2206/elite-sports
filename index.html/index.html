@@ -1,142 +1,1144 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Elite Sports</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Ícones (opcional, melhora muito o visual) -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Elite Sports</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+    >
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header class="topo">
+<!-- =========================
+     HEADER
+========================= -->
+<header class="topo novo-topo">
 
     <!-- LOGO -->
-    <div class="logo">
-    <img src="./img/logo.png" class="logo-img">
-    <span class="logo-text">Elite <strong>Sports</strong></span>
-</div>
+    <div
+        class="logo"
+        onclick="window.location.href='index.html'"
+        style="cursor:pointer;"
+    >
+        <img src="./img/logo.png" class="logo-img" alt="Elite Sports">
+
+        <span class="logo-text">
+            Elite <strong>Sports</strong>
+        </span>
+    </div>
 
     <!-- BUSCA -->
-    <div class="busca">
+    <div class="busca busca-home">
         <i class="ri-search-line"></i>
-        <input type="text" placeholder="Buscar produtos...">
+
+        <input
+            type="text"
+            id="campoBusca"
+            placeholder="Busque por camisetas, shorts, acessórios..."
+            oninput="buscarProdutos()"
+        >
     </div>
 
     <!-- AÇÕES -->
-<div class="acoes">
-    <span><i class="ri-user-line"></i> Entrar</span>
+    <div class="acoes">
 
-    <div class="carrinho" onclick="abrirCarrinho()">
-        <i class="ri-shopping-cart-line"></i>
-        <span id="contador">0</span>
+        <span onclick="window.location.href='index.html'">
+            <i class="ri-home-line"></i>
+            Início
+        </span>
+
+        <!-- USUÁRIO -->
+        <div class="conta-dropdown">
+
+            <span id="usuarioLogadoNome" onclick="handleUsuarioClick()">
+                <i class="ri-user-line"></i>
+
+                <span id="nomeUsuario">Login</span>
+
+                <i
+                    class="ri-arrow-down-s-line"
+                    id="setaDropdown"
+                    style="display:none"
+                ></i>
+            </span>
+
+            <div id="dropdownMenu" class="dropdown-content">
+
+                <button onclick="window.location.href='minha-conta.html'">
+                    <i class="ri-user-settings-line"></i>
+                    Minha Conta
+                </button>
+
+                <button onclick="window.location.href='meus-pedidos.html'">
+                    <i class="ri-shopping-bag-line"></i>
+                    Meus Pedidos
+                </button>
+
+                <button onclick="sair()">
+                    <i class="ri-logout-box-line"></i>
+                    Sair da conta
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CARRINHO -->
+        <div
+            class="carrinho"
+            onclick="window.location.href='carrinhos.html'"
+        >
+            <i class="ri-shopping-cart-2-line"></i>
+            <span id="contador">0</span>
+        </div>
+
     </div>
-</div>
 
 </header>
 
-<!-- MENU -->
+
+<!-- =========================
+     MENU
+========================= -->
 <nav class="menu">
-    <a href="#" class="ativo">Camisetas</a>
-    <a href="#">Shorts</a>
-    <a href="#">Treino</a>
-    <a href="#">Ofertas</a>
+
+    <a href="index.html" class="ativo">
+        Início
+    </a>
+
+    <a href="camisetas.html">
+        Camisetas
+    </a>
+
+    <a href="shorts.html">
+        Shorts
+    </a>
+
+    <a href="acessorios.html">
+        Acessórios
+    </a>
+
+    <a href="selecoes.html">
+        Copa do Mundo
+    </a>
+
 </nav>
 
-<!-- BANNER -->
+
+<!-- =========================
+     BANNER
+========================= -->
 <section class="banner">
-    <span class="tag">NOVA COLEÇÃO</span>
-    <h2><span>ESPORTIVA</span></h2>
-    <p>Performance e estilo para o seu jogo</p>
-    <button class="btn-banner">Ver coleção →</button>
+
+    <!-- SLIDE 1 -->
+    <div
+        class="slide-banner ativo"
+        style="background-image: url('./img/banner1.png');"
+    >
+
+        <div class="conteudo-banner">
+
+            <span class="tag">
+                PERFORMANCE • CONFORTO • ESTILO
+            </span>
+
+            <h1>
+                VISTA SUA
+                <span>PAIXÃO</span>
+            </h1>
+
+            <p>
+                Roupas esportivas pensadas para quem vive o esporte
+                dentro e fora do jogo.
+            </p>
+
+            <button
+                class="btn-banner"
+                onclick="window.location.href='camisetas.html'"
+            >
+                Ver produtos
+                <i class="ri-arrow-right-line"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SLIDE 2 -->
+    <div
+        class="slide-banner"
+        style="background-image: url('./img/banner2.png');"
+    >
+
+        <div class="conteudo-banner">
+
+            <span class="tag">
+                COPA DO MUNDO
+            </span>
+
+            <h1>
+                VISTA AS CORES
+                <span>DA SUA SELEÇÃO</span>
+            </h1>
+
+            <p>
+                Camisas e shorts para quem leva a paixão pelo futebol
+                para todos os lugares.
+            </p>
+
+            <button
+                class="btn-banner"
+                onclick="window.location.href='selecoes.html'"
+            >
+                Ver coleção
+                <i class="ri-arrow-right-line"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="slide-banner"
+     style="background-image: url('./img/banner3.png');">
+
+    <div class="conteudo-banner">
+        <span class="banner-tag">ELITE SPORTS</span>
+
+        <h1>
+            SUPERE SEUS<br>
+            <strong>LIMITES</strong>
+        </h1>
+
+        <p>
+            Performance, conforto e estilo para acompanhar o seu ritmo.
+        </p>
+
+        <button onclick="window.location.href='camisetas.html'">
+            Ver produtos
+            <i class="ri-arrow-right-line"></i>
+        </button>
+    </div>
+
+</div>
+
+
+    <!-- SETAS -->
+    <button
+        class="seta-banner anterior"
+        onclick="voltarSlide()"
+        aria-label="Slide anterior"
+    >
+        <i class="ri-arrow-left-s-line"></i>
+    </button>
+
+    <button
+        class="seta-banner proxima"
+        onclick="avancarSlide()"
+        aria-label="Próximo slide"
+    >
+        <i class="ri-arrow-right-s-line"></i>
+    </button>
+
+
+    <!-- INDICADORES -->
+<div class="indicadores-banner">
+    <span class="indicador ativo"></span>
+    <span class="indicador"></span>
+    <span class="indicador"></span>
+</div>
+
 </section>
 
-<!-- PRODUTOS -->
-<section class="produtos">
 
-    <h2>Destaques</h2>
+<!-- =========================
+     BENEFÍCIOS
+========================= -->
+<section class="beneficios">
 
-    <div class="grid">
+    <div class="beneficio-item">
 
-<!-- PRODUTO 1 -->
-<div class="card" onclick="abrirProduto(1)">
-    <img src="./img/camiseta-dryfit/azul-1.png">
-    <h3>Camiseta Dry Fit</h3>
-    <p>R$ 99,90</p>
-   <button onclick="abrirProduto(1)">Comprar</button>
-</div>
+        <div class="beneficio-icone">
+            <i class="ri-truck-line"></i>
+        </div>
 
-<!-- PRODUTO 2 -->
-<div class="card" onclick="abrirProduto(2)">
-    <img src="./img/short-esportivo/short.jpg">
-    <h3>Short Esportivo</h3>
-    <p>R$ 79,90</p>
-    <button onclick="abrirProduto(2)">Comprar</button>
-</div>
+        <div>
+            <strong>Entrega para todo o Brasil</strong>
+            <span>Receba seus produtos com segurança.</span>
+        </div>
 
-<!-- PRODUTO 3 -->
-<div class="card" onclick="abrirProduto(3)">
-    <img src="./img/camiseta-treino/treino.jpg">
-    <h3>Camiseta Treino</h3>
-    <p>R$ 89,90</p>
-    <button onclick="abrirProduto(3)">Comprar</button>
-</div>
+    </div>
 
-<!-- PRODUTO 4 -->
-<div class="card" onclick="abrirProduto(4)">
-    <img src="./img/regata/regata.jpg">
-    <h3>Regata Fitness</h3>
-    <p>R$ 69,90</p>
-    <button onclick="abrirProduto(4)">Comprar</button>
-</div>
+
+    <div class="beneficio-item">
+
+        <div class="beneficio-icone">
+            <i class="ri-shield-check-line"></i>
+        </div>
+
+        <div>
+            <strong>Compra segura</strong>
+            <span>Seus dados protegidos.</span>
+        </div>
+
+    </div>
+
+
+    <div class="beneficio-item">
+
+        <div class="beneficio-icone">
+            <i class="ri-bank-card-line"></i>
+        </div>
+
+        <div>
+            <strong>Pagamento facilitado</strong>
+            <span>Mais comodidade para comprar.</span>
+        </div>
+
+    </div>
+
+
+    <div class="beneficio-item">
+
+        <div class="beneficio-icone">
+            <i class="ri-customer-service-2-line"></i>
+        </div>
+
+        <div>
+            <strong>Atendimento</strong>
+            <span>Conte com a Elite Sports.</span>
+        </div>
 
     </div>
 
 </section>
 
+
+<!-- =========================
+     CATEGORIAS
+========================= -->
+<section class="secao-home">
+
+    <div class="titulo-secao">
+
+        <span class="subtitulo-secao">
+            CATEGORIAS
+        </span>
+
+        <h2>
+            Encontre seu estilo
+        </h2>
+
+        <p>
+            Escolha a categoria e encontre o produto ideal para você.
+        </p>
+
+    </div>
+
+
+    <div class="categorias-grid">
+
+        <!-- CAMISETAS -->
+<div
+    class="categoria-card"
+    onclick="window.location.href='camisetas.html'"
+>
+    <img
+        src="./img/camiseta-dryfit/DryFit-preta-1.png"
+        alt="Camisetas"
+    >
+
+    <div class="categoria-overlay">
+        <h3>Camisetas</h3>
+
+        <span>
+            Ver produtos
+            <i class="ri-arrow-right-line"></i>
+        </span>
+    </div>
+</div>
+
+
+<!-- SHORTS -->
+<div
+    class="categoria-card"
+    onclick="window.location.href='shorts.html'"
+>
+    <img
+        src="./img/short-esportivo/Short-Preto-1.png"
+        alt="Shorts"
+    >
+
+    <div class="categoria-overlay">
+        <h3>Shorts</h3>
+
+        <span>
+            Ver produtos
+            <i class="ri-arrow-right-line"></i>
+        </span>
+    </div>
+</div>
+
+
+<!-- ACESSÓRIOS -->
+<div
+    class="categoria-card"
+    onclick="window.location.href='acessorios.html'"
+>
+    <img
+        src="./img/acessorios/Bola_futebol_3.png"
+        alt="Acessórios"
+    >
+
+    <div class="categoria-overlay">
+        <h3>Acessórios</h3>
+
+        <span>
+            Ver produtos
+            <i class="ri-arrow-right-line"></i>
+        </span>
+    </div>
+</div>
+
+
+<!-- COPA DO MUNDO -->
+<div
+    class="categoria-card"
+    onclick="window.location.href='selecoes.html'"
+>
+    <img
+        src="./img/brasil-1.png"
+        alt="Copa do Mundo"
+    >
+
+    <div class="categoria-overlay">
+        <h3>Copa do Mundo</h3>
+
+        <span>
+            Ver produtos
+            <i class="ri-arrow-right-line"></i>
+        </span>
+    </div>
+</div>
+
+</div>
+</section>
+
+
+<!-- =========================
+     DESTAQUES
+========================= -->
+<section class="secao-destaques">
+
+    <div class="titulo-destaques">
+        <span class="mini-tag">DESTAQUES</span>
+
+        <h2>Produtos em destaque</h2>
+
+        <p>
+            Alguns dos produtos mais procurados da Elite Sports.
+        </p>
+    </div>
+
+
+    <div class="destaques-grid">
+
+        <!-- CAMISETA DRY FIT -->
+        <article
+            class="card-destaque"
+            onclick="abrirProduto(1, 'azul')"
+        >
+            <div class="card-destaque-img">
+
+                <span class="badge-destaque">
+                    DESTAQUE
+                </span>
+
+                <img
+                    src="./img/camiseta-dryfit/DryFit-azul-1.png"
+                    alt="Camiseta Dry Fit"
+                >
+
+            </div>
+
+            <div class="card-destaque-info">
+
+                <span class="categoria-destaque">
+                    CAMISETAS
+                </span>
+
+                <h3>Camiseta Dry Fit</h3>
+
+                <p class="preco-card">
+                    R$ 99,90
+                </p>
+
+                <button
+                    class="btn-card"
+                    onclick="event.stopPropagation(); abrirProduto(1, 'azul')"
+                >
+                    <span>Ver produto</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+
+            </div>
+        </article>
+
+
+        <!-- SHORT ESPORTIVO -->
+        <article
+            class="card-destaque"
+            onclick="abrirProduto(2, 'preto')"
+        >
+            <div class="card-destaque-img">
+
+                <img
+                    src="./img/short-esportivo/Short-Preto-1.png"
+                    alt="Short Esportivo"
+                >
+
+            </div>
+
+            <div class="card-destaque-info">
+
+                <span class="categoria-destaque">
+                    SHORTS
+                </span>
+
+                <h3>Short Esportivo</h3>
+
+                <p class="preco-card">
+                    R$ 79,90
+                </p>
+
+                <button
+                    class="btn-card"
+                    onclick="event.stopPropagation(); abrirProduto(2, 'preto')"
+                >
+                    <span>Ver produto</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+
+            </div>
+        </article>
+
+
+        <!-- CAMISETA TREINO -->
+        <article
+            class="card-destaque"
+            onclick="abrirProduto(3, 'preto')"
+        >
+            <div class="card-destaque-img">
+
+                <img
+                    src="./img/camiseta-treino/Camiseta treino-preta-1.png"
+                    alt="Camiseta Treino"
+                >
+
+            </div>
+
+            <div class="card-destaque-info">
+
+                <span class="categoria-destaque">
+                    CAMISETAS
+                </span>
+
+                <h3>Camiseta Treino</h3>
+
+                <p class="preco-card">
+                    R$ 89,90
+                </p>
+
+                <button
+                    class="btn-card"
+                    onclick="event.stopPropagation(); abrirProduto(3, 'preto')"
+                >
+                    <span>Ver produto</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+
+            </div>
+        </article>
+
+
+        <!-- REGATA FITNESS -->
+        <article
+            class="card-destaque"
+            onclick="abrirProduto(4, 'preto')"
+        >
+            <div class="card-destaque-img">
+
+                <img
+                    src="./img/regata/Regata-Preta-1.png"
+                    alt="Regata Fitness"
+                >
+
+            </div>
+
+            <div class="card-destaque-info">
+
+                <span class="categoria-destaque">
+                    TREINO
+                </span>
+
+                <h3>Regata Fitness</h3>
+
+                <p class="preco-card">
+                    R$ 69,90
+                </p>
+
+                <button
+                    class="btn-card"
+                    onclick="event.stopPropagation(); abrirProduto(4, 'preto')"
+                >
+                    <span>Ver produto</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+
+            </div>
+        </article>
+
+
+        <!-- CAMISA BRASIL -->
+        <article
+            class="card-destaque"
+            onclick="window.location.href='produto.html?id=101'"
+        >
+            <div class="card-destaque-img">
+
+                <img
+                    src="./img/brasil-1.png"
+                    alt="Camisa Brasil"
+                >
+
+            </div>
+
+            <div class="card-destaque-info">
+
+                <span class="categoria-destaque">
+                    COPA DO MUNDO
+                </span>
+
+                <h3>Camisa Brasil</h3>
+
+                <p class="preco-card">
+                    R$ 129,90
+                </p>
+
+                <button
+                    class="btn-card"
+                    onclick="event.stopPropagation(); window.location.href='produto.html?id=101'"
+                >
+                    <span>Ver produto</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+
+            </div>
+        </article>
+
+
+        <!-- CAMISA FRANÇA -->
+        <article
+            class="card-destaque"
+            onclick="window.location.href='produto.html?id=102'"
+        >
+            <div class="card-destaque-img">
+
+                <img
+                    src="./img/franca-1.png"
+                    alt="Camisa França"
+                >
+
+            </div>
+
+            <div class="card-destaque-info">
+
+                <span class="categoria-destaque">
+                    COPA DO MUNDO
+                </span>
+
+                <h3>Camisa França</h3>
+
+                <p class="preco-card">
+                    R$ 129,90
+                </p>
+
+                <button
+                    class="btn-card"
+                    onclick="event.stopPropagation(); window.location.href='produto.html?id=102'"
+                >
+                    <span>Ver produto</span>
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+<section class="cta-home">
+
+    <div>
+
+        <span>
+            ELITE SPORTS
+        </span>
+
+        <h2>
+            Mais que esporte,
+            <strong>é estilo de vida.</strong>
+        </h2>
+
+        <p>
+            Performance, conforto e estilo em cada detalhe.
+        </p>
+
+    </div>
+
+    <button onclick="window.location.href='camisetas.html'">
+        Conhecer produtos
+        <i class="ri-arrow-right-line"></i>
+    </button>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+<footer class="rodape">
+
+    <div class="rodape-conteudo">
+
+        <!-- MARCA -->
+        <div class="rodape-coluna rodape-marca">
+
+            <div class="logo">
+
+                <img
+                    src="./img/logo.png"
+                    class="logo-img"
+                    alt="Elite Sports"
+                >
+
+                <span class="logo-text">
+                    Elite <strong>Sports</strong>
+                </span>
+
+            </div>
+
+            <p>
+                Mais que esporte, é estilo de vida.
+            </p>
+
+        </div>
+
+
+        <!-- NAVEGAÇÃO -->
+        <div class="rodape-coluna">
+
+            <h4>
+                Navegação
+            </h4>
+
+            <a href="index.html">
+                Início
+            </a>
+
+            <a href="camisetas.html">
+                Camisetas
+            </a>
+
+            <a href="shorts.html">
+                Shorts
+            </a>
+
+            <a href="acessorios.html">
+                Acessórios
+            </a>
+
+            <a href="selecoes.html">
+                Copa do Mundo
+            </a>
+
+        </div>
+
+
+        <!-- CONTA -->
+        <div class="rodape-coluna">
+
+            <h4>
+                Minha conta
+            </h4>
+
+            <a href="Entrar.html">
+                Entrar
+            </a>
+
+            <a href="minha-conta.html">
+                Minha conta
+            </a>
+
+            <a href="meus-pedidos.html">
+                Meus pedidos
+            </a>
+
+            <a href="carrinhos.html">
+                Carrinho
+            </a>
+
+        </div>
+
+
+        <!-- REDES -->
+        <div class="rodape-coluna">
+
+            <h4>
+                Siga a Elite Sports
+            </h4>
+
+            <div class="redes-sociais">
+
+                <a href="#" aria-label="Instagram">
+                    <i class="ri-instagram-line"></i>
+                </a>
+
+                <a href="#" aria-label="WhatsApp">
+                    <i class="ri-whatsapp-line"></i>
+                </a>
+
+                <a href="#" aria-label="TikTok">
+                    <i class="ri-tiktok-line"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="rodape-final">
+
+        <span>
+            © 2026 Elite Sports.
+        </span>
+
+        <span>
+            Todos os direitos reservados.
+        </span>
+
+    </div>
+
+</footer>
+
+
 <script>
-function abrirProduto(id) {
-    window.location.href = "produto.html?id=" + id;
+
+/* =========================
+   PRODUTO
+========================= */
+function abrirProduto(id, cor = "azul") {
+    window.location.href =
+        "produto.html?id=" + id + "&cor=" + cor;
 }
 
-function abrirCarrinho() {
-    window.location.href = "carrinhos.html";
-}
-</script>
-<script>
+
+/* =========================
+   CARRINHO
+========================= */
 function atualizarContador() {
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    let carrinho =
+        JSON.parse(localStorage.getItem("carrinho")) || [];
 
     let total = 0;
 
-    carrinho.forEach(p => {
-        total += p.qtd || 1;
+    carrinho.forEach(produto => {
+        total += produto.qtd || 1;
     });
 
-    const contador = document.getElementById("contador");
+    const contador =
+        document.getElementById("contador");
 
-    if (total > 9) {
-        contador.innerText = "9+";
+    if (!contador) {
+        return;
+    }
+
+    contador.innerText =
+        total > 9 ? "9+" : total;
+}
+
+
+/* =========================
+   USUÁRIO
+========================= */
+function atualizarNomeUsuarioHeader() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+    const nomeEl =
+        document.getElementById("nomeUsuario");
+
+    const seta =
+        document.getElementById("setaDropdown");
+
+    if (usuario) {
+
+        nomeEl.innerText =
+            usuario.nome || "Usuário";
+
+        seta.style.display =
+            "inline";
+
     } else {
-        contador.innerText = total;
+
+        nomeEl.innerText =
+            "Login";
+
+        seta.style.display =
+            "none";
     }
 }
 
-// CHAMA AUTOMATICAMENTE AO CARREGAR
-atualizarContador();
 
-function abrirProduto(id) {
-    window.location.href = "produto.html?id=" + id;
+function handleUsuarioClick() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+    if (!usuario) {
+
+        window.location.href =
+            "Entrar.html";
+
+        return;
+    }
+
+    const menu =
+        document.getElementById("dropdownMenu");
+
+    const seta =
+        document.getElementById("setaDropdown");
+
+    menu.classList.toggle("show");
+
+    seta.classList.toggle("girar");
 }
 
-function abrirCarrinho() {
-    window.location.href = "carrinhos.html";
+
+function sair() {
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+    atualizarNomeUsuarioHeader();
+
+    const menu =
+        document.getElementById("dropdownMenu");
+
+    if (menu) {
+        menu.classList.remove("show");
+    }
 }
 
+
+/* =========================
+   FECHAR DROPDOWN
+========================= */
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const usuarioArea =
+            document.getElementById(
+                "usuarioLogadoNome"
+            );
+
+        const menu =
+            document.getElementById(
+                "dropdownMenu"
+            );
+
+        const seta =
+            document.getElementById(
+                "setaDropdown"
+            );
+
+        if (
+            usuarioArea &&
+            !usuarioArea.contains(event.target) &&
+            menu &&
+            !menu.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+            if (seta) {
+                seta.classList.remove("girar");
+            }
+        }
+    }
+);
+
+
+/* =========================
+   CARROSSEL
+========================= */
+let slideAtual = 0;
+
+const slidesBanner =
+    document.querySelectorAll(
+        ".slide-banner"
+    );
+
+const indicadores =
+    document.querySelectorAll(
+        ".indicador"
+    );
+
+
+function mostrarSlide(index) {
+
+    slidesBanner.forEach(
+        slide => {
+            slide.classList.remove("ativo");
+        }
+    );
+
+    indicadores.forEach(
+        indicador => {
+            indicador.classList.remove("ativo");
+        }
+    );
+
+    slidesBanner[index]
+        .classList.add("ativo");
+
+    if (indicadores[index]) {
+        indicadores[index]
+            .classList.add("ativo");
+    }
+
+    slideAtual = index;
+}
+
+
+function avancarSlide() {
+
+    let proximo =
+        slideAtual + 1;
+
+    if (
+        proximo >=
+        slidesBanner.length
+    ) {
+        proximo = 0;
+    }
+
+    mostrarSlide(proximo);
+}
+
+
+function voltarSlide() {
+
+    let anterior =
+        slideAtual - 1;
+
+    if (anterior < 0) {
+        anterior =
+            slidesBanner.length - 1;
+    }
+
+    mostrarSlide(anterior);
+}
+
+
+function irParaSlide(index) {
+    mostrarSlide(index);
+}
+
+
+setInterval(
+    avancarSlide,
+    100000
+);
+
+
+/* =========================
+   BUSCA
+========================= */
+function buscarProdutos() {
+
+    const busca =
+        document
+            .getElementById("campoBusca")
+            .value
+            .trim()
+            .toLowerCase();
+
+    const produtos =
+        document.querySelectorAll(
+            ".produto-pesquisa"
+        );
+
+    produtos.forEach(produto => {
+
+        const nome =
+            produto.dataset.nome
+                .toLowerCase();
+
+        if (
+            nome.includes(busca)
+        ) {
+
+            produto.style.display =
+                "flex";
+
+        } else {
+
+            produto.style.display =
+                "none";
+        }
+    });
+}
+
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+window.addEventListener(
+    "load",
+    function() {
+
+        atualizarNomeUsuarioHeader();
+
+        atualizarContador();
+
+        mostrarSlide(0);
+    }
+);
 
 </script>
+
 </body>
 </html>

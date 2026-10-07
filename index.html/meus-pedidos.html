@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meus Pedidos - Elite Sports</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        /* =====================================================
+           MEUS PEDIDOS
+           ===================================================== */
+
+        .pagina-pedidos {
+            min-height: 100vh;
+            background: #0d0d12;
+            color: #ffffff;
+        }
+
+        /* =====================================================
+           CONTEÚDO
+           ===================================================== */
+
+        .pagina-pedidos .painel-conteudo {
+            background: #0d0d12;
+        }
+
+        .pagina-pedidos .painel-cabecalho {
+            margin-bottom: 30px;
+        }
+
+        .pagina-pedidos .painel-cabecalho h1 {
+            margin: 0 0 8px;
+            color: #ffffff;
+            font-size: 34px;
+            font-weight: 700;
+        }
+
+        .pagina-pedidos .painel-cabecalho p {
+            margin: 0;
+            color: #9292a5;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           LISTA DE PEDIDOS
+           ===================================================== */
+
+        .pagina-pedidos .pedidos-card {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
+
+        /* =====================================================
+           CARD DO PEDIDO
+           ===================================================== */
+
+        .pagina-pedidos .linha-pedido {
+            width: 100%;
+            box-sizing: border-box;
+
+            background: #111116;
+
+            border: 1px solid #292932;
+            border-radius: 18px;
+
+            padding: 24px;
+
+            overflow: hidden;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+        }
+
+
+        /* =====================================================
+           CABEÇALHO DO PEDIDO
+           ===================================================== */
+
+        .pagina-pedidos .pedido-cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #292932;
+        }
+
+        .pagina-pedidos .pedido-cabecalho-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .pagina-pedidos .pedido-numero {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .pagina-pedidos .pedido-data {
+            color: #88889a;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           STATUS
+           ===================================================== */
+
+        .pagina-pedidos .status-pedido {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 8px 14px;
+
+            border-radius: 999px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+        .pagina-pedidos .status-pedido.processando {
+            background: rgba(139, 61, 255, 0.14);
+            color: #a855f7;
+        }
+
+        .pagina-pedidos .status-pedido.transito {
+            background: rgba(59, 130, 246, 0.14);
+            color: #60a5fa;
+        }
+
+        .pagina-pedidos .status-pedido.entregue {
+            background: rgba(34, 197, 94, 0.14);
+            color: #4ade80;
+        }
+
+
+        /* =====================================================
+           PRODUTOS
+           ===================================================== */
+
+        .pagina-pedidos .pedido-itens {
+            width: 100%;
+        }
+
+        .pagina-pedidos .item-pedido {
+            display: flex;
+            align-items: center;
+
+            width: 100%;
+            min-width: 0;
+
+            gap: 20px;
+
+            padding: 22px 0;
+
+            box-sizing: border-box;
+
+            border-bottom: 1px solid #24242d;
+        }
+
+        .pagina-pedidos .item-pedido:last-child {
+            border-bottom: none;
+        }
+
+
+        /* =====================================================
+           IMAGEM DO PRODUTO
+           ===================================================== */
+
+      .pagina-pedidos .item-pedido-imagem {
+    width: 105px !important;
+    height: 105px !important;
+
+    min-width: 105px !important;
+    min-height: 105px !important;
+
+    max-width: 105px !important;
+    max-height: 105px !important;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #242430 0%,
+            #17171e 65%,
+            #131319 100%
+        );
+
+    border: 1px solid #30303b;
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+.pagina-pedidos .item-pedido-imagem::before {
+    content: "";
+
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background: rgba(124, 44, 255, 0.18);
+
+    filter: blur(28px);
+
+    bottom: -20px;
+    right: -15px;
+
+    pointer-events: none;
+}
+
+.pagina-pedidos .item-pedido-imagem img {
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: 100% !important;
+    max-height: 100% !important;
+
+    object-fit: contain !important;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+        /* =====================================================
+           INFORMAÇÕES DO PRODUTO
+           ===================================================== */
+
+        .pagina-pedidos .item-pedido-info {
+            display: flex;
+            flex-direction: column;
+
+            gap: 7px;
+
+            min-width: 0;
+        }
+
+        .pagina-pedidos .item-pedido-info strong {
+            color: #ffffff;
+
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .pagina-pedidos .item-pedido-preco {
+            color: #8b3dff;
+
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .pagina-pedidos .item-pedido-detalhes {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            color: #88889a;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           TOTAL
+           ===================================================== */
+
+        .pagina-pedidos .pedido-rodape {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            gap: 14px;
+
+            padding-top: 20px;
+        }
+
+        .pagina-pedidos .pedido-total-label {
+            color: #88889a;
+            font-size: 14px;
+        }
+
+        .pagina-pedidos .pedido-total {
+            color: #8b3dff;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           PEDIDO VAZIO
+           ===================================================== */
+
+        .pagina-pedidos .pedido-vazio {
+            width: 100%;
+            box-sizing: border-box;
+
+            background: #111116;
+
+            border: 1px solid #292932;
+            border-radius: 18px;
+
+            padding: 70px 25px;
+
+            text-align: center;
+        }
+
+        .pagina-pedidos .pedido-vazio i {
+            display: block;
+
+            margin-bottom: 18px;
+
+            color: #8b3dff;
+
+            font-size: 55px;
+        }
+
+        .pagina-pedidos .pedido-vazio h3 {
+            margin: 0 0 10px;
+
+            color: #ffffff;
+
+            font-size: 22px;
+        }
+
+        .pagina-pedidos .pedido-vazio p {
+            margin: 0 auto 25px;
+
+            max-width: 500px;
+
+            color: #9292a5;
+
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .pagina-pedidos .pedido-vazio button {
+            border: none;
+            border-radius: 9px;
+
+            padding: 13px 26px;
+
+            background: linear-gradient(
+                90deg,
+                #7c2cff,
+                #a855f7
+            );
+
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        /* =====================================================
+           CELULAR
+           ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .pagina-pedidos .painel-cabecalho h1 {
+                font-size: 28px;
+            }
+
+            .pagina-pedidos .linha-pedido {
+                padding: 18px;
+            }
+
+            .pagina-pedidos .pedido-cabecalho {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .pagina-pedidos .status-pedido {
+                align-self: flex-start;
+            }
+
+            .pagina-pedidos .item-pedido {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .pagina-pedidos .item-pedido-imagem {
+                width: 80px !important;
+                height: 80px !important;
+
+                min-width: 80px !important;
+                min-height: 80px !important;
+
+                max-width: 80px !important;
+                max-height: 80px !important;
+            }
+
+            .pagina-pedidos .item-pedido-info strong {
+                font-size: 15px;
+            }
+
+            .pagina-pedidos .item-pedido-detalhes {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .pagina-pedidos .pedido-rodape {
+                justify-content: space-between;
+            }
+
+            .pagina-pedidos .pedido-total {
+                font-size: 19px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="painel-conta pagina-pedidos">
+
+
+    <!-- =====================================================
+         TOPO
+         ===================================================== -->
+
+    <header class="painel-topo">
+
+        <div class="painel-usuario">
+
+            <i class="ri-user-line"></i>
+
+            <strong id="nomeTopo">
+                Usuário
+            </strong>
+
+        </div>
+
+
+        <div class="painel-acoes-topo">
+
+            <span onclick="history.back()">
+                <i class="ri-arrow-left-line"></i>
+                Voltar
+            </span>
+
+            <span onclick="window.location.href='index.html'">
+                <i class="ri-home-line"></i>
+                Início
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         LAYOUT
+         ===================================================== -->
+
+    <div class="painel-layout">
+
+
+        <!-- =================================================
+             MENU
+             ================================================= -->
+
+        <aside class="painel-menu">
+
+            <a
+                href="minha-conta.html"
+                class="menu-conta"
+            >
+
+                <i class="ri-user-line"></i>
+
+                Minha conta
+
+            </a>
+
+
+            <a
+                href="meus-pedidos.html"
+                class="menu-conta ativo"
+            >
+
+                <i class="ri-shopping-bag-line"></i>
+
+                Meus pedidos
+
+            </a>
+
+
+            <button
+                class="btn-sair-conta"
+                onclick="sairConta()"
+            >
+
+                <i class="ri-logout-box-line"></i>
+
+                Sair da conta
+
+            </button>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             CONTEÚDO
+             ================================================= -->
+
+        <main class="painel-conteudo">
+
+
+            <div class="painel-cabecalho">
+
+                <div>
+
+                    <h1>
+                        Meus pedidos
+                    </h1>
+
+                    <p>
+                        Acompanhe seus pedidos realizados.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <section
+                class="pedidos-card"
+                id="listaPedidos"
+            ></section>
+
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   USUÁRIO
+   ========================================================= */
+
+function carregarUsuario() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+
+    if (!usuario) {
+
+        window.location.href = "Entrar.html";
+
+        return;
+    }
+
+
+    document.getElementById("nomeTopo").innerText =
+        usuario.nome || "Usuário";
+}
+
+
+
+/* =========================================================
+   PEDIDOS
+   ========================================================= */
+
+function carregarPedidos() {
+
+    const lista =
+        document.getElementById("listaPedidos");
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        );
+
+    const pedidos =
+        JSON.parse(
+            localStorage.getItem("pedidos")
+        ) || [];
+
+
+    lista.innerHTML = "";
+
+
+    const pedidosDoUsuario =
+        pedidos.filter(pedido => {
+
+            return pedido.usuarioEmail === usuario.email;
+
+        });
+
+
+    /* =====================================================
+       NENHUM PEDIDO
+       ===================================================== */
+
+    if (pedidosDoUsuario.length === 0) {
+
+        lista.innerHTML = `
+
+            <div class="pedido-vazio">
+
+                <i class="ri-shopping-bag-line"></i>
+
+                <h3>
+                    Você ainda não possui pedidos.
+                </h3>
+
+                <p>
+                    Quando você finalizar uma compra,
+                    ela aparecerá aqui.
+                </p>
+
+                <button
+                    onclick="window.location.href='index.html'"
+                >
+                    Ver produtos
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+
+
+    /* =====================================================
+       PEDIDOS
+       ===================================================== */
+
+    pedidosDoUsuario.forEach((pedido, index) => {
+
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "linha-pedido";
+
+
+        let itensHTML = "";
+
+
+
+        /* =================================================
+           PRODUTOS DO PEDIDO
+           ================================================= */
+
+        pedido.itens.forEach(item => {
+            itensHTML += `
+    <div class="item-pedido">
+        
+        <div class="item-pedido-imagem">
+            <img src="${item.imagem}" alt="${item.nome}">
+        </div>
+
+        <div class="item-pedido-info">
+            <strong>${item.nome}</strong>
+            <span class="item-pedido-preco">${item.preco}</span>
+            <div class="item-pedido-detalhes">
+                <span>Cor: ${item.cor}</span>
+                <span>Tamanho: ${item.tamanho}</span>
+                <span>Quantidade: ${item.qtd || 1}</span>
+            </div>
+        </div>
+
+    </div>
+`;
+ });
+
+
+
+        /* =================================================
+           CARD DO PEDIDO
+           ================================================= */
+
+        div.innerHTML = `
+
+            <div class="pedido-cabecalho">
+
+
+                <div class="pedido-cabecalho-info">
+
+                    <span class="pedido-numero">
+
+                        Pedido #${index + 1}
+
+                    </span>
+
+
+                    <span class="pedido-data">
+
+                        Realizado em ${pedido.data}
+
+                    </span>
+
+                </div>
+
+
+
+                <span
+                    class="status-pedido ${classeStatus(pedido.status)}"
+                >
+
+                    ${pedido.status || "Processando"}
+
+                </span>
+
+
+            </div>
+
+
+
+            <div class="pedido-itens">
+
+                ${itensHTML}
+
+            </div>
+
+
+
+            <div class="pedido-rodape">
+
+                <span class="pedido-total-label">
+
+                    Total do pedido
+
+                </span>
+
+
+                <strong class="pedido-total">
+
+                    R$
+                    ${pedido.total
+                        .toFixed(2)
+                        .replace(".", ",")}
+
+                </strong>
+
+            </div>
+
+        `;
+
+
+        lista.appendChild(div);
+
+    });
+
+}
+
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+function classeStatus(status) {
+
+    if (!status) {
+
+        return "processando";
+
+    }
+
+
+    const texto =
+        status.toLowerCase();
+
+
+    if (
+        texto.includes("entregue")
+    ) {
+
+        return "entregue";
+
+    }
+
+
+    if (
+        texto.includes("trânsito") ||
+        texto.includes("transito")
+    ) {
+
+        return "transito";
+
+    }
+
+
+    return "processando";
+}
+
+
+
+/* =========================================================
+   SAIR
+   ========================================================= */
+
+function sairConta() {
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+    window.location.href =
+        "index.html";
+}
+
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+carregarUsuario();
+
+carregarPedidos();
+
+</script>
+
+
+</body>
+
+</html>

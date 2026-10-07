@@ -2,9 +2,11 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Carrinho</title>
 <link rel="stylesheet" href="style.css">
 
+<!-- Ícones da biblioteca RemixIcon -->
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
 </head>
@@ -13,167 +15,852 @@
 
 <header class="topo">
 
-    <!-- LOGO -->
+    <!-- LOGO: ao clicar volta para a página inicial -->
     <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
         <img src="./img/logo.png" class="logo-img">
         <span class="logo-text">Elite <strong>Sports</strong></span>
     </div>
 
-    <!-- BUSCA -->
-    <div class="busca">
-        <i class="ri-search-line"></i>
-        <input type="text" placeholder="Buscar produtos...">
-    </div>
-
-    <!-- AÇÕES -->
     <div class="acoes">
-
-        <span onclick="window.location.href='index.html'">
-            Home
+        <!-- Botão voltar -->
+        <span onclick="history.back()">
+            <i class="ri-arrow-left-line"></i> Voltar
         </span>
 
-        <div class="carrinho" onclick="window.location.href='carrinhos.html'">
-            <i class="ri-shopping-cart-line"></i>
-            <span id="contador">0</span>
+        <!-- Botão início -->
+        <span onclick="window.location.href='index.html'">
+            <i class="ri-home-line"></i> Início
+        </span>
+
+        <!-- DROPDOWN DO USUÁRIO -->
+        <div class="conta-dropdown">
+            <!-- Área clicável do usuário -->
+            <span id="usuarioLogadoNome" onclick="handleUsuarioClick()">
+                <i class="ri-user-line"></i> <span id="nomeUsuario">Login</span>
+                <i class="ri-arrow-down-s-line" id="setaDropdown" style="display:none"></i>
+            </span>
+
+            <!-- Menu dropdown com opções -->
+        <div id="dropdownMenu" class="dropdown-content">
+            <button onclick="window.location.href='minha-conta.html'">Minha Conta</button>
+            <button onclick="window.location.href='meus-pedidos.html'">Meus Pedidos</button>
+            <button onclick="sair()">Sair da conta</button>
+        </div>
         </div>
 
+        <!-- Ícone do carrinho sempre por último -->
+        <div class="carrinho" onclick="window.location.href='carrinhos.html'">
+            <i class="ri-shopping-cart-line"></i>
+            <span id="contador">0</span> <!-- quantidade de itens -->
+        </div>
     </div>
 
 </header>
 
-<div class="produtos">
+<!-- BANNER CARRINHO -->
+<section class="banner-carrinho">
 
-    <h2>🛒 Meu Carrinho</h2>
+    <div class="banner-carrinho-texto">
 
-    <div id="lista"></div>
+        <span>ELITE SPORTS</span>
 
-    <h3 class="total" id="total"></h3>
+        <h1>Meu Carrinho</h1>
+        <p>Confira seus produtos e finalize sua compra.</p>
 
-    <div style="margin-top:15px; display:flex; gap:10px;">
-        <button class="btn-limpar" onclick="limparCarrinho()">
-            Limpar Carrinho
-        </button>
-
-        <button class="btn-principal" onclick="finalizarCompra()">
-            Finalizar Compra
-        </button>
     </div>
 
-</div>
+
+    <div class="banner-carrinho-logo">
+
+        <img src="./img/logo.png">
+
+    </div>
+
+</section>
+
+
+    <div class="carrinho-layout">
+
+        <!-- LADO ESQUERDO -->
+        <section class="carrinho-conteudo">
+
+            <!-- Carrinho vazio -->
+            <div id="carrinhoVazio" class="carrinho-vazio">
+
+                <div class="carrinho-vazio-icone">
+                    <i class="ri-shopping-cart-2-line"></i>
+                </div>
+
+                <h2>Seu carrinho está vazio</h2>
+
+                <p>
+                    Parece que você ainda não adicionou nenhum produto
+                    no seu carrinho.
+                </p>
+
+                <button
+                    class="btn-continuar"
+                    onclick="window.location.href='index.html'">
+
+                    <i class="ri-shopping-bag-line"></i>
+                    Continuar comprando
+
+                </button>
+
+            </div>
+
+
+            <!-- Lista de produtos -->
+            <div id="lista" class="lista-carrinho"></div>
+
+
+            <!-- Rodapé da lista quando houver produtos -->
+            <div id="acoesCarrinho" class="acoes-carrinho">
+
+                <button
+                    class="btn-limpar"
+                    onclick="limparCarrinho()">
+
+                    <i class="ri-delete-bin-line"></i>
+                    Limpar Carrinho
+
+                </button>
+
+                <button
+                    class="btn-principal btn-finalizar-lista"
+                    onclick="finalizarCompra()">
+
+                    <i class="ri-shopping-bag-line"></i>
+                    Finalizar Compra
+
+                </button>
+
+            </div>
+
+
+            <div
+                id="mensagemCompra"
+                class="mensagem-compra">
+            </div>
+
+        </section>
+
+
+        <!-- RESUMO -->
+        <aside class="resumo-pedido">
+
+            <h2>Resumo do pedido</h2>
+
+
+            <div class="resumo-linha">
+                <span id="resumoQuantidade">
+                    Produtos (0)
+                </span>
+
+                <span id="resumoProdutos">
+                    R$ 0,00
+                </span>
+            </div>
+
+
+            <div class="resumo-linha">
+                <span>Frete</span>
+                <span id="resumoFrete">R$ 0,00</span>
+            </div>
+
+
+            <div class="resumo-divisor"></div>
+
+
+            <div class="resumo-total">
+
+                <strong>Total</strong>
+
+                <strong id="total">
+                    R$ 0,00
+                </strong>
+
+            </div>
+
+
+            <button
+                id="btnFinalizarResumo"
+                class="btn-principal resumo-finalizar"
+                onclick="finalizarCompra()">
+
+                <i class="ri-lock-line"></i>
+                Finalizar Compra
+
+            </button>
+
+
+            <button
+                class="resumo-continuar"
+                onclick="window.location.href='index.html'">
+
+                <i class="ri-arrow-left-line"></i>
+                Continuar Comprando
+
+            </button>
+
+
+            <!-- BENEFÍCIOS -->
+            <div class="resumo-beneficios">
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icone">
+                        <i class="ri-shield-check-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>Compra 100% segura</strong>
+                        <span>Seus dados protegidos</span>
+                    </div>
+
+                </div>
+
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icone">
+                        <i class="ri-truck-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>Entrega para todo o Brasil</strong>
+                        <span>Receba onde estiver</span>
+                    </div>
+
+                </div>
+
+
+                <div class="beneficio">
+
+                    <div class="beneficio-icone">
+                        <i class="ri-bank-card-line"></i>
+                    </div>
+
+                    <div>
+                        <strong>Diversas formas de pagamento</strong>
+                        <span>Pix, cartão e boleto</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
 
 <script>
 
-let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+let carrinho =
+    JSON.parse(localStorage.getItem("carrinho")) || [];
 
-let lista = document.getElementById("lista");
-let totalEl = document.getElementById("total");
-let contadorEl = document.getElementById("contador");
+const lista =
+    document.getElementById("lista");
+
+const totalEl =
+    document.getElementById("total");
+
+const contadorEl =
+    document.getElementById("contador");
+
+const carrinhoVazio =
+    document.getElementById("carrinhoVazio");
+
+const acoesCarrinho =
+    document.getElementById("acoesCarrinho");
+
+const resumoQuantidade =
+    document.getElementById("resumoQuantidade");
+
+const resumoProdutos =
+    document.getElementById("resumoProdutos");
+
+const resumoFrete =
+    document.getElementById("resumoFrete");
+
+const btnFinalizarResumo =
+    document.getElementById("btnFinalizarResumo");
+
+
+/* ==============================
+   PREÇO
+   ============================== */
 
 function parsePreco(preco) {
-    return Number(preco.replace("R$", "").replace(",", "."));
+
+    if (typeof preco === "number") {
+        return preco;
+    }
+
+    return Number(
+        String(preco)
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(/\s/g, "")
+            .replace(",", ".")
+    );
 }
+
+
+function formatarPreco(valor) {
+
+    return valor.toLocaleString(
+        "pt-BR",
+        {
+            style: "currency",
+            currency: "BRL"
+        }
+    );
+}
+
+
+/* ==============================
+   ATUALIZA CARRINHO
+   ============================== */
 
 function atualizarCarrinho() {
 
     lista.innerHTML = "";
-    let total = 0;
+
+    let subtotal = 0;
     let totalItens = 0;
 
+
+    /* CARRINHO VAZIO */
+
     if (carrinho.length === 0) {
-        lista.innerHTML = "<p>🛒 Seu carrinho está vazio</p>";
-        totalEl.innerText = "";
-        contadorEl.innerText = 0;
+
+        carrinhoVazio.style.display = "flex";
+        lista.style.display = "none";
+        acoesCarrinho.style.display = "none";
+
+        subtotal = 0;
+        totalItens = 0;
+
+        resumoQuantidade.innerText =
+            "Produtos (0)";
+
+        resumoProdutos.innerText =
+            "R$ 0,00";
+
+        resumoFrete.innerText =
+            "R$ 0,00";
+
+        totalEl.innerText =
+            "R$ 0,00";
+
+        contadorEl.innerText = "0";
+
+        btnFinalizarResumo.disabled = true;
+
+        localStorage.setItem(
+            "carrinho",
+            JSON.stringify(carrinho)
+        );
+
         return;
     }
 
-    carrinho.forEach((p, index) => {
 
-        let qtd = p.qtd || 1;
+    /* CARRINHO COM PRODUTOS */
 
+    carrinhoVazio.style.display = "none";
+    lista.style.display = "block";
+    acoesCarrinho.style.display = "flex";
+
+    btnFinalizarResumo.disabled = false;
+
+
+    carrinho.forEach((produto, index) => {
+
+        const qtd =
+            produto.qtd || 1;
+
+        const preco =
+            parsePreco(produto.preco);
+
+        const subtotalItem =
+            preco * qtd;
+
+        subtotal += subtotalItem;
         totalItens += qtd;
-        total += parsePreco(p.preco) * qtd;
+
+
+        const cor =
+            produto.cor
+                ? produto.cor
+                : "";
+
+        const tamanho =
+            produto.tamanho
+                ? produto.tamanho
+                : "";
+
 
         lista.innerHTML += `
-            <div class="item-carrinho">
 
-                <img src="${p.imagem}">
+            <article class="item-carrinho">
+
+                <div class="item-imagem">
+                    <img
+                        src="${produto.imagem}"
+                        alt="${produto.nome}">
+                </div>
+
 
                 <div class="item-info">
-                    <h3>${p.nome}</h3>
-                    <p>${p.preco}</p>
+
+                    <h3>
+                        ${produto.nome}
+                    </h3>
+
+                    <div class="item-detalhes">
+
+                        ${cor
+                            ? `<span>Cor: ${cor}</span>`
+                            : ""
+                        }
+
+                        ${tamanho
+                            ? `<span>Tamanho: ${tamanho}</span>`
+                            : ""
+                        }
+
+                    </div>
+
+                    <strong class="item-preco">
+                        ${formatarPreco(preco)}
+                    </strong>
+
                 </div>
 
-                <div class="item-acoes">
-                    <button class="btn-qtd" onclick="diminuir(${index})">−</button>
-                    <span class="qtd">${qtd}</span>
-                    <button class="btn-qtd" onclick="aumentar(${index})">+</button>
+
+                <div class="item-quantidade">
+
+                    <span>Quantidade</span>
+
+                    <div class="item-acoes">
+
+                        <button
+                            class="btn-qtd"
+                            onclick="diminuir(${index})">
+                            −
+                        </button>
+
+                        <strong class="qtd">
+                            ${qtd}
+                        </strong>
+
+                        <button
+                            class="btn-qtd"
+                            onclick="aumentar(${index})">
+                            +
+                        </button>
+
+                    </div>
+
                 </div>
 
-                <button class="btn-remover" onclick="remover(${index})">🗑️</button>
 
-            </div>
+                <div class="item-subtotal">
+
+                    <span>Subtotal</span>
+
+                    <strong>
+                        ${formatarPreco(subtotalItem)}
+                    </strong>
+
+                    <button
+                        class="btn-remover"
+                        onclick="remover(${index})">
+
+                        <i class="ri-delete-bin-line"></i>
+                        Remover
+
+                    </button>
+
+                </div>
+
+            </article>
+
         `;
     });
 
-    totalEl.innerText = "Total: R$ " + total.toFixed(2).replace(".", ",");
-    contadorEl.innerText = totalItens;
 
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    /* RESUMO */
+
+    resumoQuantidade.innerText =
+        `Produtos (${totalItens})`;
+
+    resumoProdutos.innerText =
+        formatarPreco(subtotal);
+
+
+    /*
+       Por enquanto o frete continua R$ 0,00.
+       Depois podemos integrar cálculo real.
+    */
+
+    const frete = 0;
+
+    resumoFrete.innerText =
+        formatarPreco(frete);
+
+    totalEl.innerText =
+        formatarPreco(subtotal + frete);
+
+
+    contadorEl.innerText =
+        totalItens > 9
+            ? "9+"
+            : totalItens;
+
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
 }
+
+
+/* ==============================
+   QUANTIDADE
+   ============================== */
 
 function aumentar(index) {
-    carrinho[index].qtd = (carrinho[index].qtd || 1) + 1;
+
+    carrinho[index].qtd =
+        (carrinho[index].qtd || 1) + 1;
+
     atualizarCarrinho();
 }
+
 
 function diminuir(index) {
+
     if ((carrinho[index].qtd || 1) > 1) {
+
         carrinho[index].qtd--;
+
     }
+
     atualizarCarrinho();
 }
+
+
+/* ==============================
+   REMOVER
+   ============================== */
 
 function remover(index) {
+
     carrinho.splice(index, 1);
+
     atualizarCarrinho();
 }
+
+
+/* ==============================
+   LIMPAR
+   ============================== */
 
 function limparCarrinho() {
+
     carrinho = [];
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
     atualizarCarrinho();
 }
 
+
+/* ==============================
+   FINALIZAR
+   ============================== */
+
 function finalizarCompra() {
+
     if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio!");
         return;
     }
 
-    alert("Compra finalizada com sucesso!");
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        ) || null;
+
+
+    if (!usuario) {
+
+        alert(
+            "Você precisa fazer login para finalizar o pedido!"
+        );
+
+        localStorage.setItem(
+            "voltarDepoisLogin",
+            "carrinhos.html"
+        );
+
+        window.location.href =
+            "Entrar.html";
+
+        return;
+    }
+
+
+    let pedidos =
+        JSON.parse(
+            localStorage.getItem("pedidos")
+        ) || [];
+
+
+    const total =
+        carrinho.reduce(
+            (soma, produto) => {
+
+                return soma +
+                    parsePreco(produto.preco) *
+                    (produto.qtd || 1);
+
+            },
+            0
+        );
+
+
+    const novoPedido = {
+
+        id: Date.now(),
+
+        usuarioEmail:
+            usuario.email,
+
+        usuarioNome:
+            usuario.nome,
+
+        data:
+            new Date().toLocaleString("pt-BR"),
+
+        itens:
+            [...carrinho],
+
+        total:
+            total,
+
+        status:
+            "Pedido realizado"
+
+    };
+
+
+    pedidos.push(novoPedido);
+
+
+    localStorage.setItem(
+        "pedidos",
+        JSON.stringify(pedidos)
+    );
+
+
+    const mensagemCompra =
+        document.getElementById(
+            "mensagemCompra"
+        );
+
+
+    mensagemCompra.innerText =
+        "Compra finalizada com sucesso!";
+
+    mensagemCompra.style.display =
+        "block";
+
+
     carrinho = [];
+
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
+
     atualizarCarrinho();
+
+
+    setTimeout(() => {
+
+        window.location.href =
+            "meus-pedidos.html";
+
+    }, 1500);
 }
 
-atualizarCarrinho();
+
+/* ==============================
+   CONTADOR
+   ============================== */
+
 function atualizarContador() {
-    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    let carrinhoSalvo =
+        JSON.parse(
+            localStorage.getItem("carrinho")
+        ) || [];
+
 
     let total = 0;
 
-    carrinho.forEach(p => {
-        total += p.qtd || 1;
-    });
 
-    const contador = document.getElementById("contador");
+    carrinhoSalvo.forEach(
+        produto => {
 
-    if (total > 9) {
-        contador.innerText = "9+";
+            total +=
+                produto.qtd || 1;
+
+        }
+    );
+
+
+    contadorEl.innerText =
+        total > 9
+            ? "9+"
+            : total;
+}
+
+
+/* ==============================
+   HEADER
+   ============================== */
+
+function atualizarNomeUsuarioHeader() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        ) || null;
+
+
+    const nomeEl =
+        document.getElementById(
+            "nomeUsuario"
+        );
+
+
+    const seta =
+        document.getElementById(
+            "setaDropdown"
+        );
+
+
+    if (usuario) {
+
+        nomeEl.innerText =
+            usuario.nome;
+
+        seta.style.display =
+            "inline";
+
     } else {
-        contador.innerText = total;
+
+        nomeEl.innerText =
+            "Login";
+
+        seta.style.display =
+            "none";
+
     }
 }
 
-atualizarContador();
+
+function handleUsuarioClick() {
+
+    const usuario =
+        JSON.parse(
+            localStorage.getItem("usuarioLogado")
+        ) || null;
+
+
+    if (usuario) {
+
+        document
+            .getElementById("dropdownMenu")
+            .classList
+            .toggle("show");
+
+    } else {
+
+        window.location.href =
+            "Entrar.html";
+
+    }
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const usuario =
+            document.getElementById(
+                "usuarioLogadoNome"
+            );
+
+        const menu =
+            document.getElementById(
+                "dropdownMenu"
+            );
+
+
+        if (
+            usuario &&
+            menu &&
+            !usuario.contains(event.target) &&
+            !menu.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+function sair() {
+
+    localStorage.removeItem(
+        "usuarioLogado"
+    );
+
+    atualizarNomeUsuarioHeader();
+}
+
+
+/* ==============================
+   INICIALIZA
+   ============================== */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        atualizarNomeUsuarioHeader();
+        atualizarCarrinho();
+        atualizarContador();
+
+    }
+);
 
 </script>
 
