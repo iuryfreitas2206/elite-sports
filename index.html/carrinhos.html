@@ -534,14 +534,176 @@ function atualizarCarrinho() {
 /* ==============================
    QUANTIDADE
    ============================== */
+async function aumentar(index) {
 
-function aumentar(index) {
+    const item =
+        carrinho[index];
 
-    carrinho[index].qtd =
-        (carrinho[index].qtd || 1) + 1;
+    try {
 
-    atualizarCarrinho();
+        const resposta = await fetch(
+            "http://localhost:3000/api/produtos"
+        );
+
+        const produtos =
+            await resposta.json();
+
+
+        if (!resposta.ok) {
+
+            alert(
+                "Não foi possível consultar o estoque."
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // LOCALIZA O PRODUTO NO MYSQL
+        // ==========================================
+
+        const produtoBanco =
+            produtos.find(
+                produto =>
+                    produto.nome
+                        .toLowerCase()
+                        .trim() ===
+                    item.nome
+                        .toLowerCase()
+                        .trim()
+            );
+
+
+        if (!produtoBanco) {
+
+            alert(
+                "Produto não encontrado no estoque."
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // PREPARA COR E TAMANHO
+        // ==========================================
+
+        const corCarrinho =
+            item.cor || "Única";
+
+
+        const tamanhoCarrinho =
+            item.tamanho === "Único"
+                ? null
+                : item.tamanho;
+
+
+        // ==========================================
+        // LOCALIZA A VARIAÇÃO
+        // ==========================================
+
+        const variacao =
+            produtoBanco.variacoes.find(
+                variacao => {
+
+                    const mesmaCor =
+                        String(
+                            variacao.cor
+                        ).toLowerCase() ===
+                        String(
+                            corCarrinho
+                        ).toLowerCase();
+
+
+                    const mesmoTamanho =
+                        tamanhoCarrinho === null
+
+                            ? variacao.tamanho === null
+
+                            : String(
+                                variacao.tamanho
+                            ).toLowerCase() ===
+                              String(
+                                  tamanhoCarrinho
+                              ).toLowerCase();
+
+
+                    return (
+                        mesmaCor &&
+                        mesmoTamanho
+                    );
+
+                }
+            );
+
+
+        if (!variacao) {
+
+            alert(
+                "Variação não encontrada no estoque."
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // COMPARA QUANTIDADE COM ESTOQUE
+        // ==========================================
+
+        const estoqueDisponivel =
+            Number(
+                variacao.estoque
+            );
+
+
+        const quantidadeAtual =
+            Number(
+                item.qtd || 1
+            );
+
+
+        if (
+            quantidadeAtual + 1 >
+            estoqueDisponivel
+        ) {
+
+            alert(
+                `Limite de estoque atingido. Disponível: ${estoqueDisponivel} unidade(s).`
+            );
+
+            return;
+        }
+
+
+        // ==========================================
+        // AUMENTA
+        // ==========================================
+
+        carrinho[index].qtd =
+            quantidadeAtual + 1;
+
+
+        atualizarCarrinho();
+
+
+    } catch (erro) {
+
+        console.error(
+            "Erro ao consultar estoque:",
+            erro
+        );
+
+
+        alert(
+            "Não foi possível conectar com o servidor."
+        );
+
+    }
+
 }
+
 
 
 function diminuir(index) {
@@ -585,33 +747,39 @@ function limparCarrinho() {
 }
 
 
-/* ==============================
-   FINALIZAR
-   ============================== */
+async function finalizarCompra() {
 
-function finalizarCompra() {
+    // ==========================================
+    // VERIFICA SE EXISTEM PRODUTOS
+    // ==========================================
 
     if (carrinho.length === 0) {
         return;
     }
 
 
+    // ==========================================
+    // VERIFICA USUÁRIO LOGADO
+    // ==========================================
+
     const usuario =
         JSON.parse(
             localStorage.getItem("usuarioLogado")
-        ) || null;
+        );
 
 
-    if (!usuario) {
+    if (!usuario || !usuario.id_usuario) {
 
         alert(
             "Você precisa fazer login para finalizar o pedido!"
         );
 
+
         localStorage.setItem(
             "voltarDepoisLogin",
             "carrinhos.html"
         );
+
 
         window.location.href =
             "Entrar.html";
@@ -620,90 +788,108 @@ function finalizarCompra() {
     }
 
 
-    let pedidos =
-        JSON.parse(
-            localStorage.getItem("pedidos")
-        ) || [];
+    // ==========================================
+    // ENVIA PEDIDO PARA A API
+    // ==========================================
 
+    try {
 
-    const total =
-        carrinho.reduce(
-            (soma, produto) => {
+        const resposta = await fetch(
+            "http://localhost:3000/api/pedidos",
+            {
+                method: "POST",
 
-                return soma +
-                    parsePreco(produto.preco) *
-                    (produto.qtd || 1);
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-            },
-            0
+                body: JSON.stringify({
+
+                    id_usuario:
+                        usuario.id_usuario,
+
+                    itens:
+                        carrinho
+
+                })
+            }
         );
 
 
-    const novoPedido = {
-
-        id: Date.now(),
-
-        usuarioEmail:
-            usuario.email,
-
-        usuarioNome:
-            usuario.nome,
-
-        data:
-            new Date().toLocaleString("pt-BR"),
-
-        itens:
-            [...carrinho],
-
-        total:
-            total,
-
-        status:
-            "Pedido realizado"
-
-    };
+        const dados =
+            await resposta.json();
 
 
-    pedidos.push(novoPedido);
+        // ==========================================
+        // ERRO DA API
+        // ==========================================
+
+        if (!resposta.ok) {
+
+            alert(
+                dados.mensagem ||
+                "Não foi possível finalizar o pedido."
+            );
+
+            return;
+        }
 
 
-    localStorage.setItem(
-        "pedidos",
-        JSON.stringify(pedidos)
-    );
+        // ==========================================
+        // PEDIDO CRIADO
+        // ==========================================
+
+        const mensagemCompra =
+            document.getElementById(
+                "mensagemCompra"
+            );
 
 
-    const mensagemCompra =
-        document.getElementById(
-            "mensagemCompra"
+        mensagemCompra.innerText =
+            `Pedido #${dados.id_pedido} realizado com sucesso!`;
+
+
+        mensagemCompra.style.display =
+            "block";
+
+
+        // Limpa o carrinho SOMENTE depois
+        // que o MySQL confirmou o pedido
+
+        carrinho = [];
+
+
+        localStorage.setItem(
+            "carrinho",
+            JSON.stringify(carrinho)
         );
 
 
-    mensagemCompra.innerText =
-        "Compra finalizada com sucesso!";
-
-    mensagemCompra.style.display =
-        "block";
+        atualizarCarrinho();
 
 
-    carrinho = [];
+        setTimeout(() => {
+
+            window.location.href =
+                "meus-pedidos.html";
+
+        }, 1500);
 
 
-    localStorage.setItem(
-        "carrinho",
-        JSON.stringify(carrinho)
-    );
+    } catch (erro) {
+
+        console.error(
+            "Erro ao finalizar pedido:",
+            erro
+        );
 
 
-    atualizarCarrinho();
+        alert(
+            "Não foi possível conectar com o servidor."
+        );
 
+    }
 
-    setTimeout(() => {
-
-        window.location.href =
-            "meus-pedidos.html";
-
-    }, 1500);
 }
 
 

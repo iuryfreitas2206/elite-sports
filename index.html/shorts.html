@@ -1,1066 +1,543 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Shorts - Elite Sports</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <link
-        href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-        rel="stylesheet"
-    >
-</head>
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
 
+  <body class="pagina-catalogo pagina-shorts">
+    <!-- ===================================================== -->
+    <!-- HEADER                                                -->
+    <!-- ===================================================== -->
 
-<body class="pagina-catalogo">
-
-
-<!-- ===================================================== -->
-<!-- HEADER                                                -->
-<!-- ===================================================== -->
-
-<header class="topo catalogo-topo">
-
-    <div
+    <header class="topo catalogo-topo">
+      <div
         class="logo"
-        onclick="window.location.href='index.html'"
-        style="cursor:pointer;"
-    >
-        <img src="./img/logo.png" class="logo-img">
+        onclick="window.location.href = 'index.html'"
+        style="cursor: pointer"
+      >
+        <img src="./img/logo.png" class="logo-img" />
 
-        <span class="logo-text">
-            Elite <strong>Sports</strong>
-        </span>
-    </div>
+        <span class="logo-text"> Elite <strong>Sports</strong> </span>
+      </div>
 
+      <!-- BUSCA -->
 
-    <!-- BUSCA -->
-
-    <div class="busca-topo">
-
+      <div class="busca-topo">
         <i class="ri-search-line"></i>
 
         <input
-            type="text"
-            id="campoBusca"
-            placeholder="Busque por shorts..."
-            oninput="buscarProdutos()"
-        >
+          type="text"
+          id="campoBusca"
+          placeholder="Busque por shorts..."
+          oninput="buscarProdutos()"
+        />
+      </div>
 
-    </div>
+      <!-- AÇÕES -->
 
-
-    <!-- AÇÕES -->
-
-    <div class="acoes">
-
-        <span onclick="window.location.href='index.html'">
-            <i class="ri-home-line"></i>
-            Início
+      <div class="acoes">
+        <span onclick="window.location.href = 'index.html'">
+          <i class="ri-home-line"></i>
+          Início
         </span>
-
 
         <!-- USUÁRIO -->
 
         <div class="conta-dropdown">
+          <span id="usuarioLogadoNome" onclick="handleUsuarioClick()">
+            <i class="ri-user-line"></i>
 
-            <span
-                id="usuarioLogadoNome"
-                onclick="handleUsuarioClick()"
-            >
+            <span id="nomeUsuario"> Login </span>
 
-                <i class="ri-user-line"></i>
+            <i
+              class="ri-arrow-down-s-line"
+              id="setaDropdown"
+              style="display: none"
+            ></i>
+          </span>
 
-                <span id="nomeUsuario">
-                    Login
-                </span>
+          <div id="dropdownMenu" class="dropdown-content">
+            <button onclick="window.location.href = 'minha-conta.html'">
+              Minha Conta
+            </button>
 
-                <i
-                    class="ri-arrow-down-s-line"
-                    id="setaDropdown"
-                    style="display:none;"
-                ></i>
+            <button onclick="window.location.href = 'meus-pedidos.html'">
+              Meus Pedidos
+            </button>
 
-            </span>
-
-
-            <div
-                id="dropdownMenu"
-                class="dropdown-content"
-            >
-
-                <button onclick="window.location.href='minha-conta.html'">
-                    Minha Conta
-                </button>
-
-                <button onclick="window.location.href='meus-pedidos.html'">
-                    Meus Pedidos
-                </button>
-
-                <button onclick="sair()">
-                    Sair da conta
-                </button>
-
-            </div>
-
+            <button onclick="sair()">Sair da conta</button>
+          </div>
         </div>
-
 
         <!-- CARRINHO -->
 
-        <div
-            class="carrinho"
-            onclick="window.location.href='carrinhos.html'"
-        >
+        <div class="carrinho" onclick="window.location.href = 'carrinhos.html'">
+          <i class="ri-shopping-cart-line"></i>
 
-            <i class="ri-shopping-cart-line"></i>
-
-            <span id="contador">
-                0
-            </span>
-
+          <span id="contador"> 0 </span>
         </div>
+      </div>
+    </header>
 
-    </div>
+    <!-- ===================================================== -->
+    <!-- MENU                                                  -->
+    <!-- ===================================================== -->
 
-</header>
+    <nav class="menu">
+      <a href="index.html"> Início </a>
 
+      <a href="camisetas.html"> Camisetas </a>
 
+      <a href="shorts.html" class="ativo"> Shorts </a>
 
-<!-- ===================================================== -->
-<!-- MENU                                                  -->
-<!-- ===================================================== -->
+      <a href="acessorios.html"> Acessórios </a>
+    </nav>
 
-<nav class="menu">
+    <!-- ===================================================== -->
+    <!-- HERO                                                  -->
+    <!-- ===================================================== -->
 
-    <a href="index.html">
-        Início
-    </a>
+    <section class="catalogo-hero">
+      <div class="catalogo-hero-logo"></div>
 
-    <a href="camisetas.html">
-        Camisetas
-    </a>
+      <div class="catalogo-hero-conteudo">
+        <span class="catalogo-mini-titulo"> ELITE SPORTS </span>
 
-    <a
-        href="shorts.html"
-        class="ativo"
-    >
-        Shorts
-    </a>
-
-    <a href="acessorios.html">
-        Acessórios
-    </a>
-
-    <a href="selecoes.html">
-        Copa do Mundo
-    </a>
-
-</nav>
-
-
-
-<!-- ===================================================== -->
-<!-- HERO                                                  -->
-<!-- ===================================================== -->
-
-<section class="catalogo-hero">
-
-    <div class="catalogo-hero-logo"></div>
-
-    <div class="catalogo-hero-conteudo">
-
-        <span class="catalogo-mini-titulo">
-            ELITE SPORTS
-        </span>
-
-        <h1>
-            SHORTS
-        </h1>
+        <h1>SHORTS</h1>
 
         <p>
-            Liberdade de movimento, conforto e performance
-            para acompanhar todos os seus treinos.
+          Liberdade de movimento, conforto e performance para acompanhar todos
+          os seus treinos.
         </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- ===================================================== -->
-<!-- CATÁLOGO                                              -->
-<!-- ===================================================== -->
-
-<main class="catalogo-container">
-
-
-    <!-- FILTROS -->
-
-    <div class="catalogo-filtros">
-
-        <button
-            class="filtro-btn ativo"
-            onclick="filtrarProdutos('todos', this)"
-        >
-            Todos
-        </button>
-
-        <button
-            class="filtro-btn"
-            onclick="filtrarProdutos('esportivo', this)"
-        >
-            Esportivo
-        </button>
-
-        <button
-            class="filtro-btn"
-            onclick="filtrarProdutos('copa', this)"
-        >
-            Copa do Mundo
-        </button>
-
-    </div>
-
-
-
-    <!-- ================================================= -->
-    <!-- PRODUTOS                                          -->
-    <!-- ================================================= -->
-
-    <section class="catalogo-grid">
-
-
-        <!-- SHORT ESPORTIVO -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="esportivo"
-            data-nome="short esportivo"
-            onclick="abrirProduto(2, 'preto')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-esportivo/Short-Preto-1.png"
-                    alt="Short Esportivo"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    SHORTS
-                </span>
-
-                <h2>
-                    Short Esportivo
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 79,90
-                </strong>
-
-
-                <div class="produto-cores">
-
-                    <span
-                        class="cor-produto preto"
-                        title="Preto"
-                    ></span>
-
-                    <span
-                        class="cor-produto azul"
-                        title="Azul"
-                    ></span>
-
-                    <span
-                        class="cor-produto branco"
-                        title="Branco"
-                    ></span>
-
-                </div>
-
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(2, 'preto');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- BRASIL -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short brasil"
-            onclick="abrirProduto(201, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-brasil-1.png"
-                    alt="Short Brasil"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Brasil
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(201, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- FRANÇA -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short frança"
-            onclick="abrirProduto(202, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-franca-1.png"
-                    alt="Short França"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short França
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(202, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- ARGENTINA -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short argentina"
-            onclick="abrirProduto(203, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-argentina-1.png"
-                    alt="Short Argentina"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Argentina
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(203, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- PORTUGAL -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short portugal"
-            onclick="abrirProduto(204, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-portugal-1.png"
-                    alt="Short Portugal"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Portugal
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(204, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- ALEMANHA -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short alemanha"
-            onclick="abrirProduto(205, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-alemanha-1.png"
-                    alt="Short Alemanha"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Alemanha
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(205, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- ESPANHA -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short espanha"
-            onclick="abrirProduto(206, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-espanha-1.png"
-                    alt="Short Espanha"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Espanha
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(206, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- INGLATERRA -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short inglaterra"
-            onclick="abrirProduto(207, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-inglaterra-1.png"
-                    alt="Short Inglaterra"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Inglaterra
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(207, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
-
-        <!-- BÉLGICA -->
-
-        <article
-            class="produto-catalogo"
-            data-categoria="copa"
-            data-nome="short bélgica"
-            onclick="abrirProduto(208, 'principal')"
-        >
-
-            <div class="produto-catalogo-imagem">
-
-                <img
-                    src="./img/short-belgica-1.png"
-                    alt="Short Bélgica"
-                >
-
-            </div>
-
-
-            <div class="produto-catalogo-info">
-
-                <span class="produto-tipo">
-                    COPA DO MUNDO
-                </span>
-
-                <h2>
-                    Short Bélgica
-                </h2>
-
-                <strong class="produto-preco">
-                    R$ 89,90
-                </strong>
-
-                <button
-                    class="btn-ver-produto"
-                    onclick="
-                        event.stopPropagation();
-                        abrirProduto(208, 'principal');
-                    "
-                >
-
-                    Ver produto
-
-                    <i class="ri-arrow-right-line"></i>
-
-                </button>
-
-            </div>
-
-        </article>
-
-
+      </div>
     </section>
 
-</main>
+    <!-- ===================================================== -->
+    <!-- CATÁLOGO                                              -->
+    <!-- ===================================================== -->
 
+    <main class="catalogo-container">
+      <!-- FILTROS -->
 
+      <div class="catalogo-filtros">
+        <button
+          class="filtro-btn ativo"
+          onclick="filtrarProdutos('todos', this)"
+        >
+          Todos
+        </button>
 
-<!-- ===================================================== -->
-<!-- BENEFÍCIOS                                            -->
-<!-- ===================================================== -->
+        <button class="filtro-btn" onclick="filtrarProdutos('esportivo', this)">
+          Esportivo
+        </button>
+      </div>
 
-<section class="catalogo-beneficios">
+      <section class="catalogo-grid">
+        <!-- ===================================================== -->
+        <!-- SHORT ESPORTIVO                                       -->
+        <!-- ===================================================== -->
 
+        <article
+          class="produto-catalogo"
+          data-categoria="esportivo"
+          data-nome="short esportivo"
+          onclick="abrirProduto(2, 'preto')"
+        >
+          <div class="produto-catalogo-imagem">
+            <img
+              src="./img/short-esportivo/Short-Preto-1.png"
+              alt="Short Esportivo"
+            />
+          </div>
 
-    <div class="catalogo-beneficio">
+          <div class="produto-catalogo-info">
+            <span class="produto-tipo"> SHORTS </span>
 
+            <h2>Short Esportivo</h2>
+
+            <strong class="produto-preco"> R$ 79,90 </strong>
+
+            <div class="produto-cores">
+              <span class="cor-produto preto" title="Preto"></span>
+
+              <span class="cor-produto azul" title="Azul"></span>
+
+              <span class="cor-produto branco" title="Branco"></span>
+            </div>
+
+            <button
+              class="btn-ver-produto"
+              onclick="
+                event.stopPropagation();
+                abrirProduto(2, 'preto');
+              "
+            >
+              Ver produto
+
+              <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- ===================================================== -->
+        <!-- CHUTEIRA ELITE SPEED                                  -->
+        <!-- ===================================================== -->
+
+        <article
+          class="produto-catalogo"
+          data-categoria="esportivo"
+          data-nome="chuteira elite speed"
+        >
+          <div class="produto-catalogo-imagem">
+            <img
+              src="./img/chuteira/chuteira-preta-1.png"
+              alt="Chuteira Elite Speed"
+            />
+          </div>
+
+          <div class="produto-catalogo-info">
+            <span class="produto-tipo"> CHUTEIRAS </span>
+
+            <h2>Chuteira Elite Speed</h2>
+
+            <strong class="produto-preco"> R$ 189,90 </strong>
+
+            <div class="produto-cores">
+              <span class="cor-produto preto" title="Preto"></span>
+
+              <span class="cor-produto azul" title="Azul"></span>
+
+              <span class="cor-produto branco" title="Branco"></span>
+            </div>
+
+            <button class="btn-ver-produto" type="button">
+              Ver produto
+
+              <i class="ri-arrow-right-line"></i>
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- ===================================================== -->
+    <!-- BENEFÍCIOS                                            -->
+    <!-- ===================================================== -->
+
+    <section class="catalogo-beneficios">
+      <div class="catalogo-beneficio">
         <div class="beneficio-icone">
-            <i class="ri-truck-line"></i>
+          <i class="ri-truck-line"></i>
         </div>
 
         <div>
-            <strong>Entrega para todo o Brasil</strong>
-            <span>Receba seus produtos com segurança.</span>
+          <strong>Entrega para todo o Brasil</strong>
+          <span>Receba seus produtos com segurança.</span>
         </div>
+      </div>
 
-    </div>
-
-
-    <div class="catalogo-beneficio">
-
+      <div class="catalogo-beneficio">
         <div class="beneficio-icone">
-            <i class="ri-shield-check-line"></i>
+          <i class="ri-shield-check-line"></i>
         </div>
 
         <div>
-            <strong>Compra segura</strong>
-            <span>Seus dados protegidos.</span>
+          <strong>Compra segura</strong>
+          <span>Seus dados protegidos.</span>
         </div>
+      </div>
 
-    </div>
-
-
-    <div class="catalogo-beneficio">
-
+      <div class="catalogo-beneficio">
         <div class="beneficio-icone">
-            <i class="ri-bank-card-line"></i>
+          <i class="ri-bank-card-line"></i>
         </div>
 
         <div>
-            <strong>Pagamento facilitado</strong>
-            <span>Mais comodidade para comprar.</span>
+          <strong>Pagamento facilitado</strong>
+          <span>Mais comodidade para comprar.</span>
         </div>
+      </div>
 
-    </div>
-
-
-    <div class="catalogo-beneficio">
-
+      <div class="catalogo-beneficio">
         <div class="beneficio-icone">
-            <i class="ri-customer-service-2-line"></i>
+          <i class="ri-customer-service-2-line"></i>
         </div>
 
         <div>
-            <strong>Atendimento</strong>
-            <span>Conte com a Elite Sports.</span>
+          <strong>Atendimento</strong>
+          <span>Conte com a Elite Sports.</span>
         </div>
+      </div>
+    </section>
 
-    </div>
+    <script>
+      /* ===================================================== */
+      /* ABRIR PRODUTO                                        */
+      /* ===================================================== */
 
+      function abrirProduto(id, cor) {
+        window.location.href = "produto.html?id=" + id + "&cor=" + cor;
+      }
 
-</section>
+      /* ===================================================== */
+      /* FILTROS                                              */
+      /* ===================================================== */
 
+      function filtrarProdutos(categoria, botao) {
+        const produtos = document.querySelectorAll(".produto-catalogo");
 
+        const botoes = document.querySelectorAll(".filtro-btn");
 
-<script>
+        botoes.forEach((btn) => {
+          btn.classList.remove("ativo");
+        });
 
+        botao.classList.add("ativo");
 
-/* ===================================================== */
-/* ABRIR PRODUTO                                        */
-/* ===================================================== */
-
-function abrirProduto(id, cor) {
-
-    window.location.href =
-        "produto.html?id=" +
-        id +
-        "&cor=" +
-        cor;
-
-}
-
-
-
-/* ===================================================== */
-/* FILTROS                                              */
-/* ===================================================== */
-
-function filtrarProdutos(categoria, botao) {
-
-    const produtos =
-        document.querySelectorAll(".produto-catalogo");
-
-    const botoes =
-        document.querySelectorAll(".filtro-btn");
-
-
-    botoes.forEach(btn => {
-        btn.classList.remove("ativo");
-    });
-
-
-    botao.classList.add("ativo");
-
-
-    produtos.forEach(produto => {
-
-        if (
+        produtos.forEach((produto) => {
+          if (
             categoria === "todos" ||
             produto.dataset.categoria === categoria
-        ) {
-
+          ) {
             produto.style.display = "flex";
-
-        } else {
-
+          } else {
             produto.style.display = "none";
+          }
+        });
+      }
 
+      /* ===================================================== */
+      /* BUSCA                                                */
+      /* ===================================================== */
+
+      function buscarProdutos() {
+        const busca = document
+          .getElementById("campoBusca")
+          .value.toLowerCase()
+          .trim();
+
+        const produtos = document.querySelectorAll(".produto-catalogo");
+
+        produtos.forEach((produto) => {
+          const nome = produto.dataset.nome.toLowerCase();
+
+          produto.style.display = nome.includes(busca) ? "flex" : "none";
+        });
+      }
+
+      /* ===================================================== */
+      /* CARRINHO                                             */
+      /* ===================================================== */
+
+      function atualizarContador() {
+        const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+
+        let total = 0;
+
+        carrinho.forEach((produto) => {
+          total += produto.qtd || 1;
+        });
+
+        document.getElementById("contador").innerText =
+          total > 9 ? "9+" : total;
+      }
+
+      /* ===================================================== */
+      /* USUÁRIO                                              */
+      /* ===================================================== */
+
+      function atualizarNomeUsuarioHeader() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+        const nome = document.getElementById("nomeUsuario");
+
+        const seta = document.getElementById("setaDropdown");
+
+        if (usuario) {
+          nome.innerText = usuario.nome || "Usuário";
+
+          seta.style.display = "inline";
+        } else {
+          nome.innerText = "Login";
+
+          seta.style.display = "none";
+        }
+      }
+
+      function handleUsuarioClick() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+        if (!usuario) {
+          window.location.href = "Entrar.html";
+
+          return;
         }
 
-    });
+        document.getElementById("dropdownMenu").classList.toggle("show");
+      }
 
-}
+      function sair() {
+        localStorage.removeItem("usuarioLogado");
 
+        atualizarNomeUsuarioHeader();
 
+        document.getElementById("dropdownMenu").classList.remove("show");
+      }
 
-/* ===================================================== */
-/* BUSCA                                                */
-/* ===================================================== */
+      window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("dropdownMenu");
 
-function buscarProdutos() {
+        const usuario = document.getElementById("usuarioLogadoNome");
 
-    const busca =
-        document
-            .getElementById("campoBusca")
-            .value
-            .toLowerCase()
-            .trim();
-
-
-    const produtos =
-        document.querySelectorAll(".produto-catalogo");
-
-
-    produtos.forEach(produto => {
-
-        const nome =
-            produto.dataset.nome.toLowerCase();
-
-
-        produto.style.display =
-            nome.includes(busca)
-            ? "flex"
-            : "none";
-
-    });
-
-}
-
-
-
-/* ===================================================== */
-/* CARRINHO                                             */
-/* ===================================================== */
-
-function atualizarContador() {
-
-    const carrinho =
-        JSON.parse(
-            localStorage.getItem("carrinho")
-        ) || [];
-
-
-    let total = 0;
-
-
-    carrinho.forEach(produto => {
-
-        total += produto.qtd || 1;
-
-    });
-
-
-    document
-        .getElementById("contador")
-        .innerText =
-        total > 9 ? "9+" : total;
-
-}
-
-
-
-/* ===================================================== */
-/* USUÁRIO                                              */
-/* ===================================================== */
-
-function atualizarNomeUsuarioHeader() {
-
-    const usuario =
-        JSON.parse(
-            localStorage.getItem("usuarioLogado")
-        );
-
-
-    const nome =
-        document.getElementById("nomeUsuario");
-
-
-    const seta =
-        document.getElementById("setaDropdown");
-
-
-    if (usuario) {
-
-        nome.innerText =
-            usuario.nome || "Usuário";
-
-        seta.style.display =
-            "inline";
-
-    } else {
-
-        nome.innerText =
-            "Login";
-
-        seta.style.display =
-            "none";
-
-    }
-
-}
-
-
-
-function handleUsuarioClick() {
-
-    const usuario =
-        JSON.parse(
-            localStorage.getItem("usuarioLogado")
-        );
-
-
-    if (!usuario) {
-
-        window.location.href =
-            "Entrar.html";
-
-        return;
-
-    }
-
-
-    document
-        .getElementById("dropdownMenu")
-        .classList
-        .toggle("show");
-
-}
-
-
-
-function sair() {
-
-    localStorage.removeItem(
-        "usuarioLogado"
-    );
-
-    atualizarNomeUsuarioHeader();
-
-    document
-        .getElementById("dropdownMenu")
-        .classList
-        .remove("show");
-
-}
-
-
-
-window.addEventListener(
-    "click",
-    function(event) {
-
-        const dropdown =
-            document.getElementById(
-                "dropdownMenu"
-            );
-
-        const usuario =
-            document.getElementById(
-                "usuarioLogadoNome"
-            );
-
-
-        if (
-            !usuario.contains(event.target)
-        ) {
-
-            dropdown.classList.remove(
-                "show"
-            );
-
+        if (!usuario.contains(event.target)) {
+          dropdown.classList.remove("show");
         }
+      });
 
-    }
-);
+      /* ===================================================== */
+      /* PRODUTO / ESTOQUE VINDO DO MYSQL                     */
+      /* ===================================================== */
 
+      async function carregarShortDoBanco() {
+        try {
+          const resposta = await fetch("http://localhost:3000/api/produtos");
 
+          const produtos = await resposta.json();
 
-window.onload = function() {
+          if (!resposta.ok) {
+            console.error("Erro ao carregar produtos:", produtos);
 
-    atualizarNomeUsuarioHeader();
+            return;
+          }
 
-    atualizarContador();
+          // Procura o Short Esportivo no MySQL
 
-};
+          const produto = produtos.find(
+            (item) => item.nome.toLowerCase().trim() === "short esportivo",
+          );
 
+          if (!produto) {
+            console.warn("Short Esportivo não encontrado no banco.");
 
-</script>
+            return;
+          }
 
+          // Localiza somente o card do Short
+          const card = document.querySelector(
+            '.produto-catalogo[data-nome="short esportivo"]',
+          );
 
-</body>
+          if (!card) {
+            return;
+          }
 
+          // ==========================================
+          // PREÇO VINDO DO MYSQL
+          // ==========================================
+
+          const preco = card.querySelector(".produto-preco");
+
+          if (preco) {
+            preco.innerText = Number(produto.preco).toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            });
+          }
+
+          // ==========================================
+          // IMAGEM VINDO DO MYSQL
+          // ==========================================
+
+          const variacaoPreta = produto.variacoes.find(
+            (variacao) =>
+              variacao.cor &&
+              variacao.cor.toLowerCase() === "preto" &&
+              variacao.imagem,
+          );
+
+          const primeiraImagem =
+            variacaoPreta ||
+            produto.variacoes.find((variacao) => variacao.imagem);
+
+          if (primeiraImagem) {
+            const imagem = card.querySelector("img");
+
+            if (imagem) {
+              imagem.src = primeiraImagem.imagem;
+            }
+          }
+
+          // ==========================================
+          // SOMA O ESTOQUE DAS VARIAÇÕES
+          // ==========================================
+
+          const estoqueTotal = produto.variacoes.reduce((total, variacao) => {
+            return total + Number(variacao.estoque || 0);
+          }, 0);
+
+          // ==========================================
+          // MOSTRA STATUS DE ESTOQUE
+          // ==========================================
+
+          let estoqueEl = card.querySelector(".produto-estoque");
+
+          if (!estoqueEl) {
+            estoqueEl = document.createElement("span");
+
+            estoqueEl.className = "produto-estoque";
+
+            const precoEl = card.querySelector(".produto-preco");
+
+            precoEl.insertAdjacentElement("afterend", estoqueEl);
+          }
+
+          if (estoqueTotal > 0) {
+            estoqueEl.innerText = "Em estoque";
+
+            estoqueEl.style.color = "#4ade80";
+          } else {
+            estoqueEl.innerText = "Produto esgotado";
+
+            estoqueEl.style.color = "#ff5c5c";
+
+            // Impede abrir produto esgotado
+
+            card.onclick = null;
+
+            card.style.cursor = "default";
+
+            const botao = card.querySelector(".btn-ver-produto");
+
+            if (botao) {
+              botao.disabled = true;
+
+              botao.innerText = "Esgotado";
+            }
+          }
+
+          console.log("Short carregado do MySQL:", produto);
+        } catch (erro) {
+          console.error("Não foi possível conectar ao catálogo:", erro);
+        }
+      }
+
+      window.onload = function () {
+        atualizarNomeUsuarioHeader();
+
+        atualizarContador();
+
+        carregarShortDoBanco();
+      };
+    </script>
+  </body>
 </html>

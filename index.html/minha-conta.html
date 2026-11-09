@@ -1,212 +1,315 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minha Conta - Elite Sports</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minha Conta - Elite Sports</title>
 
-<!-- Link para o CSS da página -->
-<link rel="stylesheet" href="style.css">
+    <!-- Link para o CSS da página -->
+    <link rel="stylesheet" href="style.css" />
 
-<!-- Link para os ícones RemixIcon -->
-<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-</head>
+    <!-- Link para os ícones RemixIcon -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
+    <!-- Container geral da área da conta -->
+    <div class="painel-conta">
+      <!-- Cabeçalho superior com nome do usuário -->
+      <header class="painel-topo">
+        <div class="painel-usuario">
+          <i class="ri-user-line"></i>
+          <strong id="nomeTopo">Usuário</strong>
+        </div>
 
-<!-- Container geral da área da conta -->
-<div class="painel-conta">
-
-    <!-- Cabeçalho superior com nome do usuário -->
-<header class="painel-topo">
-    <div class="painel-usuario">
-        <i class="ri-user-line"></i>
-        <strong id="nomeTopo">Usuário</strong>
-    </div>
-
-    <!-- Botões de navegação no topo -->
-    <div class="painel-acoes-topo">
-        <span onclick="history.back()">
+        <!-- Botões de navegação no topo -->
+        <div class="painel-acoes-topo">
+          <span onclick="history.back()">
             <i class="ri-arrow-left-line"></i> Voltar
-        </span>
+          </span>
 
-        <span onclick="window.location.href='index.html'">
+          <span onclick="window.location.href = 'index.html'">
             <i class="ri-home-line"></i> Início
-        </span>
-    </div>
-</header>
+          </span>
+        </div>
+      </header>
 
-    <!-- Conteúdo principal -->
-    <div class="painel-layout">
-
+      <!-- Conteúdo principal -->
+      <div class="painel-layout">
         <!-- Menu lateral -->
         <aside class="painel-menu">
+          <!-- Link ativo para Minha Conta -->
+          <a href="minha-conta.html" class="menu-conta ativo">
+            <i class="ri-user-line"></i>
+            Minha conta
+          </a>
 
-            <!-- Link ativo para Minha Conta -->
-            <a href="minha-conta.html" class="menu-conta ativo">
-                <i class="ri-user-line"></i>
-                Minha conta
-            </a>
+          <!-- Link para Meus Pedidos -->
+          <a href="meus-pedidos.html" class="menu-conta">
+            <i class="ri-shopping-bag-line"></i>
+            Meus pedidos
+          </a>
 
-            <!-- Link para Meus Pedidos -->
-            <a href="meus-pedidos.html" class="menu-conta">
-                <i class="ri-shopping-bag-line"></i>
-                Meus pedidos
-            </a>
-
-            <!-- Botão de sair da conta -->
-            <button class="btn-sair-conta" onclick="sairConta()">
-                <i class="ri-logout-box-line"></i>
-                Sair da conta
-            </button>
-
+          <!-- Botão de sair da conta -->
+          <button class="btn-sair-conta" onclick="sairConta()">
+            <i class="ri-logout-box-line"></i>
+            Sair da conta
+          </button>
         </aside>
 
         <!-- Área principal da tela -->
         <main class="painel-conteudo">
-
-            <div class="painel-cabecalho">
-                <div>
-                    <h1>Minha conta</h1>
-                    <p>Veja e edite suas informações pessoais.</p>
-                </div>
-
-                <!-- Botão para liberar edição dos dados -->
-                <button class="btn-editar" onclick="editarDados()">
-                    <i class="ri-pencil-line"></i>
-                    Editar dados
-                </button>
+          <div class="painel-cabecalho">
+            <div>
+              <h1>Minha conta</h1>
+              <p>Veja e edite suas informações pessoais.</p>
             </div>
 
-            <!-- Card com os dados do usuário -->
-            <section class="dados-card">
-
-                <div class="linha-dado">
-                    <div class="icone-dado">
-                        <i class="ri-user-line"></i>
-                    </div>
-                    <div>
-                        <strong>Nome</strong>
-                        <input type="text" id="perfilNome" disabled>
-                    </div>
-                </div>
-
-                <div class="linha-dado">
-                    <div class="icone-dado">
-                        <i class="ri-mail-line"></i>
-                    </div>
-                    <div>
-                        <strong>E-mail</strong>
-                        <input type="text" id="perfilEmail" disabled>
-                    </div>
-                </div>
-
-                <div class="linha-dado">
-                    <div class="icone-dado">
-                        <i class="ri-bank-card-line"></i>
-                    </div>
-                    <div>
-                        <strong>CPF</strong>
-                        <input type="text" id="perfilCPF" disabled>
-                    </div>
-                </div>
-
-                <div class="linha-dado">
-                    <div class="icone-dado">
-                        <i class="ri-phone-line"></i>
-                    </div>
-                    <div>
-                        <strong>Telefone</strong>
-                        <input type="text" id="perfilTelefone" disabled placeholder="Adicionar telefone">
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- Botão para salvar alterações -->
-            <button id="btnSalvarDados" class="btn-salvar-dados" onclick="salvarDados()" style="display:none;">
-                Salvar alterações
+            <!-- Botão para liberar edição dos dados -->
+            <button class="btn-editar" onclick="editarDados()">
+              <i class="ri-pencil-line"></i>
+              Editar dados
             </button>
+          </div>
 
+          <!-- Card com os dados do usuário -->
+          <section class="dados-card">
+            <div class="linha-dado">
+              <div class="icone-dado">
+                <i class="ri-user-line"></i>
+              </div>
+              <div>
+                <strong>Nome</strong>
+                <input type="text" id="perfilNome" disabled />
+              </div>
+            </div>
+
+            <div class="linha-dado">
+              <div class="icone-dado">
+                <i class="ri-mail-line"></i>
+              </div>
+              <div>
+                <strong>E-mail</strong>
+                <input type="text" id="perfilEmail" disabled />
+              </div>
+            </div>
+
+            <div class="linha-dado">
+              <div class="icone-dado">
+                <i class="ri-bank-card-line"></i>
+              </div>
+              <div>
+                <strong>CPF</strong>
+                <input type="text" id="perfilCPF" disabled />
+              </div>
+            </div>
+
+            <div class="linha-dado">
+              <div class="icone-dado">
+                <i class="ri-phone-line"></i>
+              </div>
+              <div>
+                <strong>Telefone</strong>
+                <input
+                  type="text"
+                  id="perfilTelefone"
+                  disabled
+                  placeholder="Adicionar telefone"
+                />
+              </div>
+            </div>
+          </section>
+
+          <!-- Botão para salvar alterações -->
+          <button
+            id="btnSalvarDados"
+            class="btn-salvar-dados"
+            onclick="salvarDados()"
+            style="display: none"
+          >
+            Salvar alterações
+          </button>
         </main>
-
+      </div>
     </div>
 
-</div>
+    <script>
+      // ==========================================
+      // CONFIGURAÇÃO DA API
+      // ==========================================
 
-<script>
+      const API_URL = "http://localhost:3000";
 
-// Carrega os dados do usuário logado
-function carregarDadosUsuario() {
-    const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+      // ==========================================
+      // CARREGAR DADOS DO USUÁRIO
+      // ==========================================
 
-    // Se não tiver usuário logado, volta para a tela de login
-    if (!usuario) {
-        window.location.href = "Entrar.html";
-        return;
-    }
+      async function carregarDadosUsuario() {
+        const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-    // Mostra o nome do usuário no topo
-    document.getElementById("nomeTopo").innerText = usuario.nome || "Usuário";
+        // Se não estiver logado
+        if (!usuarioLogado || !usuarioLogado.id_usuario) {
+          window.location.href = "Entrar.html";
+          return;
+        }
 
-    // Preenche os campos da tela com os dados salvos
-    document.getElementById("perfilNome").value = usuario.nome || "";
-    document.getElementById("perfilEmail").value = usuario.email || "";
-    document.getElementById("perfilCPF").value = usuario.cpf || "";
-    document.getElementById("perfilTelefone").value = usuario.telefone || "";
-}
+        try {
+          const resposta = await fetch(
+            `${API_URL}/api/usuarios/${usuarioLogado.id_usuario}`,
+          );
 
-// Libera os campos para edição
-function editarDados() {
-    document.getElementById("perfilNome").disabled = false;
-    document.getElementById("perfilTelefone").disabled = false;
+          const dados = await resposta.json();
 
-    // E-mail e CPF continuam bloqueados
-    document.getElementById("perfilEmail").disabled = true;
-    document.getElementById("perfilCPF").disabled = true;
+          if (!resposta.ok) {
+            alert(
+              dados.mensagem ||
+                "Não foi possível carregar os dados do usuário.",
+            );
 
-    document.getElementById("btnSalvarDados").style.display = "block";
-}
+            return;
+          }
 
-// Salva os dados editados
-function salvarDados() {
-    let usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+          // ==========================================
+          // PREENCHE A TELA COM DADOS DO MYSQL
+          // ==========================================
 
-    usuario.nome = document.getElementById("perfilNome").value.trim();
-    usuario.telefone = document.getElementById("perfilTelefone").value.trim();
+          document.getElementById("nomeTopo").innerText =
+            dados.nome || "Usuário";
 
-    // Atualiza os dados do usuário logado
-    localStorage.setItem("usuarioLogado", JSON.stringify(usuario));
+          document.getElementById("perfilNome").value = dados.nome || "";
 
-    // Atualiza também dentro da lista de usuários cadastrados
-    let usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-    const index = usuarios.findIndex(u => u.email === usuario.email);
+          document.getElementById("perfilEmail").value = dados.email || "";
 
-    if (index !== -1) {
-        usuarios[index].nome = usuario.nome;
-        usuarios[index].telefone = usuario.telefone;
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    }
+          document.getElementById("perfilCPF").value = dados.cpf || "";
 
-    alert("Dados salvos com sucesso!");
+          document.getElementById("perfilTelefone").value =
+            dados.telefone || "";
 
-    document.getElementById("perfilNome").disabled = true;
-    document.getElementById("perfilTelefone").disabled = true;
-    document.getElementById("btnSalvarDados").style.display = "none";
+          // ==========================================
+          // ATUALIZA A SESSÃO DO NAVEGADOR
+          // ==========================================
 
-    carregarDadosUsuario();
-}
+          localStorage.setItem("usuarioLogado", JSON.stringify(dados));
+        } catch (erro) {
+          console.error("Erro ao carregar usuário:", erro);
 
-// Sai da conta e volta para a página inicial
-function sairConta() {
-    localStorage.removeItem("usuarioLogado");
-    window.location.href = "index.html";
-}
+          alert("Não foi possível conectar com o servidor.");
+        }
+      }
 
-// Carrega os dados ao abrir a página
-carregarDadosUsuario();
+      // ==========================================
+      // LIBERAR EDIÇÃO
+      // ==========================================
 
-</script>
+      function editarDados() {
+        document.getElementById("perfilNome").disabled = false;
 
-</body>
+        document.getElementById("perfilTelefone").disabled = false;
+
+        // E-mail e CPF continuam bloqueados
+
+        document.getElementById("perfilEmail").disabled = true;
+
+        document.getElementById("perfilCPF").disabled = true;
+
+        document.getElementById("btnSalvarDados").style.display = "block";
+      }
+
+      // ==========================================
+      // SALVAR ALTERAÇÕES
+      // ==========================================
+
+      async function salvarDados() {
+        const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+        if (!usuarioLogado || !usuarioLogado.id_usuario) {
+          window.location.href = "Entrar.html";
+          return;
+        }
+
+        const nome = document.getElementById("perfilNome").value.trim();
+
+        const telefone = document.getElementById("perfilTelefone").value.trim();
+
+        // Nome obrigatório
+
+        if (!nome) {
+          alert("Informe seu nome.");
+          return;
+        }
+
+        try {
+          const resposta = await fetch(
+            `${API_URL}/api/usuarios/${usuarioLogado.id_usuario}`,
+            {
+              method: "PUT",
+
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                nome: nome,
+                telefone: telefone,
+              }),
+            },
+          );
+
+          const dados = await resposta.json();
+
+          if (!resposta.ok) {
+            alert(dados.mensagem || "Não foi possível atualizar os dados.");
+
+            return;
+          }
+
+          // ==========================================
+          // ATUALIZA A SESSÃO LOCAL
+          // ==========================================
+
+          usuarioLogado.nome = nome;
+
+          usuarioLogado.telefone = telefone;
+
+          localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
+
+          alert("Dados atualizados com sucesso!");
+
+          // Bloqueia novamente os campos
+
+          document.getElementById("perfilNome").disabled = true;
+
+          document.getElementById("perfilTelefone").disabled = true;
+
+          document.getElementById("btnSalvarDados").style.display = "none";
+
+          // Busca novamente do MySQL
+          await carregarDadosUsuario();
+        } catch (erro) {
+          console.error("Erro ao atualizar usuário:", erro);
+
+          alert("Não foi possível conectar com o servidor.");
+        }
+      }
+
+      // ==========================================
+      // SAIR DA CONTA
+      // ==========================================
+
+      function sairConta() {
+        localStorage.removeItem("usuarioLogado");
+
+        window.location.href = "index.html";
+      }
+
+      // ==========================================
+      // INICIALIZAÇÃO
+      // ==========================================
+
+      carregarDadosUsuario();
+    </script>
+  </body>
 </html>

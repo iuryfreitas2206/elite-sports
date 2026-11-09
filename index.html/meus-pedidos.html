@@ -1,876 +1,812 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Meus Pedidos - Elite Sports</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 
     <link
-        href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
-        rel="stylesheet"
-    >
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
 
     <style>
-
-        /* =====================================================
+      /* =====================================================
            MEUS PEDIDOS
            ===================================================== */
 
-        .pagina-pedidos {
-            min-height: 100vh;
-            background: #0d0d12;
-            color: #ffffff;
-        }
+      .pagina-pedidos {
+        min-height: 100vh;
+        background: #0d0d12;
+        color: #ffffff;
+      }
 
-        /* =====================================================
+      /* =====================================================
            CONTEÚDO
            ===================================================== */
 
-        .pagina-pedidos .painel-conteudo {
-            background: #0d0d12;
-        }
+      .pagina-pedidos .painel-conteudo {
+        background: #0d0d12;
+      }
 
-        .pagina-pedidos .painel-cabecalho {
-            margin-bottom: 30px;
-        }
+      .pagina-pedidos .painel-cabecalho {
+        margin-bottom: 30px;
+      }
 
-        .pagina-pedidos .painel-cabecalho h1 {
-            margin: 0 0 8px;
-            color: #ffffff;
-            font-size: 34px;
-            font-weight: 700;
-        }
+      .pagina-pedidos .painel-cabecalho h1 {
+        margin: 0 0 8px;
+        color: #ffffff;
+        font-size: 34px;
+        font-weight: 700;
+      }
 
-        .pagina-pedidos .painel-cabecalho p {
-            margin: 0;
-            color: #9292a5;
-            font-size: 16px;
-        }
+      .pagina-pedidos .painel-cabecalho p {
+        margin: 0;
+        color: #9292a5;
+        font-size: 16px;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            LISTA DE PEDIDOS
            ===================================================== */
 
-        .pagina-pedidos .pedidos-card {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-        }
+      .pagina-pedidos .pedidos-card {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            CARD DO PEDIDO
            ===================================================== */
 
-        .pagina-pedidos .linha-pedido {
-            width: 100%;
-            box-sizing: border-box;
+      .pagina-pedidos .linha-pedido {
+        width: 100%;
+        box-sizing: border-box;
 
-            background: #111116;
+        background: #111116;
 
-            border: 1px solid #292932;
-            border-radius: 18px;
+        border: 1px solid #292932;
+        border-radius: 18px;
 
-            padding: 24px;
+        padding: 24px;
 
-            overflow: hidden;
+        overflow: hidden;
 
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-        }
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            CABEÇALHO DO PEDIDO
            ===================================================== */
 
-        .pagina-pedidos .pedido-cabecalho {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+      .pagina-pedidos .pedido-cabecalho {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-            gap: 20px;
+        gap: 20px;
 
-            padding-bottom: 20px;
+        padding-bottom: 20px;
 
-            border-bottom: 1px solid #292932;
-        }
+        border-bottom: 1px solid #292932;
+      }
 
-        .pagina-pedidos .pedido-cabecalho-info {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
+      .pagina-pedidos .pedido-cabecalho-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
 
-        .pagina-pedidos .pedido-numero {
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: 700;
-        }
+      .pagina-pedidos .pedido-numero {
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 700;
+      }
 
-        .pagina-pedidos .pedido-data {
-            color: #88889a;
-            font-size: 14px;
-        }
+      .pagina-pedidos .pedido-data {
+        color: #88889a;
+        font-size: 14px;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            STATUS
            ===================================================== */
 
-        .pagina-pedidos .status-pedido {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+      .pagina-pedidos .status-pedido {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
 
-            padding: 8px 14px;
+        padding: 8px 14px;
 
-            border-radius: 999px;
+        border-radius: 999px;
 
-            font-size: 13px;
-            font-weight: 700;
+        font-size: 13px;
+        font-weight: 700;
 
-            white-space: nowrap;
-        }
+        white-space: nowrap;
+      }
 
-        .pagina-pedidos .status-pedido.processando {
-            background: rgba(139, 61, 255, 0.14);
-            color: #a855f7;
-        }
+      .pagina-pedidos .status-pedido.processando {
+        background: rgba(139, 61, 255, 0.14);
+        color: #a855f7;
+      }
 
-        .pagina-pedidos .status-pedido.transito {
-            background: rgba(59, 130, 246, 0.14);
-            color: #60a5fa;
-        }
+      .pagina-pedidos .status-pedido.transito {
+        background: rgba(59, 130, 246, 0.14);
+        color: #60a5fa;
+      }
 
-        .pagina-pedidos .status-pedido.entregue {
-            background: rgba(34, 197, 94, 0.14);
-            color: #4ade80;
-        }
+      .pagina-pedidos .status-pedido.entregue {
+        background: rgba(34, 197, 94, 0.14);
+        color: #4ade80;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            PRODUTOS
            ===================================================== */
 
-        .pagina-pedidos .pedido-itens {
-            width: 100%;
-        }
+      .pagina-pedidos .pedido-itens {
+        width: 100%;
+      }
 
-        .pagina-pedidos .item-pedido {
-            display: flex;
-            align-items: center;
+      .pagina-pedidos .item-pedido {
+        display: flex;
+        align-items: center;
 
-            width: 100%;
-            min-width: 0;
+        width: 100%;
+        min-width: 0;
 
-            gap: 20px;
+        gap: 20px;
 
-            padding: 22px 0;
+        padding: 22px 0;
 
-            box-sizing: border-box;
+        box-sizing: border-box;
 
-            border-bottom: 1px solid #24242d;
-        }
+        border-bottom: 1px solid #24242d;
+      }
 
-        .pagina-pedidos .item-pedido:last-child {
-            border-bottom: none;
-        }
+      .pagina-pedidos .item-pedido:last-child {
+        border-bottom: none;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            IMAGEM DO PRODUTO
            ===================================================== */
 
       .pagina-pedidos .item-pedido-imagem {
-    width: 105px !important;
-    height: 105px !important;
+        width: 105px !important;
+        height: 105px !important;
 
-    min-width: 105px !important;
-    min-height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
 
-    max-width: 105px !important;
-    max-height: 105px !important;
+        max-width: 105px !important;
+        max-height: 105px !important;
 
-    flex-shrink: 0;
+        flex-shrink: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    position: relative;
+        position: relative;
 
-    background:
-        radial-gradient(
-            circle at center,
-            #242430 0%,
-            #17171e 65%,
-            #131319 100%
+        background: radial-gradient(
+          circle at center,
+          #242430 0%,
+          #17171e 65%,
+          #131319 100%
         );
 
-    border: 1px solid #30303b;
-    border-radius: 14px;
+        border: 1px solid #30303b;
+        border-radius: 14px;
 
-    overflow: hidden;
-}
+        overflow: hidden;
+      }
 
-.pagina-pedidos .item-pedido-imagem::before {
-    content: "";
+      .pagina-pedidos .item-pedido-imagem::before {
+        content: "";
 
-    position: absolute;
+        position: absolute;
 
-    width: 80px;
-    height: 80px;
+        width: 80px;
+        height: 80px;
 
-    border-radius: 50%;
+        border-radius: 50%;
 
-    background: rgba(124, 44, 255, 0.18);
+        background: rgba(124, 44, 255, 0.18);
 
-    filter: blur(28px);
+        filter: blur(28px);
 
-    bottom: -20px;
-    right: -15px;
+        bottom: -20px;
+        right: -15px;
 
-    pointer-events: none;
-}
+        pointer-events: none;
+      }
 
-.pagina-pedidos .item-pedido-imagem img {
-    display: block !important;
+      .pagina-pedidos .item-pedido-imagem img {
+        display: block !important;
 
-    width: 100% !important;
-    height: 100% !important;
+        width: 100% !important;
+        height: 100% !important;
 
-    max-width: 100% !important;
-    max-height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
 
-    object-fit: contain !important;
+        object-fit: contain !important;
 
-    position: relative;
-    z-index: 1;
-}
+        position: relative;
+        z-index: 1;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            INFORMAÇÕES DO PRODUTO
            ===================================================== */
 
-        .pagina-pedidos .item-pedido-info {
-            display: flex;
-            flex-direction: column;
+      .pagina-pedidos .item-pedido-info {
+        display: flex;
+        flex-direction: column;
 
-            gap: 7px;
+        gap: 7px;
 
-            min-width: 0;
-        }
+        min-width: 0;
+      }
 
-        .pagina-pedidos .item-pedido-info strong {
-            color: #ffffff;
+      .pagina-pedidos .item-pedido-info strong {
+        color: #ffffff;
 
-            font-size: 17px;
-            font-weight: 700;
-        }
+        font-size: 17px;
+        font-weight: 700;
+      }
 
-        .pagina-pedidos .item-pedido-preco {
-            color: #8b3dff;
+      .pagina-pedidos .item-pedido-preco {
+        color: #8b3dff;
 
-            font-size: 17px;
-            font-weight: 700;
-        }
+        font-size: 17px;
+        font-weight: 700;
+      }
 
-        .pagina-pedidos .item-pedido-detalhes {
-            display: flex;
-            flex-wrap: wrap;
+      .pagina-pedidos .item-pedido-detalhes {
+        display: flex;
+        flex-wrap: wrap;
 
-            gap: 12px;
+        gap: 12px;
 
-            color: #88889a;
+        color: #88889a;
 
-            font-size: 13px;
-        }
+        font-size: 13px;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            TOTAL
            ===================================================== */
 
-        .pagina-pedidos .pedido-rodape {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
+      .pagina-pedidos .pedido-rodape {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
 
-            gap: 14px;
+        gap: 14px;
 
-            padding-top: 20px;
-        }
+        padding-top: 20px;
+      }
 
-        .pagina-pedidos .pedido-total-label {
-            color: #88889a;
-            font-size: 14px;
-        }
+      .pagina-pedidos .pedido-total-label {
+        color: #88889a;
+        font-size: 14px;
+      }
 
-        .pagina-pedidos .pedido-total {
-            color: #8b3dff;
-            font-size: 22px;
-            font-weight: 700;
-        }
+      .pagina-pedidos .pedido-total {
+        color: #8b3dff;
+        font-size: 22px;
+        font-weight: 700;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            PEDIDO VAZIO
            ===================================================== */
 
-        .pagina-pedidos .pedido-vazio {
-            width: 100%;
-            box-sizing: border-box;
+      .pagina-pedidos .pedido-vazio {
+        width: 100%;
+        box-sizing: border-box;
 
-            background: #111116;
+        background: #111116;
 
-            border: 1px solid #292932;
-            border-radius: 18px;
+        border: 1px solid #292932;
+        border-radius: 18px;
 
-            padding: 70px 25px;
+        padding: 70px 25px;
 
-            text-align: center;
-        }
+        text-align: center;
+      }
 
-        .pagina-pedidos .pedido-vazio i {
-            display: block;
+      .pagina-pedidos .pedido-vazio i {
+        display: block;
 
-            margin-bottom: 18px;
+        margin-bottom: 18px;
 
-            color: #8b3dff;
+        color: #8b3dff;
 
-            font-size: 55px;
-        }
+        font-size: 55px;
+      }
 
-        .pagina-pedidos .pedido-vazio h3 {
-            margin: 0 0 10px;
+      .pagina-pedidos .pedido-vazio h3 {
+        margin: 0 0 10px;
 
-            color: #ffffff;
+        color: #ffffff;
 
-            font-size: 22px;
-        }
+        font-size: 22px;
+      }
 
-        .pagina-pedidos .pedido-vazio p {
-            margin: 0 auto 25px;
+      .pagina-pedidos .pedido-vazio p {
+        margin: 0 auto 25px;
 
-            max-width: 500px;
+        max-width: 500px;
 
-            color: #9292a5;
+        color: #9292a5;
 
-            font-size: 15px;
-            line-height: 1.5;
-        }
+        font-size: 15px;
+        line-height: 1.5;
+      }
 
-        .pagina-pedidos .pedido-vazio button {
-            border: none;
-            border-radius: 9px;
+      .pagina-pedidos .pedido-vazio button {
+        border: none;
+        border-radius: 9px;
 
-            padding: 13px 26px;
+        padding: 13px 26px;
 
-            background: linear-gradient(
-                90deg,
-                #7c2cff,
-                #a855f7
-            );
+        background: linear-gradient(90deg, #7c2cff, #a855f7);
 
-            color: #ffffff;
+        color: #ffffff;
 
-            font-size: 14px;
-            font-weight: 700;
+        font-size: 14px;
+        font-weight: 700;
 
-            cursor: pointer;
-        }
+        cursor: pointer;
+      }
 
-
-        /* =====================================================
+      /* =====================================================
            CELULAR
            ===================================================== */
 
-        @media (max-width: 700px) {
-
-            .pagina-pedidos .painel-cabecalho h1 {
-                font-size: 28px;
-            }
-
-            .pagina-pedidos .linha-pedido {
-                padding: 18px;
-            }
-
-            .pagina-pedidos .pedido-cabecalho {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .pagina-pedidos .status-pedido {
-                align-self: flex-start;
-            }
-
-            .pagina-pedidos .item-pedido {
-                align-items: flex-start;
-                gap: 15px;
-            }
-
-            .pagina-pedidos .item-pedido-imagem {
-                width: 80px !important;
-                height: 80px !important;
-
-                min-width: 80px !important;
-                min-height: 80px !important;
-
-                max-width: 80px !important;
-                max-height: 80px !important;
-            }
-
-            .pagina-pedidos .item-pedido-info strong {
-                font-size: 15px;
-            }
-
-            .pagina-pedidos .item-pedido-detalhes {
-                flex-direction: column;
-                gap: 3px;
-            }
-
-            .pagina-pedidos .pedido-rodape {
-                justify-content: space-between;
-            }
-
-            .pagina-pedidos .pedido-total {
-                font-size: 19px;
-            }
+      @media (max-width: 700px) {
+        .pagina-pedidos .painel-cabecalho h1 {
+          font-size: 28px;
         }
 
+        .pagina-pedidos .linha-pedido {
+          padding: 18px;
+        }
+
+        .pagina-pedidos .pedido-cabecalho {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .pagina-pedidos .status-pedido {
+          align-self: flex-start;
+        }
+
+        .pagina-pedidos .item-pedido {
+          align-items: flex-start;
+          gap: 15px;
+        }
+
+        .pagina-pedidos .item-pedido-imagem {
+          width: 80px !important;
+          height: 80px !important;
+
+          min-width: 80px !important;
+          min-height: 80px !important;
+
+          max-width: 80px !important;
+          max-height: 80px !important;
+        }
+
+        .pagina-pedidos .item-pedido-info strong {
+          font-size: 15px;
+        }
+
+        .pagina-pedidos .item-pedido-detalhes {
+          flex-direction: column;
+          gap: 3px;
+        }
+
+        .pagina-pedidos .pedido-rodape {
+          justify-content: space-between;
+        }
+
+        .pagina-pedidos .pedido-total {
+          font-size: 19px;
+        }
+      }
     </style>
+  </head>
 
-</head>
-
-
-<body>
-
-<div class="painel-conta pagina-pedidos">
-
-
-    <!-- =====================================================
+  <body>
+    <div class="painel-conta pagina-pedidos">
+      <!-- =====================================================
          TOPO
          ===================================================== -->
 
-    <header class="painel-topo">
-
+      <header class="painel-topo">
         <div class="painel-usuario">
+          <i class="ri-user-line"></i>
 
-            <i class="ri-user-line"></i>
-
-            <strong id="nomeTopo">
-                Usuário
-            </strong>
-
+          <strong id="nomeTopo"> Usuário </strong>
         </div>
-
 
         <div class="painel-acoes-topo">
+          <span onclick="history.back()">
+            <i class="ri-arrow-left-line"></i>
+            Voltar
+          </span>
 
-            <span onclick="history.back()">
-                <i class="ri-arrow-left-line"></i>
-                Voltar
-            </span>
-
-            <span onclick="window.location.href='index.html'">
-                <i class="ri-home-line"></i>
-                Início
-            </span>
-
+          <span onclick="window.location.href = 'index.html'">
+            <i class="ri-home-line"></i>
+            Início
+          </span>
         </div>
+      </header>
 
-    </header>
-
-
-
-    <!-- =====================================================
+      <!-- =====================================================
          LAYOUT
          ===================================================== -->
 
-    <div class="painel-layout">
-
-
+      <div class="painel-layout">
         <!-- =================================================
              MENU
              ================================================= -->
 
         <aside class="painel-menu">
+          <a href="minha-conta.html" class="menu-conta">
+            <i class="ri-user-line"></i>
 
-            <a
-                href="minha-conta.html"
-                class="menu-conta"
-            >
+            Minha conta
+          </a>
 
-                <i class="ri-user-line"></i>
+          <a href="meus-pedidos.html" class="menu-conta ativo">
+            <i class="ri-shopping-bag-line"></i>
 
-                Minha conta
+            Meus pedidos
+          </a>
 
-            </a>
+          <button class="btn-sair-conta" onclick="sairConta()">
+            <i class="ri-logout-box-line"></i>
 
-
-            <a
-                href="meus-pedidos.html"
-                class="menu-conta ativo"
-            >
-
-                <i class="ri-shopping-bag-line"></i>
-
-                Meus pedidos
-
-            </a>
-
-
-            <button
-                class="btn-sair-conta"
-                onclick="sairConta()"
-            >
-
-                <i class="ri-logout-box-line"></i>
-
-                Sair da conta
-
-            </button>
-
+            Sair da conta
+          </button>
         </aside>
-
-
 
         <!-- =================================================
              CONTEÚDO
              ================================================= -->
 
         <main class="painel-conteudo">
+          <div class="painel-cabecalho">
+            <div>
+              <h1>Meus pedidos</h1>
 
-
-            <div class="painel-cabecalho">
-
-                <div>
-
-                    <h1>
-                        Meus pedidos
-                    </h1>
-
-                    <p>
-                        Acompanhe seus pedidos realizados.
-                    </p>
-
-                </div>
-
+              <p>Acompanhe seus pedidos realizados.</p>
             </div>
+          </div>
 
-
-            <section
-                class="pedidos-card"
-                id="listaPedidos"
-            ></section>
-
-
+          <section class="pedidos-card" id="listaPedidos"></section>
         </main>
-
+      </div>
     </div>
 
-</div>
-
-
-
-<script>
-
-
-/* =========================================================
+    <script>
+      /* =========================================================
    USUÁRIO
    ========================================================= */
 
-function carregarUsuario() {
+      function carregarUsuario() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
-    const usuario =
-        JSON.parse(
-            localStorage.getItem("usuarioLogado")
-        );
+        if (!usuario) {
+          window.location.href = "Entrar.html";
 
+          return;
+        }
 
-    if (!usuario) {
+        document.getElementById("nomeTopo").innerText =
+          usuario.nome || "Usuário";
+      }
 
-        window.location.href = "Entrar.html";
+      async function carregarPedidos() {
+        const lista = document.getElementById("listaPedidos");
 
-        return;
-    }
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 
+        // Se não estiver logado
+        if (!usuario || !usuario.id_usuario) {
+          window.location.href = "Entrar.html";
 
-    document.getElementById("nomeTopo").innerText =
-        usuario.nome || "Usuário";
-}
+          return;
+        }
 
+        lista.innerHTML = "";
 
+        try {
+          // ==========================================
+          // BUSCA PEDIDOS NO MYSQL
+          // ==========================================
 
-/* =========================================================
-   PEDIDOS
-   ========================================================= */
+          const resposta = await fetch(
+            `http://localhost:3000/api/pedidos/usuario/${usuario.id_usuario}`,
+          );
 
-function carregarPedidos() {
+          const pedidos = await resposta.json();
 
-    const lista =
-        document.getElementById("listaPedidos");
+          if (!resposta.ok) {
+            alert(
+              pedidos.mensagem || "Não foi possível carregar seus pedidos.",
+            );
 
-    const usuario =
-        JSON.parse(
-            localStorage.getItem("usuarioLogado")
-        );
+            return;
+          }
 
-    const pedidos =
-        JSON.parse(
-            localStorage.getItem("pedidos")
-        ) || [];
+          // ==========================================
+          // NENHUM PEDIDO
+          // ==========================================
 
+          if (pedidos.length === 0) {
+            lista.innerHTML = `
 
-    lista.innerHTML = "";
+                <div class="pedido-vazio">
 
+                    <i class="ri-shopping-bag-line"></i>
 
-    const pedidosDoUsuario =
-        pedidos.filter(pedido => {
+                    <h3>
+                        Você ainda não possui pedidos.
+                    </h3>
 
-            return pedido.usuarioEmail === usuario.email;
+                    <p>
+                        Quando você finalizar uma compra,
+                        ela aparecerá aqui.
+                    </p>
 
-        });
+                    <button
+                        onclick="window.location.href='index.html'"
+                    >
+                        Ver produtos
+                    </button>
 
+                </div>
 
-    /* =====================================================
-       NENHUM PEDIDO
-       ===================================================== */
+            `;
 
-    if (pedidosDoUsuario.length === 0) {
+            return;
+          }
 
-        lista.innerHTML = `
+          // ==========================================
+          // MOSTRA OS PEDIDOS
+          // ==========================================
 
-            <div class="pedido-vazio">
+          pedidos.forEach((pedido) => {
+            const div = document.createElement("div");
 
-                <i class="ri-shopping-bag-line"></i>
+            div.className = "linha-pedido";
 
-                <h3>
-                    Você ainda não possui pedidos.
-                </h3>
+            let itensHTML = "";
 
-                <p>
-                    Quando você finalizar uma compra,
-                    ela aparecerá aqui.
-                </p>
+            // ======================================
+            // PRODUTOS
+            // ======================================
 
-                <button
-                    onclick="window.location.href='index.html'"
-                >
-                    Ver produtos
-                </button>
+            pedido.itens.forEach((item) => {
+              const preco = Number(item.preco_unitario).toLocaleString(
+                "pt-BR",
+                {
+                  style: "currency",
+                  currency: "BRL",
+                },
+              );
 
-            </div>
+              const tamanho = item.tamanho || "Único";
 
-        `;
+              const cor = item.cor || "Única";
 
-        return;
-    }
+              const imagemHTML = item.imagem
+                ? `
+                            <img
+                                src="${item.imagem}"
+                                alt="${item.nome_produto}"
+                            >
+                        `
+                : `
+                            <i class="ri-shopping-bag-line"></i>
+                        `;
 
+              itensHTML += `
 
+                    <div class="item-pedido">
 
-    /* =====================================================
-       PEDIDOS
-       ===================================================== */
+                        <div class="item-pedido-imagem">
 
-    pedidosDoUsuario.forEach((pedido, index) => {
+                            ${imagemHTML}
 
-
-        const div =
-            document.createElement("div");
-
-
-        div.className =
-            "linha-pedido";
-
-
-        let itensHTML = "";
-
-
-
-        /* =================================================
-           PRODUTOS DO PEDIDO
-           ================================================= */
-
-        pedido.itens.forEach(item => {
-            itensHTML += `
-    <div class="item-pedido">
-        
-        <div class="item-pedido-imagem">
-            <img src="${item.imagem}" alt="${item.nome}">
-        </div>
-
-        <div class="item-pedido-info">
-            <strong>${item.nome}</strong>
-            <span class="item-pedido-preco">${item.preco}</span>
-            <div class="item-pedido-detalhes">
-                <span>Cor: ${item.cor}</span>
-                <span>Tamanho: ${item.tamanho}</span>
-                <span>Quantidade: ${item.qtd || 1}</span>
-            </div>
-        </div>
-
-    </div>
-`;
- });
+                        </div>
 
 
+                        <div class="item-pedido-info">
 
-        /* =================================================
-           CARD DO PEDIDO
-           ================================================= */
-
-        div.innerHTML = `
-
-            <div class="pedido-cabecalho">
+                            <strong>
+                                ${item.nome_produto}
+                            </strong>
 
 
-                <div class="pedido-cabecalho-info">
+                            <span class="item-pedido-preco">
 
-                    <span class="pedido-numero">
+                                ${preco}
 
-                        Pedido #${index + 1}
+                            </span>
+
+
+                            <div class="item-pedido-detalhes">
+
+                                <span>
+                                    Cor: ${cor}
+                                </span>
+
+                                <span>
+                                    Tamanho: ${tamanho}
+                                </span>
+
+                                <span>
+                                    Quantidade: ${item.quantidade}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+            });
+
+            // ======================================
+            // DATA
+            // ======================================
+
+            const dataPedido = new Date(pedido.data_pedido).toLocaleDateString(
+              "pt-BR",
+            );
+
+            // ======================================
+            // TOTAL
+            // ======================================
+
+            const total = Number(pedido.valor_total).toLocaleString("pt-BR", {
+              style: "currency",
+              currency: "BRL",
+            });
+
+            // ======================================
+            // CARD
+            // ======================================
+
+            div.innerHTML = `
+
+                <div class="pedido-cabecalho">
+
+
+                    <div class="pedido-cabecalho-info">
+
+
+                        <span class="pedido-numero">
+
+                            Pedido #${pedido.id_pedido}
+
+                        </span>
+
+
+                        <span class="pedido-data">
+
+                            Realizado em ${dataPedido}
+
+                        </span>
+
+
+                    </div>
+
+
+                    <span
+                        class="status-pedido ${classeStatus(pedido.status)}"
+                    >
+
+                        ${pedido.status}
 
                     </span>
 
-
-                    <span class="pedido-data">
-
-                        Realizado em ${pedido.data}
-
-                    </span>
 
                 </div>
 
 
+                <div class="pedido-itens">
 
-                <span
-                    class="status-pedido ${classeStatus(pedido.status)}"
-                >
+                    ${itensHTML}
 
-                    ${pedido.status || "Processando"}
-
-                </span>
+                </div>
 
 
-            </div>
+                <div class="pedido-rodape">
 
 
+                    <span class="pedido-total-label">
 
-            <div class="pedido-itens">
+                        Total do pedido
 
-                ${itensHTML}
-
-            </div>
-
+                    </span>
 
 
-            <div class="pedido-rodape">
+                    <strong class="pedido-total">
 
-                <span class="pedido-total-label">
+                        ${total}
 
-                    Total do pedido
-
-                </span>
+                    </strong>
 
 
-                <strong class="pedido-total">
+                </div>
 
-                    R$
-                    ${pedido.total
-                        .toFixed(2)
-                        .replace(".", ",")}
+            `;
 
-                </strong>
+            lista.appendChild(div);
+          });
+        } catch (erro) {
+          console.error("Erro ao carregar pedidos:", erro);
 
-            </div>
+          alert("Não foi possível conectar com o servidor.");
+        }
+      }
 
-        `;
+      /* =========================================================
+         STATUS
+      /========================================================= */
 
+      function classeStatus(status) {
+        if (!status) {
+          return "processando";
+        }
 
-        lista.appendChild(div);
+        const texto = status.toLowerCase();
 
-    });
+        if (texto.includes("entregue")) {
+          return "entregue";
+        }
 
-}
-
-
-
-/* =========================================================
-   STATUS
-   ========================================================= */
-
-function classeStatus(status) {
-
-    if (!status) {
+        if (texto.includes("trânsito") || texto.includes("transito")) {
+          return "transito";
+        }
 
         return "processando";
+      }
 
-    }
-
-
-    const texto =
-        status.toLowerCase();
-
-
-    if (
-        texto.includes("entregue")
-    ) {
-
-        return "entregue";
-
-    }
-
-
-    if (
-        texto.includes("trânsito") ||
-        texto.includes("transito")
-    ) {
-
-        return "transito";
-
-    }
-
-
-    return "processando";
-}
-
-
-
-/* =========================================================
+      /* =========================================================
    SAIR
    ========================================================= */
 
-function sairConta() {
+      function sairConta() {
+        localStorage.removeItem("usuarioLogado");
 
-    localStorage.removeItem(
-        "usuarioLogado"
-    );
+        window.location.href = "index.html";
+      }
 
-    window.location.href =
-        "index.html";
-}
-
-
-
-/* =========================================================
+      /* =========================================================
    INICIALIZAÇÃO
    ========================================================= */
 
-carregarUsuario();
+      carregarUsuario();
 
-carregarPedidos();
-
-</script>
-
-
-</body>
-
+      carregarPedidos();
+    </script>
+  </body>
 </html>
