@@ -7,7 +7,7 @@ const bcrypt = require("bcryptjs");
 const db = require("./db");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -835,8 +835,8 @@ app.get("/api/produtos", async (req, res) => {
 // ==========================================
 // INICIA O SERVIDOR
 // ==========================================
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(
-        `API Elite Sports rodando em http://localhost:${PORT}`
+        `API Elite Sports rodando na porta ${PORT}`
     );
 });
