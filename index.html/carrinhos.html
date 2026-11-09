@@ -542,7 +542,7 @@ async function aumentar(index) {
     try {
 
         const resposta = await fetch(
-            "http://localhost:3000/api/produtos"
+            "https://elite-sports-production.up.railway.app/api/produtos"
         );
 
         const produtos =
@@ -795,7 +795,7 @@ async function finalizarCompra() {
     try {
 
         const resposta = await fetch(
-            "http://localhost:3000/api/pedidos",
+            "https://elite-sports-production.up.railway.app/api/pedidos",
             {
                 method: "POST",
 

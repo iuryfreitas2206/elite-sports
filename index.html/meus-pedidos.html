@@ -540,7 +540,7 @@
           // ==========================================
 
           const resposta = await fetch(
-            `http://localhost:3000/api/pedidos/usuario/${usuario.id_usuario}`,
+            `https://elite-sports-production.up.railway.app/api/pedidos/usuario/${usuario.id_usuario}`,
           );
 
           const pedidos = await resposta.json();

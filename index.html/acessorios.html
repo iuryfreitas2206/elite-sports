@@ -654,7 +654,7 @@
 
       async function carregarAcessoriosDoBanco() {
         try {
-          const resposta = await fetch("http://localhost:3000/api/produtos");
+          const resposta = await fetch("https://elite-sports-production.up.railway.app/api/produtos");
 
           const produtosBanco = await resposta.json();
 
