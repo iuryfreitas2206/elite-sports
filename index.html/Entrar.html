@@ -250,16 +250,32 @@
           </div>
 
           <div id="senhaStep" style="display: none">
-            <label>Nova senha</label>
+            <p id="avisoCodigo">Digite o código recebido por e-mail.</p>
 
-            <input type="password" id="novaSenha" placeholder="Nova senha" />
+            <label>Código de verificação</label>
+            <input
+              type="text"
+              id="codigoRedefinir"
+              placeholder="Digite os 6 números"
+              inputmode="numeric"
+              autocomplete="one-time-code"
+              maxlength="6"
+            />
+
+            <label>Nova senha</label>
+            <input
+              type="password"
+              id="novaSenha"
+              placeholder="Nova senha"
+              autocomplete="new-password"
+            />
 
             <label>Confirmar senha</label>
-
             <input
               type="password"
               id="confirmarNovaSenha"
               placeholder="Repita a senha"
+              autocomplete="new-password"
             />
 
             <button onclick="atualizarSenha()">Redefinir Senha</button>
@@ -326,7 +342,6 @@
 
       function validarEmail(email) {
         const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
         return regex.test(email);
       }
 
@@ -528,21 +543,24 @@
         /* ENVIA O CADASTRO PARA A API */
 
         try {
-          const resposta = await fetch("https://elite-sports-production.up.railway.app/api/usuarios", {
-            method: "POST",
+          const resposta = await fetch(
+            "https://elite-sports-production.up.railway.app/api/usuarios",
+            {
+              method: "POST",
 
-            headers: {
-              "Content-Type": "application/json",
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                nome: nome,
+                email: email,
+                cpf: cpfNumeros,
+                telefone: "",
+                senha: senha,
+              }),
             },
-
-            body: JSON.stringify({
-              nome: nome,
-              email: email,
-              cpf: cpfNumeros,
-              telefone: "",
-              senha: senha,
-            }),
-          });
+          );
 
           const dados = await resposta.json();
 
@@ -621,18 +639,21 @@
         }
 
         try {
-          const resposta = await fetch("https://elite-sports-production.up.railway.app/api/login", {
-            method: "POST",
+          const resposta = await fetch(
+            "https://elite-sports-production.up.railway.app/api/login",
+            {
+              method: "POST",
 
-            headers: {
-              "Content-Type": "application/json",
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify({
+                email: email,
+                senha: senha,
+              }),
             },
-
-            body: JSON.stringify({
-              email: email,
-              senha: senha,
-            }),
-          });
+          );
 
           const dados = await resposta.json();
 
@@ -704,10 +725,20 @@
         }
       }
 
-      /* =========================================================
-   REDEFINIR SENHA
-   ========================================================= */
+      // ==========================================
+      // RECUPERACAO DE SENHA - ELITE SPORTS
+      // ==========================================
 
+      const API_RECUPERACAO = "https://elite-sports-production.up.railway.app";
+
+      let recuperacaoEmAndamento = false;
+
+      function avisoRecuperacao(elemento, texto, sucesso = false) {
+        elemento.style.color = sucesso ? "#4ade80" : "#ff5c5c";
+        elemento.innerText = texto;
+      }
+
+      // ABRIR TELA
       function mostrarRedefinirSenha() {
         document.getElementById("boxLogin").style.display = "none";
         document.getElementById("boxCadastro").style.display = "none";
@@ -717,17 +748,20 @@
         document.getElementById("senhaStep").style.display = "none";
 
         document.getElementById("emailRedefinir").value = "";
+        document.getElementById("codigoRedefinir").value = "";
+        document.getElementById("novaSenha").value = "";
+        document.getElementById("confirmarNovaSenha").value = "";
 
         document.getElementById("mensagemRedefinir").innerText = "";
+        document.getElementById("mensagemNovaSenha").innerText = "";
 
-        const mensagemNova = document.getElementById("mensagemNovaSenha");
-
-        if (mensagemNova) {
-          mensagemNova.innerText = "";
-        }
+        window.usuarioRedefinir = null;
       }
 
+      // ENVIAR CODIGO POR E-MAIL
       async function verificarEmailRedefinir() {
+        if (recuperacaoEmAndamento) return;
+
         const email = document
           .getElementById("emailRedefinir")
           .value.trim()
@@ -735,103 +769,104 @@
 
         const mensagem = document.getElementById("mensagemRedefinir");
 
-        if (email === "") {
-          mensagem.style.color = "#ff5c5c";
-
-          mensagem.innerText = "Digite seu e-mail.";
-
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          avisoRecuperacao(mensagem, "Digite um e-mail válido.");
           return;
         }
 
+        recuperacaoEmAndamento = true;
+        avisoRecuperacao(mensagem, "Solicitando código...", true);
+
         try {
           const resposta = await fetch(
-            "https://elite-sports-production.up.railway.app/api/verificar-email",
+            `${API_RECUPERACAO}/api/recuperacao/solicitar`,
             {
               method: "POST",
-
               headers: {
                 "Content-Type": "application/json",
               },
-
-              body: JSON.stringify({
-                email: email,
-              }),
+              body: JSON.stringify({ email }),
             },
           );
 
           const dados = await resposta.json();
 
           if (!resposta.ok) {
-            mensagem.style.color = "#ff5c5c";
-
-            mensagem.innerText =
-              dados.mensagem || "Não foi possível verificar o e-mail.";
-
+            avisoRecuperacao(
+              mensagem,
+              dados.mensagem || "Não foi possível solicitar o código.",
+            );
             return;
           }
 
-          // Guarda somente o e-mail que será usado
-          // na próxima etapa
-          window.usuarioRedefinir = {
-            email: email,
-          };
+          window.usuarioRedefinir = { email };
 
           document.getElementById("emailStep").style.display = "none";
-
           document.getElementById("senhaStep").style.display = "block";
+
+          avisoRecuperacao(
+            document.getElementById("mensagemNovaSenha"),
+            "Se o e-mail estiver cadastrado, você receberá um código válido por 10 minutos.",
+            true,
+          );
         } catch (erro) {
-          console.error("Erro ao verificar e-mail:", erro);
+          console.error("Erro ao solicitar código:", erro);
 
-          mensagem.style.color = "#ff5c5c";
-
-          mensagem.innerText = "Não foi possível conectar com o servidor.";
+          avisoRecuperacao(mensagem, "Não foi possível comunicar com a API.");
+        } finally {
+          recuperacaoEmAndamento = false;
         }
       }
 
+      // VALIDAR CODIGO E TROCAR SENHA
       async function atualizarSenha() {
-        const nova = document.getElementById("novaSenha").value;
+        if (recuperacaoEmAndamento) return;
 
+        const codigo = document.getElementById("codigoRedefinir").value.trim();
+
+        const nova = document.getElementById("novaSenha").value;
         const repetir = document.getElementById("confirmarNovaSenha").value;
 
         const mensagem = document.getElementById("mensagemNovaSenha");
 
-        if (nova.length < 6) {
-          mensagem.style.color = "#ff5c5c";
+        if (!window.usuarioRedefinir?.email) {
+          avisoRecuperacao(mensagem, "Solicite um código primeiro.");
+          return;
+        }
 
-          mensagem.innerText = "A senha precisa ter pelo menos 6 caracteres.";
+        if (!/^\d{6}$/.test(codigo)) {
+          avisoRecuperacao(mensagem, "Digite o código de 6 números.");
+          return;
+        }
 
+        if (nova.length < 8 || new TextEncoder().encode(nova).length > 72) {
+          avisoRecuperacao(
+            mensagem,
+            "A senha precisa ter pelo menos 8 caracteres e no máximo 72 bytes.",
+          );
           return;
         }
 
         if (nova !== repetir) {
-          mensagem.style.color = "#ff5c5c";
-
-          mensagem.innerText = "As senhas não conferem.";
-
+          avisoRecuperacao(mensagem, "As senhas não conferem.");
           return;
         }
 
-        if (!window.usuarioRedefinir || !window.usuarioRedefinir.email) {
-          mensagem.style.color = "#ff5c5c";
+        recuperacaoEmAndamento = true;
 
-          mensagem.innerText = "Não foi possível identificar o usuário.";
-
-          return;
-        }
+        avisoRecuperacao(mensagem, "Atualizando senha...", true);
 
         try {
           const resposta = await fetch(
-            "https://elite-sports-production.up.railway.app/api/redefinir-senha",
+            `${API_RECUPERACAO}/api/recuperacao/confirmar`,
             {
-              method: "PUT",
-
+              method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
-
               body: JSON.stringify({
                 email: window.usuarioRedefinir.email,
-
+                codigo,
                 novaSenha: nova,
               }),
             },
@@ -840,21 +875,21 @@
           const dados = await resposta.json();
 
           if (!resposta.ok) {
-            mensagem.style.color = "#ff5c5c";
-
-            mensagem.innerText =
-              dados.mensagem || "Não foi possível redefinir a senha.";
-
+            avisoRecuperacao(
+              mensagem,
+              dados.mensagem || "Código inválido ou expirado.",
+            );
             return;
           }
 
-          mensagem.style.color = "#4ade80";
+          avisoRecuperacao(
+            mensagem,
+            "Senha redefinida com sucesso! Volte ao login.",
+            true,
+          );
 
-          mensagem.innerText = "Senha redefinida com sucesso!";
-
-          // Limpa os campos
+          document.getElementById("codigoRedefinir").value = "";
           document.getElementById("novaSenha").value = "";
-
           document.getElementById("confirmarNovaSenha").value = "";
 
           window.usuarioRedefinir = null;
@@ -865,9 +900,9 @@
         } catch (erro) {
           console.error("Erro ao redefinir senha:", erro);
 
-          mensagem.style.color = "#ff5c5c";
-
-          mensagem.innerText = "Não foi possível conectar com o servidor.";
+          avisoRecuperacao(mensagem, "Não foi possível comunicar com a API.");
+        } finally {
+          recuperacaoEmAndamento = false;
         }
       }
 
