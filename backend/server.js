@@ -5,12 +5,19 @@ const express = require("express");
 const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const db = require("./db");
+const registrarRecuperacao = require("./recuperacao_senha");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
+
+// Configuração do proxy do Railway
+app.set("trust proxy", 1);
+
+// Registrar recuperação de senha
+registrarRecuperacao(app, db, bcrypt);
 
 
 // ==========================================
@@ -623,152 +630,7 @@ app.get("/api/pedidos/usuario/:id_usuario", async (req, res) => {
 
 });
 
-// ==========================================
-// VERIFICAR E-MAIL PARA REDEFINIR SENHA
-// ==========================================
-app.post("/api/verificar-email", async (req, res) => {
 
-    try {
-
-        const { email } = req.body;
-
-
-        if (!email) {
-            return res.status(400).json({
-                mensagem: "Informe o e-mail."
-            });
-        }
-
-
-        const [usuarios] = await db.query(
-            `
-            SELECT id_usuario, email
-            FROM usuarios
-            WHERE email = ?
-            `,
-            [email.toLowerCase()]
-        );
-
-
-        if (usuarios.length === 0) {
-            return res.status(404).json({
-                mensagem: "E-mail não cadastrado."
-            });
-        }
-
-
-        res.json({
-            mensagem: "E-mail encontrado."
-        });
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao verificar e-mail:",
-            erro
-        );
-
-
-        res.status(500).json({
-            mensagem:
-                "Erro interno ao verificar e-mail."
-        });
-
-    }
-
-});
-
-
-// ==========================================
-// REDEFINIR SENHA
-// ==========================================
-app.put("/api/redefinir-senha", async (req, res) => {
-
-    try {
-
-        const {
-            email,
-            novaSenha
-        } = req.body;
-
-
-        if (!email || !novaSenha) {
-            return res.status(400).json({
-                mensagem:
-                    "Informe o e-mail e a nova senha."
-            });
-        }
-
-
-        if (novaSenha.length < 6) {
-            return res.status(400).json({
-                mensagem:
-                    "A senha precisa ter pelo menos 6 caracteres."
-            });
-        }
-
-
-        const [usuarios] = await db.query(
-            `
-            SELECT id_usuario
-            FROM usuarios
-            WHERE email = ?
-            `,
-            [email.toLowerCase()]
-        );
-
-
-        if (usuarios.length === 0) {
-            return res.status(404).json({
-                mensagem: "Usuário não encontrado."
-            });
-        }
-
-
-        // Criptografa a nova senha
-        const senhaHash =
-            await bcrypt.hash(
-                novaSenha,
-                10
-            );
-
-
-        await db.query(
-            `
-            UPDATE usuarios
-            SET senha_hash = ?
-            WHERE email = ?
-            `,
-            [
-                senhaHash,
-                email.toLowerCase()
-            ]
-        );
-
-
-        res.json({
-            mensagem:
-                "Senha redefinida com sucesso!"
-        });
-
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao redefinir senha:",
-            erro
-        );
-
-
-        res.status(500).json({
-            mensagem:
-                "Erro interno ao redefinir senha."
-        });
-
-    }
-
-});
 
 // ==========================================
 // LISTAR PRODUTOS E ESTOQUE
