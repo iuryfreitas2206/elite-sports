@@ -101,19 +101,31 @@ class _ProdutoPageState extends State<ProdutoPage> {
     },
     'Regata Fitness': {
       'preto': [
-        'assets/img/regata/Regata-Preta-1.png',
-        'assets/img/regata/Regata-Preta-2.png',
+        'assets/img/regata/regata-Preta-1.png',
+        'assets/img/regata/regata-Preta-2.png',
         'assets/img/regata/Regata-Preta-3.png',
       ],
       'azul': [
-        'assets/img/regata/Regata-Azul-1.png',
-        'assets/img/regata/Regata-Azul-2.png',
-        'assets/img/regata/Regata-Azul-3.png',
+        'assets/img/regata/regata-azul-1.png',
+        'assets/img/regata/regata-azul-2.png',
+        'assets/img/regata/regata-azul-3.png',
       ],
       'branco': [
-        'assets/img/regata/Regata-Branca-1.png',
-        'assets/img/regata/Regata-Branca-2.png',
-        'assets/img/regata/Regata-Branca-3.png',
+        'assets/img/regata/regata-Branca-1.png',
+        'assets/img/regata/regata-Branca-2.png',
+        'assets/img/regata/regata-Branca-3.png',
+      ],
+    },
+    'Chuteira Elite Speed': {
+      'preto': [
+        'assets/img/acessorios/chuteira-preta-1.png',
+        'assets/img/acessorios/chuteira-preta-2.png',
+        'assets/img/acessorios/chuteira-preta-3.png',
+      ],
+      'branco': [
+        'assets/img/acessorios/chuteira-branca-1.png',
+        'assets/img/acessorios/chuteira-branca-2.png',
+        'assets/img/acessorios/chuteira-branca-3.png',
       ],
     },
     'Bola Elite Nations': {

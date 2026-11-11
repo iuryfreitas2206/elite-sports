@@ -1215,7 +1215,7 @@ class _HomePageState extends State<HomePage> {
         preco: _precos['Camiseta Treino'] ?? 'R\$ 89,90',
       ),
       _ProdutoDestaqueData(
-        imagem: 'assets/img/regata/Regata-Preta-1.png',
+        imagem: 'assets/img/regata/regata-Preta-1.png',
         imagemFallback: 'assets/img/regata/regata-Preta-1.png',
         categoria: 'TREINO',
         nome: 'Regata Fitness',

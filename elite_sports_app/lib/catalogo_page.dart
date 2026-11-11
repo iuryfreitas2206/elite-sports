@@ -83,7 +83,7 @@ class _CatalogoPageState extends State<CatalogoPage> {
           _ProdutoSite(
             'Regata Fitness',
             'Regata Fitness',
-            'assets/img/regata/Regata-Preta-1.png',
+            'assets/img/regata/regata-Preta-1.png',
             'Regatas',
             imagemAlternativa: 'assets/img/regata/regata-Preta-1.png',
           ),
@@ -100,7 +100,7 @@ class _CatalogoPageState extends State<CatalogoPage> {
           _ProdutoSite(
             'Chuteira Elite Speed',
             'Chuteira Elite Speed',
-            'assets/img/chuteira/chuteira-preta-1.png',
+            'assets/img/acessorios/chuteira-preta-1.png',
             'Esportivo',
           ),
         ];

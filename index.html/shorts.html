@@ -196,11 +196,11 @@
         <article
           class="produto-catalogo"
           data-categoria="esportivo"
-          data-nome="chuteira elite speed"
+          data-nome="chuteira elite speed" onclick="abrirProduto(12, 'preto')"
         >
           <div class="produto-catalogo-imagem">
             <img
-              src="./img/chuteira/chuteira-preta-1.png"
+              src="./img/acessorios/chuteira-preta-1.png"
               alt="Chuteira Elite Speed"
             />
           </div>
@@ -210,17 +210,17 @@
 
             <h2>Chuteira Elite Speed</h2>
 
-            <strong class="produto-preco"> R$ 189,90 </strong>
+            <strong class="produto-preco"> R$ 249,90 </strong>
 
             <div class="produto-cores">
               <span class="cor-produto preto" title="Preto"></span>
 
-              <span class="cor-produto azul" title="Azul"></span>
+              
 
               <span class="cor-produto branco" title="Branco"></span>
             </div>
 
-            <button class="btn-ver-produto" type="button">
+            <button class="btn-ver-produto" type="button" onclick="event.stopPropagation(); abrirProduto(12, 'preto')">
               Ver produto
 
               <i class="ri-arrow-right-line"></i>
