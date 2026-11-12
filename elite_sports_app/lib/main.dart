@@ -79,9 +79,9 @@ class _HomePageState extends State<HomePage> {
     ),
     _BannerData(
       imagem: 'assets/img/banner2.png',
-      titulo1: 'VISTA AS CORES',
-      titulo2: 'DA SUA SELEÇÃO',
-      descricao: 'Camisas e shorts para quem leva a paixão pelo futebol para todos os lugares.',
+      titulo1: 'CHUTEIRAS ELITE',
+      titulo2: 'SPEED',
+      descricao: 'Performance, conforto e estilo para o seu jogo.',
     ),
     _BannerData(
       imagem: 'assets/img/banner3.png',

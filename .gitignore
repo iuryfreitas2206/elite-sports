@@ -1,2 +1,23 @@
 backend/node_modules/
 backend/.env
+
+# Arquivos gerados automaticamente
+**/bin/
+**/obj/
+**/build/
+**/.dart_tool/
+**/node_modules/
+**/.gradle/
+
+# Configuracoes sensiveis
+**/.env
+**/.env.*
+**/appsettings.Development.json
+**/*.jks
+**/*.keystore
+**/*.pfx
+**/key.properties
+
+# Aplicativos compilados
+**/*.apk
+

@@ -1,0 +1,152 @@
+@model IEnumerable<EliteSports.Modelos.ProdutoConsulta>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Elite Sports - Produtos";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Elite Sports - Produtos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #0b0a10;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            padding: 24px;
+            text-align: center;
+            border-bottom: 1px solid #292633;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header span {
+            color: #913cff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #aaa5b3;
+            margin-bottom: 32px;
+        }
+
+        .grade {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+        }
+
+        .produto {
+            background: #17151e;
+            border: 1px solid #302c3b;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .produto img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            background: #111017;
+            padding: 12px;
+        }
+
+        .info {
+            padding: 20px;
+        }
+
+        .categoria {
+            color: #b37aff;
+            font-size: 14px;
+        }
+
+        .nome {
+            font-size: 19px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .preco {
+            font-size: 24px;
+            font-weight: bold;
+            color: #aa62ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Elite <span>Sports</span></h1>
+    </header>
+
+    <main>
+        <h2 style="text-align:center;">Nosso Catálogo</h2>
+
+        <p class="subtitulo">
+            Produtos carregados diretamente do SQL Server
+        </p>
+
+        <div class="grade">
+
+            @foreach (var produto in Model)
+            {
+                var imagem = string.IsNullOrWhiteSpace(produto.Imagem)
+                    ? null
+                    : "/" + produto.Imagem
+                        .Replace("\\", "/")
+                        .TrimStart('.', '/');
+
+                <div class="produto">
+
+                    @if (imagem != null)
+                    {
+                        <img src="@imagem" alt="@produto.Nome" loading="lazy" />
+                    }
+                    else
+                    {
+                        <p style="padding:30px;">Imagem indisponível</p>
+                    }
+
+                    <div class="info">
+                        <div class="categoria">@produto.Categoria</div>
+
+                        <div class="nome">@produto.Nome</div>
+
+                        <div class="preco">
+                            @(produto.Preco.ToString(
+                                "C",
+                                new System.Globalization.CultureInfo("pt-BR")
+                            ))
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </main>
+
+</body>
+</html>

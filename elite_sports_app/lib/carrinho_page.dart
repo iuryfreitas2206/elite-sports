@@ -535,7 +535,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
               onPressed: () {
                 Navigator.pop(dialogContext, true);
               },
-              child: const Text('Registrar pedido'),
+              child: const Text('Finalizar compra'),
             ),
           ],
         );
@@ -1181,7 +1181,7 @@ class _CarrinhoPageState extends State<CarrinhoPage> {
                   ? null
                   : finalizarCompra,
               icon: const Icon(Icons.lock_outline),
-              label: const Text('Registrar pedido'),
+              label: const Text('Finalizar compra'),
               style: FilledButton.styleFrom(
                 backgroundColor: roxo,
                 foregroundColor: Colors.white,
